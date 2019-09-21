@@ -51,7 +51,8 @@ import sort_system
 
 
 
-notlogic_pattern_str = r"(?:(?:(?<!\&)(?<!\|)(?<!=>).(?!\&)(?!\|)(?!=>))+)"
+#notlogic_pattern_str = r"(?:(?:(?<!\&)(?<!\|)(?<!=>).(?!\&)(?!\|)(?!=>))+)"
+notlogic_pattern_str = r"[^\&\|!=]+"
 fluent_pattern_lambda_exp = lambda x: r"(?:"+ "|".join(x)+ ")\s*=\s*"+notlogic_pattern_str 
 predicate_pattern_lambda_exp = lambda x: r"(?:"+ "|".join(x)+ ")"
 

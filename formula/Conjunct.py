@@ -27,7 +27,7 @@ import itertools
 ##############################################################################################################################################################
 #k1 = (['X1','X2'], ['Int','Int'],['! numStone() = X1']) 
 
-def refresh_vars(conjuct):
+def __refresh_vars(conjuct):
 	var_list, sort_list, pred_list = conjuct
 	new_var_list, new_sort_list = list(),list()
 	preds_str = '&'.join(pred_list)
@@ -54,7 +54,7 @@ def get_sat_subconjuncts(conjunct, model_list, length):
 		rest_preds = list(set(pred_list) - set(list(del_preds)))
 		#rest_body = ' and '.join(rest_preds)
 		if rest_preds == [] or model_list is None or model_checker.sat_conjunct(model_list, (var_list, sort_list, rest_preds)) is True:
-			subconjunct_list.append( util_conjunct.refresh_vars((var_list, sort_list, rest_preds))) 
+			subconjunct_list.append( __refresh_vars((var_list, sort_list, rest_preds))) 
 	return subconjunct_list
 
 

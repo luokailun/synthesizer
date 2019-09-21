@@ -243,7 +243,7 @@ def poss_or_ssa(action_str, fluent=None, model=None):
 	if fluent:
 		feature = Util.generate_function_feature(fluent)+'_'+feature
 		axiom_name = "ssa"
-	#print feature
+
 	lambda_function, para_selected_list= context_operator.find_axiom_with_feature(axiom_name, feature)
 	#print '----', lambda_function, para_selected_list
 	formula = lambda_function if  isinstance(lambda_function, str) else lambda_function(para_selected_list)
@@ -259,6 +259,7 @@ def poss_or_ssa(action_str, fluent=None, model=None):
 def __mrepl_fluent_regress(matched):
 	fluent_str =matched.group()
 	
+	#print fluent_str
 	match_fluent_str = Util.eliminate_unmatched(fluent_str).strip()
 	
 	#handle regression:#########
@@ -271,6 +272,7 @@ def __mrepl_fluent_regress(matched):
 	#regress_str = context_operator.get_axioms()['ssa']
 	#print action_str, match_fluent_str
 	regress_str = poss_or_ssa(action_str, match_fluent_str)
+	#print '~~~',match_fluent_str, action_str, regress_str
 	regress_str = "(%s)"%regress_str
 	#logger.debug("#regress fluent: %s, after regress %s" %(match_fluent_str,regress_str))
 	##########

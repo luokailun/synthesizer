@@ -15,9 +15,9 @@ str_pred_name = r"(?:[A-Z][\w]*)"
 str_symbol = r"(?P<name>"+ str_const_name+"|"+str_var_name+"|"+str_pred_name+")"
 
 
-str_eqfunction = r"(%s)\(((?:%s|%s|,)*)\)=((?:%s|%s))"%(str_const_name,str_const_name,str_var_name,str_const_name,str_var_name)
+str_eqfunction = r"(%s)\(((?:%s|%s|,)*)\)\s*=\s*((?:%s|%s))"%(str_const_name,str_const_name,str_var_name,str_const_name,str_var_name)
 str_predicate = r"(%s)\(((?:%s|%s|,)*)\)"%(str_pred_name,str_const_name,str_var_name)
-str_relation = r"(?:%s|%s)"%(str_eqfunction,str_predicate)
+str_fluent = r"(?:%s|%s)"%(str_eqfunction,str_predicate)
 
 str_action = r"(%s)\(((?:%s|%s|,)*)\)"%(str_const_name,str_const_name,str_var_name)
 
@@ -38,7 +38,7 @@ symbol = re.compile(str_symbol)
 var = re.compile(str_var_name)
 
 
-relation = re.compile(str_relation)
+fluent = re.compile(str_fluent)
 action = re.compile(str_action)
 
 

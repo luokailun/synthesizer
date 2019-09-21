@@ -4,13 +4,15 @@ from regression import program_regress
 from prover import z3prover
 from model import model_interpretor
 from basic import context_operator
-from local_update import local_update
+#from local_update import local_update
+import local_update
 from formula import Fstructure
-from local_update import scoring
+import scoring
 
 
 def ____get_vars(sorts):
 	return [ (context_operator.get_new_var(), sort) for sort in sorts]
+
 
 def __generate_pi_action():
 	functions_sorts = context_operator.get_functions_sorts()
@@ -27,7 +29,7 @@ def __generate_pi_action():
 
 def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 	#results = __interpret_model(__imply(formula1, formula2, "(set-option :timeout 10000)"), MAX_VALUE)
-	#print '----------org---------',results
+	print '----------org---------',results
 	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
 	while flag is False:
 
@@ -55,6 +57,7 @@ def synthesis(Init, Goal, predicate_list):
 	while n>0:
 		formula = Fstructure.to_formula(fstructure)
 		next_formula = program_regress.A_regress(program_regress.E_regress(formula, __generate_pi_action()), __generate_pi_action())
+		print 'before regress: ~~~~~~:', formula
 		print 'regress: ~~~~~~~~~~', next_formula
 		print
 		result = z3prover.imply(formula, next_formula, "(set-option :timeout 10000)"+z3prover.generate_head())

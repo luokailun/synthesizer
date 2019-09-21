@@ -51,7 +51,16 @@ math_preds, fluent_preds = Predicate.genPreds('new_chomp2N.sc')
 #print math_preds+fluent_preds
 #exit(0)
 
-import algorithm
+from regression import program_regress
+from local_update import algorithm 
+
+#f = "(( !Ch(1,1) ) => ( !Ch(1,1)&turn(p1) ))&!exists(K266:Int)[! xlen() = K266&K266 > 1&! ylen() = K266]"
+
+#print program_regress.A_regress(program_regress.E_regress(f, __generate_pi_action()), __generate_pi_action())
+
+#exit(0)
+
+
 algorithm.synthesis(Init, Goal, math_preds+fluent_preds)
 
 

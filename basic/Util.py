@@ -76,7 +76,7 @@ def get_paras_from_str(para_str):
 
 def parse_relation(relation_str):
 	#print relation_str
-	match = pattern.relation.match(relation_str)
+	match = pattern.fluent.match(relation_str)
 	if match:
 		if match.group(3):
 			return match.group(1), match.group(2),match.group(3)
@@ -99,6 +99,7 @@ def parse_relation_or_function(mstr):
 		return parse_function(mstr)
 	else:
 		return a,b,c
+
 
 def isVar(mstr):
 	match = pattern.var.match(mstr)

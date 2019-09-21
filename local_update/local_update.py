@@ -89,7 +89,7 @@ def P_update(fstructure, model_plus, atomic_pred_list, pred_score_dict, LENGTH=2
 	#candicate_conjuncts_dict = dict()
 	new_model_pos_list = model_pos_list + [model_plus]
 
-	print conjunct_model_list
+	#print conjunct_model_list
 
 	for e, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
 		base_conjunct_list = __get_target_conjuncts_from_preds(model_neg_list, list(), atomic_pred_list, LENGTH)
@@ -98,7 +98,7 @@ def P_update(fstructure, model_plus, atomic_pred_list, pred_score_dict, LENGTH=2
 
 		scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
 		updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict)
-		print conjunct, updated_conjunct
+		#print conjunct, updated_conjunct
 		fstructure = Fstructure.update(fstructure, [conjunct], updated_conjunct, [], [])
 	# dynamic update?
 	return Fstructure.update(fstructure, [], [], [], [model_plus])
