@@ -41,15 +41,6 @@ import random
 
 
 
-klist = [1,2,3]
-c = klist[2]
-m = klist.remove(klist[2])
-k = klist.pop(klist[0])
-
-print c
-print k
-print m
-print klist
 
 
 

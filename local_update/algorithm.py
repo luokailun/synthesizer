@@ -44,42 +44,55 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 
 
 
+# Input: a initial database Init, the Goal  and a predicate_list
+# Output: a game invariant F s.t.   (1) Init \models F,  (2) F \models Goal  (3) F \models AEregression(F)
+
 
 def synthesis(Init, Goal, predicate_list):
 	n=1
 
 	positive_model_list = list()
 	conjunct_model_list = list()
+	# see the definition of fstructure in formula dir
 	fstructure = Fstructure.init(Goal, positive_model_list, conjunct_model_list)
 
+	# set the inital score (c=0) for each generated predicates 
 	pred_score_dict = scoring.init_preds_base_score(predicate_list)
 
 	while n>0:
 		formula = Fstructure.to_formula(fstructure)
+		# do AEregression
 		next_formula = program_regress.A_regress(program_regress.E_regress(formula, __generate_pi_action()), __generate_pi_action())
 		print 'before regress: ~~~~~~:', formula
 		print 'regress: ~~~~~~~~~~', next_formula
 		print
+		# checking condition (3)
 		result = z3prover.imply(formula, next_formula, "(set-option :timeout 10000)"+z3prover.generate_head())
 
+		# if condition (3) holds
 		if model_interpretor.interpret_result(result) is True:
+
+			# checking condition (1)
 			result = z3prover.imply(Init, formula, "(set-option :timeout 10000)"+z3prover.generate_head())
 
+			# if condition (1) holds 
 			if model_interpretor.interpret_result(result) is True:
-				return formula
+				return formula. #return the result (we have guaranteed condition (2) holds)
 			elif model_interpretor.interpret_result(result) is False:
-
+			# if condition (2) does not holds, generate small model M and strengthen formula F (fstructure): 
+			# ensure that M \models F
 				positive_model = __generate_small_model(formula, next_formula, result)
 				fstructure = local_update.P_update(fstructure, positive_model, predicate_list, pred_score_dict)
 			else:
 				pass
 
+		# if condition (3) does not holds, generate small model M and strengthen formula F (fstructure)
+		# ensure that M \not\models F
 		elif model_interpretor.interpret_result(result) is False:
 
 			negative_model = __generate_small_model(formula, next_formula, result)
 			fstructure = local_update.N_update(fstructure, negative_model, predicate_list, pred_score_dict)
 			formula = Fstructure.to_formula(fstructure)
-
 			print 'update(n):~~~~~~~~~', formula
 			print
 			#exit(0)

@@ -60,7 +60,7 @@ def get_sat_subconjuncts(conjunct, model_list, length):
 
 ##############################################################################################################################################################
 
-
+# rename the variables in the conjunct
 
 def rename(conjunct):
 	var_list, sort_list, pred_list = conjunct
