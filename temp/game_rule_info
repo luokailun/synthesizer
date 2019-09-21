@@ -1,0 +1,45 @@
+('SSA', 'Ch(X,Y),eat(P,I,J)', 'Ch(X,Y)&(I>X|J>Y)')
+('SSA', 'lastx=X,eat(P,I,J)', 'X=I')
+('SSA', 'lasty=Y,eat(P,I,J)', 'Y=J')
+('SSA', 'xlen=Y,pi(A)', 'xlen=Y')
+('SSA', 'ylen=Y,pi(A)', 'ylen=Y')
+('End', '', '!Ch(1,1)')
+('Win', 'pi(P)', '!Ch(1,1)&turn(P)')
+('SSA', 'turn(P),pi(A)', '!turn(P)')
+('Poss', 'eat(P,X,Y)', 'Ch(X,Y)&turn(P)')
+('Init', '', 'forall(X,Y)[X>0&X<=xlen&Y>0&Y<=ylen=>Ch(X,Y)]')
+('Init', '', 'turn(p1)&!turn(p2)')
+('Basic', '', 'forall(P)[(P=p1|P=p2)&!(p1=p2)]')
+
+
+('SSA', 'Ch(K1,K2),eat(K3,K4,K5)', 'Ch(K1,K2)&(K4>K1|K5>K2)')
+('SSA', 'lastx()=K6,eat(K7,K8,K9)', 'K6=K8')
+('SSA', 'lasty()=K10,eat(K11,K12,K13)', 'K10=K13')
+('SSA', 'xlen()=K14,pi(K15)', 'xlen()=K14')
+('SSA', 'ylen()=K16,pi(K17)', 'ylen()=K16')
+('End', '', '!Ch(1,1)')
+('Win', 'pi(K18)', '!Ch(1,1)&turn(K18)')
+('SSA', 'turn(K19),pi(K20)', '!turn(K19)')
+('Poss', 'eat(K21,K22,K23)', 'Ch(K22,K23)&turn(K21)')
+('Init', '', 'forall(K24:Int,K25:Int)[K24>0&K24<=xlen()&K25>0&K25<=ylen()=>Ch(K24,K25)]')
+('Init', '', 'turn(p1)&!turn(p2)')
+('Basic', '', 'forall(K26:_S1)[(K26=p1|K26=p2)&!(p1=p2)]')
+
+(['eat_K21_K22_K23_'], ['K21', 'K22', 'K23'], 'eat_(.+?)_(.+?)_(.+?)_')
+(['Ch_K1_K2_', 'eat_K3_K4_K5_'], ['K1', 'K2', 'K3', 'K4', 'K5'], 'Ch_(.+?)_(.+?)__eat_(.+?)_(.+?)_(.+?)_')
+(['lastx__K6', 'eat_K7_K8_K9_'], ['K6', 'K7', 'K8', 'K9'], 'lastx__(.+?)_eat_(.+?)_(.+?)_(.+?)_')
+(['lasty__K10', 'eat_K11_K12_K13_'], ['K10', 'K11', 'K12', 'K13'], 'lasty__(.+?)_eat_(.+?)_(.+?)_(.+?)_')
+(['xlen__K14', 'pi_K15_'], ['K14', 'K15'], 'xlen__(.+?)_(.+?)_')
+(['ylen__K16', 'pi_K17_'], ['K16', 'K17'], 'ylen__(.+?)_(.+?)_')
+(['turn_K19_', 'pi_K20_'], ['K19', 'K20'], 'turn_(.+?)__(.+?)_')
+(['pi_K18_'], ['K18'], '(.+?)_')
+
+ actions:['eat']
+ fluents:['Ch', 'turn', 'xlen', 'ylen', 'lasty', 'lastx']
+ 0arity-fluents:['lastx', 'lasty', 'xlen', 'ylen']
+ predicates:['Ch', 'turn']
+ functional fluents:['xlen', 'ylen', 'lasty', 'lastx']
+
+ sort for constants:{'Int': ['1', '0'], '_S1': ['p2', 'p1'], 'Bool': ['True', 'False']}
+ sort for functions:{'Ch': ['Int', 'Int', 'Bool'], 'xlen': ['Int'], 'eat': ['_S1', 'Int', 'Int', 'Bool'], 'turn': ['_S1', 'Bool'], 'ylen': ['Int'], 'lasty': ['Int'], 'lastx': ['Int']}
+ sort for predicates:{'turn': ['_S1'], 'Ch': ['Int', 'Int']}
