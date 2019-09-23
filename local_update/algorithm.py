@@ -29,14 +29,14 @@ def __generate_pi_action():
 
 def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 	#results = __interpret_model(__imply(formula1, formula2, "(set-option :timeout 10000)"), MAX_VALUE)
-	print '----------org---------',results
+	#print '----------org---------',results
 	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
 	while flag is False:
 
 		value_constraints = ' '.join([ "(assert %s)"%util_trans_smt.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
 		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+z3prover.generate_head()+value_constraints)
 
-		if imodel_interpretor.nterpret_results(new_results) is False:
+		if model_interpretor.interpret_results(new_results) is False:
 			flag, element = model_interpretor.interpret_model(new_results, MAX_VALUE)
 
 		MAX_VALUE = MAX_VALUE+2
@@ -62,7 +62,15 @@ def synthesis(Init, Goal, predicate_list):
 	while n>0:
 		formula = Fstructure.to_formula(fstructure)
 		# do AEregression
-		next_formula = program_regress.A_regress(program_regress.E_regress(formula, __generate_pi_action()), __generate_pi_action())
+		#next_formula = program_regress.A_regress(program_regress.E_regress(formula, __generate_pi_action()), __generate_pi_action())
+		next_formula = program_regress.A_regress(formula, __generate_pi_action())
+		result = z3prover.imply('false', next_formula , "(set-option :timeout 10000)"+z3prover.generate_head())
+		print result
+		print 'A regress: ', next_formula
+		next_formula = program_regress.E_regress(next_formula, __generate_pi_action())
+		result = z3prover.imply('false', next_formula , "(set-option :timeout 10000)"+z3prover.generate_head())
+		print result
+		exit(0)
 		print 'before regress: ~~~~~~:', formula
 		print 'regress: ~~~~~~~~~~', next_formula
 		print
@@ -71,17 +79,16 @@ def synthesis(Init, Goal, predicate_list):
 
 		# if condition (3) holds
 		if model_interpretor.interpret_result(result) is True:
-
 			# checking condition (1)
 			result = z3prover.imply(Init, formula, "(set-option :timeout 10000)"+z3prover.generate_head())
-
 			# if condition (1) holds 
 			if model_interpretor.interpret_result(result) is True:
-				return formula. #return the result (we have guaranteed condition (2) holds)
+				return formula #return the result (we have guaranteed condition (2) holds)
 			elif model_interpretor.interpret_result(result) is False:
 			# if condition (2) does not holds, generate small model M and strengthen formula F (fstructure): 
 			# ensure that M \models F
 				positive_model = __generate_small_model(formula, next_formula, result)
+				print 'P model:', positive_model
 				fstructure = local_update.P_update(fstructure, positive_model, predicate_list, pred_score_dict)
 			else:
 				pass
@@ -91,6 +98,7 @@ def synthesis(Init, Goal, predicate_list):
 		elif model_interpretor.interpret_result(result) is False:
 
 			negative_model = __generate_small_model(formula, next_formula, result)
+			print 'N model:', negative_model
 			fstructure = local_update.N_update(fstructure, negative_model, predicate_list, pred_score_dict)
 			formula = Fstructure.to_formula(fstructure)
 			print 'update(n):~~~~~~~~~', formula

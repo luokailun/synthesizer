@@ -10,6 +10,7 @@ import os
 import re
 from operator import itemgetter #itemgetter用来去dict中的key，省去了使用lambda函数
 from itertools import groupby #itertool还包含有其他很多函数，比如将多个list联合起来。。
+import json
 
 #import Util
 #import context_operator
@@ -365,6 +366,13 @@ def __pre_parse(rule_list):
 ########################################################################################################################
 
 
+def __load_state_constaints(domain_name):
+	with open("./input/state_constraint","r") as fp_fsa:
+		mdict = json.load(fp_fsa)[domain_name]
+		context_operator.set_state_constraints(mdict['sc'])
+
+
+
 def parser(filename):
 	with open('./input/%s'%filename,"read") as sc_file, open('./input/default_axioms.sc',"read") as basic_file,\
 	open('./temp/game_rule_info','write') as sc_temp:
@@ -426,6 +434,9 @@ def parser(filename):
 		context_operator.set_function_regress_lambda(__generate_fun_regress_lambda(fun_fluents, sort_funs))
 		context_operator.set_predicate_regress_lambda(__generate_pred_regress_lambda(predicates, sort_preds))
 		#exit(0)
+
+		domain_name = filename.split('.')[0]
+		__load_state_constaints(domain_name)
 
 		#context_operator.set_z3_header(util_z3.generate_head())
 		#exit(0)	

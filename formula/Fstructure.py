@@ -50,6 +50,14 @@ def get_pos_models(fstructure):
 
 
 
+def delete_conjunct(fstructure, conjunct):
+	formula, pos_model_list, conjunct_model_list = fstructure
+	conjunct_model_list = [(c,m) for (c, m) in conjunct_model_list if c!=conjunct]
+	return (formula, pos_model_list, conjunct_model_list)
+
+
+
+
 def update(fstructure, replaced_conjunct_list, updated_conjunct, add_model_neg_list, add_model_pos_list):
 	formula, model_pos_list, conjunct_model_list = fstructure
 

@@ -202,6 +202,9 @@ def __assignment(formula, assignment):
 	return formula
 
 
+
+
+
 def __grounding_formula(var_list, sorts, formula, universe, var_constraint_dict=None):
 
 	#vars_consts = [ (var, var_constraint_dict[var]) if var in var_constraint_dict else (var, universe[sorts[e]]) for e, var in enumerate(var_list) ]

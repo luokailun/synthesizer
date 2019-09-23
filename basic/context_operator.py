@@ -252,6 +252,15 @@ def add_replace_list(elem):
 
 ##########################################################################################	
 
+
+def get_state_constraints():
+	return global_context.DOMAIN_SC
+
+def set_state_constraints(sc):
+	global_context.DOMAIN_SC = sc
+
+##########################################################################################
+
 '''
 #get_symbol_to_sort_list()
 set_symbols_equal_list("1")

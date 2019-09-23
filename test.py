@@ -40,16 +40,16 @@ def __before_verify(domain_file):
 	#__load_state_constaints(domain_name)
 
 
-__before_verify('new_chomp2N.sc')
+__before_verify('takeaway.sc')
 
 Init = get_inital_database()
 Goal = get_goal('p1')
 #pi_action = generate_pi_action()
 
-math_preds, fluent_preds = Predicate.genPreds('new_chomp2N.sc')
+math_preds, fluent_preds = Predicate.genPreds('takeaway.sc')
 
 #print math_preds+fluent_preds
-#exit(0)
+
 
 from regression import program_regress
 from local_update import algorithm 

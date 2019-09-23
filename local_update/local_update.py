@@ -78,6 +78,9 @@ def N_update(fstructure, model_minus, atomic_pred_list, pred_score_dict, LENGTH=
 	#print candicate_conjuncts_dict['new']
 	
 	# sort and get one modified conjunct from C and replace the old one.
+	print '@@@@;',fstructure
+	print '@@@@;',model_minus
+
 	scoring_conjunct_dict = scoring.compute_conjuncts_score(sum(candicate_conjuncts_dict.values(),[]), pred_score_dict)
 	updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict)
 
@@ -96,15 +99,21 @@ def P_update(fstructure, model_plus, atomic_pred_list, pred_score_dict, LENGTH=2
 	#candicate_conjuncts_dict = dict()
 	new_model_pos_list = model_pos_list + [model_plus]
 
+	#print conjunct_model_list
 
 	for e, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
 		base_conjunct_list = __get_target_conjuncts_from_preds(model_neg_list, list(), atomic_pred_list, LENGTH)
 		#candicate_conjuncts_dict[e] = __get_repl_candidate_conjuncts(conjunct, model_neg_list, new_model_pos_list, base_conjunct_list)
 		candicate_conjunct_list = __get_repl_candidate_conjuncts(conjunct, model_neg_list, new_model_pos_list, base_conjunct_list)
 
-		scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
-		updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict)
-		fstructure = Fstructure.update(fstructure, [conjunct], updated_conjunct, [], [])
+		#print 'candidate', candicate_conjunct_list
+		if candicate_conjunct_list == list():
+			fstructure = Fstructure.delete_conjunct(fstructure, conjunct)
+		else:
+			scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
+			#print scoring_conjunct_dict
+			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict)
+			fstructure = Fstructure.update(fstructure, [conjunct], updated_conjunct, [], [])
 
 	return Fstructure.update(fstructure, [], [], [], [model_plus])
 

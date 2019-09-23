@@ -45,8 +45,7 @@ def check_sat(formula):
 def imply(formula1, formula2, add_head=""):
 	logger.debug("#checking imply:\n f1:%s\n f2:%s"%(formula1, formula2))
 	formula = "( %s ) => ( %s )" % (formula1 , formula2)
-	#sc_formula = context_operator.get_state_constraints()
-	sc_formula = ""
+	sc_formula = context_operator.get_state_constraints()
 
 	with open("./z3_input/smt_input","write") as input_file:
 		#print "-------",encoded_formula
