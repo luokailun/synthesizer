@@ -1,7 +1,8 @@
-(set-option :timeout 10000)(declare-sort _S1)(declare-fun turn(_S1) Bool)
+
+(declare-sort _S1)(declare-fun turn(_S1) Bool)
 (declare-fun numStone() Int)(declare-const p2 _S1)
 (declare-const p1 _S1)
 (declare-const True Bool)
-(declare-const False Bool) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not  (=> false (exists ((K14 _S1) (K15 Int)) (and (and (and (>= numStone K15) (or (or (= K15 1) (= K15 2)) (= K15 3))) (turn K14)) (forall ((K12 _S1) (K13 Int)) (exists ((K16 Int)) (and (= numStone (+ K16 K15)) (=> (=> (and (and (>= K16 K13) (or (or (= K13 1) (= K13 2)) (= K13 3))) (not (turn K12))) (= numStone (+ 0 K15))) (and (= numStone (+ 0 K15)) (not (not (not (turn p1))))))))))))  ))
+(declare-const False Bool) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not  (=> (and (and (turn p1) (= numStone 0)) (not (turn p2))) (=> (= numStone 0) (turn p2)))  ))
 (check-sat)
 (get-model)

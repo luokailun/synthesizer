@@ -25,6 +25,7 @@ def generate_pi_action():
 	return "pi(" + vars_sorts + ")[" + actions +"]"
 
 
+
 def get_inital_database():
 	return context_operator.get_axioms()['init']['']
 

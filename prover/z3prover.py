@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 
-def generate_head():
+def __generate_head():
 	head_str =""
 	sorts = list(context_operator.get_sorts().keys())
 	#print ["(declare-sort "+sort for sort in sorts]
@@ -53,8 +53,8 @@ def imply(formula1, formula2, add_head=""):
 		#formula = "( turn(p1) and !turn(p2)) and len(1)" 
 		#print formula
 		smt_body = util_trans_smt.get_smt_body(formula)
-		smt_head = "\n".join(add_head.split('&')) +  sc_formula
-		smt_str = '%s (assert (not %s ))\n(check-sat)\n(get-model)' %(smt_head, smt_body)
+		smt_head = "\n".join(__generate_head().split('&')) +  add_head+ sc_formula
+		smt_str = '\n%s (assert (not %s ))\n(check-sat)\n(get-model)' %(smt_head, smt_body)
 		#logger.debug("smt_format:\n %s"%smt_str)
 		#print smt_str
 		#(assert (> len 0) )

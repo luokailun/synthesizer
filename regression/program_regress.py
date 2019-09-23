@@ -50,9 +50,9 @@ def A_regression(my_object, formula, keyword, recall_fun):
 		if action.find('?') ==-1:
 			regress_formula =atomic_regress.regress(formula, action)
 			#logger.info("formula: %s, action: %s , regress result: %s"%(formula, action, regress_formula))
-			return "(%s => %s)" % (atomic_regress.poss_or_ssa(action),regress_formula )
+			return "%s=>(%s)" % (atomic_regress.poss_or_ssa(action),regress_formula )
 		else:
-			return "(%s => %s)" % (action.strip('?'), formula)
+			return "%s=>(%s)" % (action.strip('?'), formula)
 
 
 
