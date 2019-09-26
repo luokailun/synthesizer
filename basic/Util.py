@@ -49,11 +49,6 @@ def endecode_string(my_str, old_symbols, new_symbols):
 	return repeat_do_function(replace_lambda_exp, zip(old_symbols, new_symbols), my_str)
 
 
-def __mrepl_encode(matched):
-	match_str=matched.group()
-	encoded_str=endecode_string(match_str, encode_pair_para[0], encode_pair_para[1])
-	return encoded_str
-
 
 def repeat_replace_inner_with_pattern(repeat_pattern, mrepl, my_str):
 	while(True):
@@ -61,6 +56,13 @@ def repeat_replace_inner_with_pattern(repeat_pattern, mrepl, my_str):
 		my_str = encoded_str if my_str!=encoded_str else None
 		if my_str is None:
 			break	
+	return encoded_str
+
+
+
+def __mrepl_encode(matched):
+	match_str=matched.group()
+	encoded_str=endecode_string(match_str, encode_pair_para[0], encode_pair_para[1])
 	return encoded_str
 
 

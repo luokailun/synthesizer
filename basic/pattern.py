@@ -22,11 +22,7 @@ str_fluent = r"(?:%s|%s)"%(str_eqfunction,str_predicate)
 str_action = r"(%s)\(((?:%s|%s|,)*)\)"%(str_const_name,str_const_name,str_var_name)
 
 
-
-
 str_inner_parenth = r"\([^\(\)]*\)"
-
-
 
 
 rule4 = re.compile(str_rule4)

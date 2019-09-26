@@ -13,22 +13,22 @@
 
 
 
-def init(formula, pos_model_list, conjunct_model_list):
-	return (formula, pos_model_list, conjunct_model_list)
+def init(formula, pos_model_list, conjunct_model_list, pred_score_dict):
+	return (formula, pos_model_list, conjunct_model_list, pred_score_dict)
 
 
 
 def to_conjuncts(fstructure):
-	formula, pos_model_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	return [ conjunct for (conjunct, model_list) in conjunct_model_list]
 
 def to_conjunct_models(fstructure):
-	formula, pos_model_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	return conjunct_model_list
 
 
 def to_formula(fstructure):
-	formula, pos_model_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	conjunct_list = [ conjunct for (conjunct, model_list) in conjunct_model_list]
 	if conjunct_list ==[]:
 		return formula
@@ -45,21 +45,21 @@ def to_formula(fstructure):
 
 
 def get_pos_models(fstructure):
-	formula, pos_model_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	return pos_model_list
 
 
 
 def delete_conjunct(fstructure, conjunct):
-	formula, pos_model_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	conjunct_model_list = [(c,m) for (c, m) in conjunct_model_list if c!=conjunct]
-	return (formula, pos_model_list, conjunct_model_list)
+	return (formula, pos_model_list, conjunct_model_list, pred_score_dict)
 
 
 
 
 def update(fstructure, replaced_conjunct_list, updated_conjunct, add_model_neg_list, add_model_pos_list):
-	formula, model_pos_list, conjunct_model_list = fstructure
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 
 	updated_model_list = add_model_neg_list
 	new_conjunct_model_list = list()
@@ -72,7 +72,12 @@ def update(fstructure, replaced_conjunct_list, updated_conjunct, add_model_neg_l
 	if updated_model_list!=[]:
 		new_conjunct_model_list.append((updated_conjunct,updated_model_list))
 
-	return (formula, model_pos_list+add_model_pos_list, new_conjunct_model_list)
+	return (formula, pos_model_list+add_model_pos_list, new_conjunct_model_list, pred_score_dict)
+
+
+def get_pred_score_dict(fstructure):
+	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
+	return pred_score_dict
 
 
 '''

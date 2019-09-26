@@ -189,6 +189,8 @@ def models_unsat_math_pred(model_list, pred, universe):
 ##############################################################################################################################################################
 
 from basic import Util
+from basic import context_operator
+from formula import Formula
 import re
 import itertools
 import evaluation
@@ -196,16 +198,24 @@ import evaluation
 
 
 
+
+
 def __assignment(formula, assignment):
-	for fluent, value in assignment.iteritems():
-		formula = formula.replace(fluent, str(value))
-	return formula
+
+	replace_list = [ (r'\b%s'%(fluent.replace('(','\(').replace(')','\)')), str(value)) for fluent, value in assignment.iteritems()]
+	#print replace_list
+	while True:
+		new_formula = Util.repeat_do_function(Util.sub_lambda_exp, replace_list, formula)
+		if new_formula == formula:
+			return formula
+		else:
+			formula = new_formula
 
 
 
 
 
-def __grounding_formula(var_list, sorts, formula, universe, var_constraint_dict=None):
+def __grounding_conjunct(var_list, sorts, formula, universe, var_constraint_dict=None):
 
 	#vars_consts = [ (var, var_constraint_dict[var]) if var in var_constraint_dict else (var, universe[sorts[e]]) for e, var in enumerate(var_list) ]
 	#print '~~~~', var_list, sorts, formula, universe
@@ -222,7 +232,7 @@ def __grounding_formula(var_list, sorts, formula, universe, var_constraint_dict=
 
 encode_pair_logic = (['>=', '<=','=<', '=>'],['@','#','$','~'])
 
-def __to_python_formula(formula):
+def __to_python_equivalent(formula):
 	formula =Util.endecode_string(formula, encode_pair_logic[0], encode_pair_logic[1])
 	formula = formula.replace('=','==')
 	formula =Util.endecode_string(formula, encode_pair_logic[1], encode_pair_logic[0])
@@ -238,10 +248,10 @@ def sat_conjunct_by_model(model, conjunct):
 
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
-	formula = __to_python_formula(' & '.join(pred_list))
+	formula = __to_python_equivalent(' & '.join(pred_list))
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
-	ground_formula = formula if var_list == [] else __grounding_formula(var_list, sort_list, formula, universe)
+	ground_formula = formula if var_list == [] else __grounding_conjunct(var_list, sort_list, formula, universe)
 	#print '--------ground formula',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
 	#logical_formula = unknown_pattern.sub(__mrepl_unknown,logical_formula)
@@ -307,4 +317,82 @@ def to_formula(model):
 	return '&'.join(formula_list)
 
 ##############################################################################################################################################################
+
+
+
+grounding_pattern_str = r"(?P<head>(?:forall|exists))\((?P<var>[\w\:\s\d,_]+?)\)\[(?P<body>[^\[\]]+)\]"
+grounding_pattern = re.compile(grounding_pattern_str)
+
+
+
+
+def __get_const_value(universe, fluents, assignment):
+
+	consts = sum([ const_list for sort, const_list in universe.iteritems() if sort!="Int" and sort!="Bool" ],[])
+	consts = [elem for elem in consts if elem not in fluents]
+	#const_fluents = ["%s()"%fluent for fluent in fluents]
+	const_value = [ (fluent,assignment["%s()"%fluent]) for fluent in fluents if "%s()"%fluent in assignment.keys()]
+	for e, elem in enumerate(consts):
+		const_value.append((elem,e))
+	const_value_statement = [ "%s=%s"%(const,value) for (const,value) in const_value ]
+	#print const_value_statement
+	scope =dict()
+	for statement in const_value_statement:
+		exec(statement,scope)
+	return scope
+
+
+def ____mrepl_ground(match):
+	logical_connector = "&" if match.group('head') =='forall' else '|'
+	
+	#universe = {'Int': ['1', '0', '3', '2'], '_S1': [], '_S2': ['p2', 'p1'], 'Bool': ['True', 'False']}
+
+	universe, assignment = context_operator.get_current_model()
+
+	vars_sorts = { elem.split(':')[0]: elem.split(':')[1] for elem in  match.group('var').split(',') }
+	var_list = vars_sorts.keys()
+	#var_constraint_dict = __get_constraint_var_dict(var_list, match.group('body'))
+	
+	#vars_consts = [ (var, var_constraint_dict[var])if var in var_constraint_dict else (var, universe[sort]) for var, sort in vars_sorts.iteritems()]
+	vars_consts = [ (var, universe[sort]) for var, sort in vars_sorts.iteritems()]
+	vars_list = [ r'\b'+var+r'\b' for var in zip(*vars_consts)[0] ]
+	consts_list = list(itertools.product(*zip(*vars_consts)[1]))
+
+	instances = [ Util.repeat_do_function(Util.sub_lambda_exp, zip(vars_list,list(consts)), match.group('body')) for consts in consts_list ]
+
+	return "(%s)"%logical_connector.join(["(%s)"%ins for ins in instances ])
+
+
+def __grounding_formula(formula, model):
+	context_operator.set_current_model(model)
+	return Util.repeat_replace_inner_with_pattern(grounding_pattern, ____mrepl_ground, formula)
+
+
+def __to_python_formula(formula):
+	formula = __to_python_equivalent(formula)
+	return formula.replace('!',' not ').replace('&', ' and ').replace('|', ' or ')
+
+
+def sat_formula(model, formula):
+
+	universe, assignment = model
+	formula = __to_python_formula(formula)
+	#print '1,---------',formula
+	formula = Formula.entailment_eliminate(formula)
+	#print '2,---------',formula
+	ground_formula = __grounding_formula(formula, model)
+	#print '3,--------',ground_formula
+	logical_formula = __assignment(ground_formula, assignment)
+	#print '4,--------model replace',logical_formula
+	#print 'kkkk',context_operator.get_sort_symbols_dict()
+	#logger.debug("Checking formula %s with model %s \n formula after grounding: %s \n after model_replace %s"%(formula,model,ground_formula,logical_formula))
+	scope = __get_const_value(context_operator.get_sort_symbols_dict(), context_operator.get_fluents(), assignment)
+	flag = eval(logical_formula,scope)
+	#logger.debug('sat?: \n%s'%flag)
+	return flag
+
+
+
+##############################################################################################################################################################
+
 

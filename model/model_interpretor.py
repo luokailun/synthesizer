@@ -164,7 +164,7 @@ def interpret_model(results, universe=None, max_value=99999):
 	#print '----------',context_operator.get_sort_symbols_dict()
 
 	universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
-	universe['Int'] = __generate_num_universe(results)
+	universe['Int'] =  list(set(universe['Int'] +__generate_num_universe(results)))
 	#if universe is None:
 		#print '-----------'
 	#	set_model_universe(const_dict)	

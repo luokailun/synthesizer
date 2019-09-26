@@ -17,33 +17,27 @@ from parser import sort_system
 #logger = logging.getLogger(__name__)
 
 
-'''
-
-def context_operator.get_formula_from_local_dict():
-	formula_str=' and '.join([str( key )+"="+str(value) for key, value in context_operator.get_local_dict().iteritems()])
-	return 'exists('+ ','.join(get_local_dict().values())+ ')[ '+ formula_str+' ]'
-
-def context_operator.use_local_dict():
-	global_list.LOCAL_DICT = dict()
-
-def context_operator.get_local_dict():
-	return global_list.LOCAL_DICT
-
-def context_operator.get_new_var():
-	global_list.VAR_INDEX += 1
-	return 'K'+ str(global_list.VAR_INDEX)
-
-def context_operator.get_global_action():
-	return global_list.ACTION#'take(1,a,f(x)+3)'
-def set_global_action(action):
-	global_list.ACTION = action
-'''
 
 ############
 #	regress(formula,action): 
 #	(1) replace forall(x)[f(g(x)) > x+1] with  forall(x)[ exist(k,m).k=g(x) and m= f(k) and m >x+1]
 #	(2) for each fluent in formula, do regress(fluent, action)
-#
+#	# model: {universe} {key:value} 
+# 	1.sat_model_formula(model,formula)   
+#.  	(1)formula grounding according to the universe  (2) model |- formula  =>  eval(formula.replace(model))
+#.	2.sat_model_action(model,action)
+#   	first, find poss action to action:
+#		(1)Poss(action,M): where action is ground term ;
+#	   		Poss(action) : where action can be any action 	
+#		(2)action matched:  take(1,2)  -> take_1_2  take(x,y)= lambda x,y: repalcement x,y  to get (formula)
+#	 		poss(take(X,Y)) <=> X+Y>0     ->    poss(take_1_2) <=> 1+2>0
+#		(3)go to 1 with action and formula 
+# 3.progress_model(model,action)
+#   for each ground fluent 
+# 	(1)get ssa(fluent, action):  
+# 	    ssa(f(Z)=Y, take(X)) <=> Z>=1 and f(Z-1) = X+Y  or  Z<=1 and f(Z-1) = 0 
+#       f(2)=3 to do take(1)   ->
+#		Z-1 = 2  and  1+Y = 3  ->  Z=3 and Y=2   f(3)=2
 #
 #
 #
@@ -221,7 +215,7 @@ def decode_handle_fluent(m_str):
 	return re.sub(r"@(?P<code>.+?)@", __mrepl_decode_fluent, m_str) 
 
 
-def poss_or_ssa(action_str, fluent=None, model=None):
+def poss_or_ssa(action_str, fluent=None):
 	#print("aaaaa",action_str)
 	'''
 	#take(1,X,fun(1,2)) -> take   1,X,fun(1,2)
@@ -247,13 +241,8 @@ def poss_or_ssa(action_str, fluent=None, model=None):
 	lambda_function, para_selected_list= context_operator.find_axiom_with_feature(axiom_name, feature)
 	#print '----', lambda_function, para_selected_list
 	formula = lambda_function if  isinstance(lambda_function, str) else lambda_function(para_selected_list)
-	if model:
-		#ground_formula = __grounding_forall(formula)
-		#print ground_formula
-		#print __replace_model(ground_formula, model)
-		return model_sat_formula(model, formula)#eval(__replace_model(ground_formula, model))
-	else:
-		return formula
+
+	return formula
 
 
 def __mrepl_fluent_regress(matched):

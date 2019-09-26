@@ -59,8 +59,8 @@ def __get_target_conjuncts_from_preds( model_neg_list, model_pos_list, atomic_pr
 
 ### note the fstructure can be translated as:  Goal & !(C1 & C2 & C3 ...), where each Ci is exists(variables)[P1 & P2 &...].
 
-def N_update(fstructure, model_minus, atomic_pred_list, pred_score_dict, LENGTH=2):
-	
+def N_update(fstructure, model_minus, atomic_pred_list, LENGTH=2):
+	pred_score_dict = Fstructure.get_pred_score_dict(fstructure)
 	# get the set of conjunct C1, C2,...
 	conjunct_list = Fstructure.to_conjuncts(fstructure)
 	# get the set of conjunct C1, C2... with M1, M2, where each Mi is a set of models that satisfy Ci
@@ -78,8 +78,8 @@ def N_update(fstructure, model_minus, atomic_pred_list, pred_score_dict, LENGTH=
 	#print candicate_conjuncts_dict['new']
 	
 	# sort and get one modified conjunct from C and replace the old one.
-	print '@@@@;',fstructure
-	print '@@@@;',model_minus
+	#print '@@@@;',fstructure
+	#print '@@@@;',model_minus
 
 	scoring_conjunct_dict = scoring.compute_conjuncts_score(sum(candicate_conjuncts_dict.values(),[]), pred_score_dict)
 	updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict)
@@ -92,8 +92,9 @@ def N_update(fstructure, model_minus, atomic_pred_list, pred_score_dict, LENGTH=
 
 	#new_conjunct = util_pred_score.sort_and_get_conjunct(candicate_conjuncts_dict.values(), pred_score_dict)
 
-def P_update(fstructure, model_plus, atomic_pred_list, pred_score_dict, LENGTH=2):
+def P_update(fstructure, model_plus, atomic_pred_list, LENGTH=2):
 
+	pred_score_dict = Fstructure.get_pred_score_dict(fstructure)
 	conjunct_model_list = Fstructure.to_conjunct_models(fstructure)
 	model_pos_list = Fstructure.get_pos_models(fstructure)
 	#candicate_conjuncts_dict = dict()

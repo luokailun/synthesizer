@@ -261,6 +261,14 @@ def set_state_constraints(sc):
 
 ##########################################################################################
 
+def get_current_model():
+	return global_context.MODEL
+
+def set_current_model(model):
+	global_context.MODEL = model
+
+##########################################################################################
+
 '''
 #get_symbol_to_sort_list()
 set_symbols_equal_list("1")
