@@ -1,0 +1,73 @@
+/Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas -s -c 1 -l 1 -f 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/model.ispl
+
+
+/Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas  -c 1 -l 1 -f 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/model.ispl
+
+
+
+Semantics=SA;
+Agent Environment
+  Obsvars:
+	  turnp2:boolean;
+    turnp1:boolean;
+    numStone:0..1;
+  end Obsvars
+  Actions = {none};
+  Protocol: Other: {none}; end Protocol 
+  Evolution: 
+    --turnp1  if turnp1 = false;
+    --turnp2 = true if turnp2 = false;
+    
+    turnp1 = false if (Player1.Action = takep1_1) and Player2.Action = none;
+    turnp2 = true  if (Player1.Action = takep1_1) and Player2.Action = none;
+    turnp1 = true  if (Player2.Action = takep2_1) and Player1.Action = none;
+    turnp2 = false if (Player2.Action = takep2_1) and Player1.Action = none;
+    numStone=0 if (numStone=1) and Player1.Action = takep1_1;
+  end Evolution 
+end Agent
+ 
+Agent Player1
+  Vars:
+  	state: {takep1_1,none};
+  end Vars
+  Actions = {takep1_1,none};
+  Protocol:
+	  Environment.numStone>=1 and Environment.turnp1=true:{takep1_1};
+	  Other: {none};
+  end Protocol 
+  Evolution: 
+	  state = none if Action = none; 
+    state = takep1_1 if Action = takep1_1; 
+  end Evolution 
+end Agent
+ 
+Agent Player2
+  Vars:
+  	state: {none,takep2_1};
+  end Vars
+  Actions = {takep2_1,none};
+  Protocol:
+	  Environment.numStone>=1 and Environment.turnp2=true:{takep2_1};
+	  Other: {none};
+  end Protocol 
+  Evolution: 
+    state = none if Action = none; 
+	  state = takep2_1 if Action = takep2_1; 
+  end Evolution 
+end Agent
+ 
+Evaluation 
+	p1win if !(Environment.numStone=0) or !Environment.turnp1=true; 
+end Evaluation 
+
+InitStates 
+ 	Environment.turnp1=true and Environment.numStone=1 and !Environment.turnp2=true and Player1.state=none and Player2.state=none;
+end InitStates 
+
+Groups 
+	g1={Player1}; 
+end Groups 
+
+Formulae 
+ 	<g1>G p1win; 
+end Formulae 

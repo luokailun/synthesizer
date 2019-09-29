@@ -300,28 +300,8 @@ def get_sat_models(model_list, conjunct):
 	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is True]
 
 
-##############################################################################################################################################################
-
-# model is a tuple (U, S) where U is universe and S is an assignment
-
-def to_formula(model):
-	universe, assignment = model
-	formula_list = list()
-	for key,value in assignment.iteritems():
-		if value is True:
-			formula_list.append(key)
-		elif value is False:
-			formula_list.append('!%s'%key)
-		else:
-			formula_list.append('%s=%s'%(key,value))
-	return '&'.join(formula_list)
 
 ##############################################################################################################################################################
-
-
-
-grounding_pattern_str = r"(?P<head>(?:forall|exists))\((?P<var>[\w\:\s\d,_]+?)\)\[(?P<body>[^\[\]]+)\]"
-grounding_pattern = re.compile(grounding_pattern_str)
 
 
 
@@ -342,31 +322,6 @@ def __get_const_value(universe, fluents, assignment):
 	return scope
 
 
-def ____mrepl_ground(match):
-	logical_connector = "&" if match.group('head') =='forall' else '|'
-	
-	#universe = {'Int': ['1', '0', '3', '2'], '_S1': [], '_S2': ['p2', 'p1'], 'Bool': ['True', 'False']}
-
-	universe, assignment = context_operator.get_current_model()
-
-	vars_sorts = { elem.split(':')[0]: elem.split(':')[1] for elem in  match.group('var').split(',') }
-	var_list = vars_sorts.keys()
-	#var_constraint_dict = __get_constraint_var_dict(var_list, match.group('body'))
-	
-	#vars_consts = [ (var, var_constraint_dict[var])if var in var_constraint_dict else (var, universe[sort]) for var, sort in vars_sorts.iteritems()]
-	vars_consts = [ (var, universe[sort]) for var, sort in vars_sorts.iteritems()]
-	vars_list = [ r'\b'+var+r'\b' for var in zip(*vars_consts)[0] ]
-	consts_list = list(itertools.product(*zip(*vars_consts)[1]))
-
-	instances = [ Util.repeat_do_function(Util.sub_lambda_exp, zip(vars_list,list(consts)), match.group('body')) for consts in consts_list ]
-
-	return "(%s)"%logical_connector.join(["(%s)"%ins for ins in instances ])
-
-
-def __grounding_formula(formula, model):
-	context_operator.set_current_model(model)
-	return Util.repeat_replace_inner_with_pattern(grounding_pattern, ____mrepl_ground, formula)
-
 
 def __to_python_formula(formula):
 	formula = __to_python_equivalent(formula)
@@ -380,7 +335,7 @@ def sat_formula(model, formula):
 	#print '1,---------',formula
 	formula = Formula.entailment_eliminate(formula)
 	#print '2,---------',formula
-	ground_formula = __grounding_formula(formula, model)
+	ground_formula = Formula.grounding(formula, model)
 	#print '3,--------',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
 	#print '4,--------model replace',logical_formula

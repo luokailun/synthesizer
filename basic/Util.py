@@ -44,6 +44,8 @@ def repeat_do_function(f,args_list,mbase):
 	return reduce(lambda x,y: f(x,y),args_list,mbase)
 
 
+#def endecode_string_sub(my_str, old_symbols, new_symbols):
+	#return repeat_do_function(sub_lambda_exp, zip(old_symbols, new_symbols), my_str)
 
 def endecode_string(my_str, old_symbols, new_symbols):
 	return repeat_do_function(replace_lambda_exp, zip(old_symbols, new_symbols), my_str)

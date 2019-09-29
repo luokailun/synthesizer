@@ -11,7 +11,7 @@ import os
 from basic import context_operator
 from parser import sort_system
 #import util_transiform
-import util_trans_smt
+import smt_translator
 
 from basic import mylog as logging
 logger = logging.getLogger(__name__)
@@ -47,12 +47,12 @@ def imply(formula1, formula2, add_head=""):
 	formula = "( %s ) => ( %s )" % (formula1 , formula2)
 	sc_formula = context_operator.get_state_constraints()
 
-	with open("./z3_input/smt_input","write") as input_file:
+	with open("./input_z3/smt_input","write") as input_file:
 		#print "-------",encoded_formula
 		#smt_body = util_transiform.decode_formula(util_prolog.get_smt_format_body(encoded_formula))
 		#formula = "( turn(p1) and !turn(p2)) and len(1)" 
 		#print formula
-		smt_body = util_trans_smt.get_smt_body(formula)
+		smt_body = smt_translator.get_smt_body(formula)
 		smt_head = "\n".join(__generate_head().split('&')) +  add_head+ sc_formula
 		smt_str = '\n%s (assert (not %s ))\n(check-sat)\n(get-model)' %(smt_head, smt_body)
 		#logger.debug("smt_format:\n %s"%smt_str)
@@ -60,7 +60,7 @@ def imply(formula1, formula2, add_head=""):
 		#(assert (> len 0) )
 		input_file.writelines(smt_str)
 
-		cmd = "z3 -smt2 ./z3_input/smt_input"
+		cmd = "z3 -smt2 ./input_z3/smt_input"
 		input_file.close()
 		return os.popen(cmd).readlines()
 
