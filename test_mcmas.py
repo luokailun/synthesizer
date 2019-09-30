@@ -25,13 +25,6 @@ print context_operator.get_axioms()
 
 
 print atomic_regress.poss_or_ssa('take(p1,1)','numStone()=0')
-
-
-    turnp1 = false if (Player1.Action = takep1_1) or (Player1.Action = takep1_2) or (Player1.Action = takep1_3);
-    turnp1 = true if (Player1.Action = none);
-    turnp2 = false if (Player2.Action = takep2_1) or (Player2.Action = takep2_2) or (Player2.Action = takep2_3);
-    turnp2 = true if (Player2.Action = none);
-
 '''
 
 

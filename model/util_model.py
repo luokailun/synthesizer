@@ -7,9 +7,9 @@ def to_formula(model):
 	universe, assignment = model
 	formula_list = list()
 	for key,value in assignment.iteritems():
-		if value is True:
+		if value is True or str(value) == 'True':
 			formula_list.append(key)
-		elif value is False:
+		elif value is False or str(value) == 'False':
 			formula_list.append('!%s'%key)
 		else:
 			formula_list.append('%s=%s'%(key,value))

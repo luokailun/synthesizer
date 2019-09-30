@@ -1,0 +1,13 @@
+
+
+
+
+M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'})
+
+C = !exists(X1:Int)[numStone() > X1]
+
+
+QAQ: C is actually equivalent to False (C \equiv False);  but we cannot use model M to detect this? Because in M we assume the Int sort only has objects 0-4 and we have M \models C (but negative number will make that false).
+
+SOLVE: (1) add additional predicates: we require that X1>=0 since we only focus on the case natural number
+	   (2) add math checking about predicates by expanding the Int domain to 0-10 ??? (give up)

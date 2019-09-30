@@ -42,7 +42,8 @@ def compute_conjuncts_score(conjunct_list, pred_score_dict):
 	return scoring_dict
 
 
-def get_min_score_conjunct(scoring_dict):
+'''
+def get_min_score_conjunct(scoring_dict, unsat_model_list):
 	min_score = min(scoring_dict.keys())
 	min_conjunct_list = scoring_dict[min_score]
 	#ranNum = random.randint(0,len(min_conjunct_list)-1)
@@ -52,8 +53,31 @@ def get_min_score_conjunct(scoring_dict):
 	if scoring_dict[min_score] == list():
 		scoring_dict.pop(min_score)
 	return target_conjunct
+'''
+
+	#ranNum = random.randint(0,len(min_conjunct_list)-1)
+	#target_conjunct = min_conjunct_list[ranNum]
+
+#from model import model_checker
+#from model import model_interpretor
+#from prover import z3prover
+#from formula import Conjunct
 
 
+def get_min_score_conjunct(scoring_dict, unsat_model_list):
+
+	while scoring_dict.keys()!=list():
+		min_score = min(scoring_dict.keys())
+		conjunct = scoring_dict[min_score].pop(0)
+		if scoring_dict[min_score] == list():
+			scoring_dict.pop(min_score)
+		#if model_interpretor.interpret_result(z3prover.check_unsat('!(%s)'%(Conjunct.to_formula(conjunct)))) is False:
+		#if model_checker.unsat_conjunct_math(unsat_model_list, conjunct):
+		return conjunct
+	return None
 
 ##############################################################################################################################################################
+
+
+
 

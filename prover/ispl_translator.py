@@ -126,7 +126,7 @@ def __get_ispl_formula(formula, model, fluent_tuple_list):
 			if f in context_operator.get_predicates()]
 
 
-	formula = Formula.entailment_eliminate(formula)
+	formula = Formula.transform_entailment(formula)
 	formula = ____add_env(formula, fluent_list)
 	#print formula
 	formula = Formula.grounding(formula, model)
@@ -187,7 +187,7 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 	update_pair_list = [ (a,b,c) for a, (b,c) in itertools.product(fluent_value_list, action_pair_list)]
 	update_pair_list = [ (fluent, atomic_regress.poss_or_ssa(action, fluent), ispl_action) \
 						for fluent, action, ispl_action in update_pair_list]
-	update_pair_list = [ (a, Formula.entailment_eliminate(b), c) for a, b, c in update_pair_list]
+	update_pair_list = [ (a, Formula.transform_entailment(b), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, Formula.grounding(b,model), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, ____ispl_simplify(b,'Player1.Action'), c) for a, b, c in update_pair_list]
 	#update_pair_list = [ (a, b, c) for a, b, c in update_pair_list if b is not None]
@@ -217,7 +217,7 @@ def __get_ispl_poss(action_tuple_list, model, fluent_tuple_list):
 
 	action_poss_list = [ atomic_regress.poss_or_ssa(action) for action in action_list ]
 	#print action_poss_list
-	action_poss_list = [ Formula.entailment_eliminate(poss) for poss in action_poss_list ]
+	action_poss_list = [ Formula.transform_entailment(poss) for poss in action_poss_list ]
 	#print action_poss_list
 	action_poss_list = [ ____add_env(poss, fluent_list) for poss in action_poss_list ]
 	#print action_poss_list
@@ -380,7 +380,10 @@ def to_ispl(model, goal):
 	ispl_updates = '\n    '.join(ispl_updates)
 
 	ispl_win_property = __get_ispl_formula(goal, model, fluent_tuple_list)
+
 	ispl_init = __get_ispl_formula(util_model.to_formula(model), model, fluent_tuple_list)
+	#print ispl_init
+	#print util_model.to_formula(model)
 
 	return ispl%(ispl_vars, ispl_updates, ispl_p1_actions, ispl_p1_actions_poss, ispl_p2_actions, ispl_p2_actions_poss, \
 		ispl_win_property, ispl_init)

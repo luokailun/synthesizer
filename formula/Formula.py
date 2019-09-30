@@ -40,7 +40,7 @@ def __mrepl_entailment_quantifier(matched):
 	return Util.endecode_string("%s(%s)[%s]"%(matched.group(1),matched.group(2),formula), encode_pair[0], encode_pair[1])
 
 
-def entailment_eliminate(formula):
+def transform_entailment(formula):
 	old_formula = ""
 	while old_formula!=formula:
 		old_formula = formula

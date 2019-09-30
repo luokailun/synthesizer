@@ -70,28 +70,4 @@ algorithm.synthesis(Init, Goal, math_preds+fluent_preds)
 
 
 
-#( !Ch(1,1) ) => ( !Ch(1,1)&turn(p1) )
-#pi(K27:_S1,K28:Int,K29:Int)[eat(K27,K28,K29)]
-#forall(K27:_S1,K28:Int,K29:Int)[ (Ch(K28,K29)&turn(K27) => ( !(Ch(1,1)&(K28>1|K29>1)) ) => ( !(Ch(1,1)&(K28>1|K29>1))&(!turn(p1)) )) ]
-
-
-#print Goal
-#print pi_action
-#pi(K27:_S1,K28:Int,K29:Int)[eat(K27,K28,K29)]
-#A_formula = program_regress.A_regress(Goal, pi_action)
-#E_formula = program_regress.E_regress(Goal, pi_action)
-
-#print A_formula
-#print E_formula
-
-
-#from prover import z3prover
-
-#results = z3prover.imply(A_formula, Goal, z3prover.generate_head())
-
-#print results
-
-#from model import model_interpretor
-
-#print model_interpretor.interpret_result(results)
 

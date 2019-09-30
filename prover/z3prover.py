@@ -37,7 +37,7 @@ def __generate_head():
 	return head_str
 
 
-def check_sat(formula):
+def check_unsat(formula):
 	return imply(formula, 'false')
 
 
@@ -63,6 +63,7 @@ def imply(formula1, formula2, add_head=""):
 		cmd = "z3 -smt2 ./input_z3/smt_input"
 		input_file.close()
 		return os.popen(cmd).readlines()
+
 
 
 

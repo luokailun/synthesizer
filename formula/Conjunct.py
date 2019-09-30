@@ -1,10 +1,7 @@
 
 
 ###
-# the form of Uformula is: list[(A,B),...], where A is a conjunct, B is a list of models that satisfies A
-#
-#  A conjunct is a tuple (P,Q,R) where P is a list of variable, Q is a list of sorts corresponding to P, and R is 
-#  a list of predicates.
+# 
 #
 #
 #
@@ -20,7 +17,15 @@ from itertools import groupby
 
 import itertools
 
+##############################################################################################################################################################
 
+def to_formula(conjuct):
+	var_list, sort_list, pred_list = conjuct
+	if var_list !=list():
+		add_pred_list = ['%s>=0'%(x) for e, x in enumerate(var_list) if sort_list[e] == 'Int']
+		return "exists(%s)[%s]"%(','.join([ "%s:%s"%(var,sort) for var,sort in zip(var_list,sort_list)]), '&'.join(add_pred_list+pred_list))
+	else:
+		return '%s'%('&'.join(pred_list))
 
 
 
