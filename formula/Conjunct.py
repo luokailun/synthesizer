@@ -195,7 +195,6 @@ def combine_conjunct(conjunctA, conjunctB, max_var_num):
 
 def get_target_conjuncts(conjunct_list, model_sat_list, model_unsat_list):
 	#exit(0)
-	#print
 	sat_conjunct_list = [conjunct for conjunct in conjunct_list if model_checker.sat_conjunct(model_sat_list, conjunct)]
 	return [conjunct for conjunct in sat_conjunct_list if model_checker.unsat_conjunct(model_unsat_list, conjunct)]
 

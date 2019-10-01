@@ -5,7 +5,7 @@ import re
 
 word_pattern = re.compile(r'\w+')
 sym_pattern = re.compile(r'[^\w\s\(\)]+')
-op_dict = {'>': operator.gt, '==': operator.eq, '>=':operator.ge, '+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.div, '%': operator.mod }
+op_dict = {'>': operator.gt, '=': operator.eq, '>=':operator.ge, '+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.div, '%': operator.mod }
 
 
 def eval_expression(expression, value_dict):
@@ -20,7 +20,7 @@ def eval_expression(expression, value_dict):
 		if sym == '!':
 			#print 'A'
 			neg = True
-		elif sym == '==' or sym == '>=' or sym == '>':
+		elif sym == '=' or sym == '>=' or sym == '>':
 			#print 'B'
 			op, left_value, pos = sym, words[pos], pos+1
 			#left_value = var_dict[left_value] if left_value in var_dict else left_value

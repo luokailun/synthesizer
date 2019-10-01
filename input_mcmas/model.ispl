@@ -3,7 +3,7 @@ Agent Environment
   Obsvars:
 	  turnp2:boolean;
     turnp1:boolean;
-    numStone:0..6;
+    numStone:0..4;
   end Obsvars
   Actions = {none};
   Protocol: Other: {none}; end Protocol 
@@ -32,24 +32,12 @@ Agent Environment
     numStone=2 if (numStone=2+1) and Player2.Action = takep2_1;
     numStone=2 if (numStone=2+3) and Player2.Action = takep2_3;
     numStone=2 if (numStone=2+2) and Player2.Action = takep2_2;
-    numStone=5 if (numStone=5+1) and Player1.Action = takep1_1;
-    numStone=5 if (numStone=5+3) and Player1.Action = takep1_3;
-    numStone=5 if (numStone=5+2) and Player1.Action = takep1_2;
-    numStone=5 if (numStone=5+1) and Player2.Action = takep2_1;
-    numStone=5 if (numStone=5+3) and Player2.Action = takep2_3;
-    numStone=5 if (numStone=5+2) and Player2.Action = takep2_2;
     numStone=4 if (numStone=4+1) and Player1.Action = takep1_1;
     numStone=4 if (numStone=4+3) and Player1.Action = takep1_3;
     numStone=4 if (numStone=4+2) and Player1.Action = takep1_2;
     numStone=4 if (numStone=4+1) and Player2.Action = takep2_1;
     numStone=4 if (numStone=4+3) and Player2.Action = takep2_3;
     numStone=4 if (numStone=4+2) and Player2.Action = takep2_2;
-    numStone=6 if (numStone=6+1) and Player1.Action = takep1_1;
-    numStone=6 if (numStone=6+3) and Player1.Action = takep1_3;
-    numStone=6 if (numStone=6+2) and Player1.Action = takep1_2;
-    numStone=6 if (numStone=6+1) and Player2.Action = takep2_1;
-    numStone=6 if (numStone=6+3) and Player2.Action = takep2_3;
-    numStone=6 if (numStone=6+2) and Player2.Action = takep2_2;
     turnp1 = false if ! Player1.Action = none and Player2.Action = none;
     turnp2 = true  if ! Player1.Action = none and Player2.Action = none;
     turnp1 = true if ! Player2.Action = none and Player1.Action = none;
@@ -94,7 +82,7 @@ Evaluation
 end Evaluation 
 
 InitStates 
- 	!Environment.turnp1=true and Environment.numStone=3 and Environment.turnp2=true;
+ 	!Environment.turnp1=true and Environment.numStone=0 and Environment.turnp2=true;
 end InitStates 
 
 Groups 

@@ -9,10 +9,9 @@ import evaluation
 
 
 ##############################################################################################################################################################
-
+# because we need to assignment formula like cell(len(),1) with {len(): 2, cell(2,1): 1}
 
 def __assignment(formula, assignment):
-
 	replace_list = [ (r'\b%s'%(fluent.replace('(','\(').replace(')','\)')), str(value)) for fluent, value in assignment.iteritems()]
 	#print replace_list
 	while True:
@@ -22,6 +21,11 @@ def __assignment(formula, assignment):
 		else:
 			formula = new_formula
 
+
+
+def __assignment_light(formula, assignment):
+	#print replace_list
+	return Util.repeat_do_function(Util.replace_lambda_exp, list(assignment.items()), formula)
 
 
 
@@ -40,7 +44,7 @@ def __grounding_conjunct(var_list, sorts, formula, universe, var_constraint_dict
 
 
 
-
+'''
 encode_pair_logic = (['>=', '<=','=<', '=>'],['@','#','$','~'])
 
 def __to_python_equivalent(formula):
@@ -48,6 +52,7 @@ def __to_python_equivalent(formula):
 	formula = formula.replace('=','==')
 	formula =Util.endecode_string(formula, encode_pair_logic[1], encode_pair_logic[0])
 	return formula
+'''
 
 
 
@@ -59,12 +64,13 @@ def sat_conjunct_by_model(model, conjunct):
 
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
-	formula = __to_python_equivalent(' & '.join(pred_list))
+	#formula = __to_python_equivalent(' & '.join(pred_list))
+	formula = ' & '.join(pred_list)
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
 	ground_formula = formula if var_list == [] else __grounding_conjunct(var_list, sort_list, formula, universe)
 	#print '--------ground formula',ground_formula
-	logical_formula = __assignment(ground_formula, assignment)
+	logical_formula = __assignment_light(ground_formula, assignment)
 	#logical_formula = unknown_pattern.sub(__mrepl_unknown,logical_formula)
 	#print '--------logical',logical_formula
 	if var_list == []:

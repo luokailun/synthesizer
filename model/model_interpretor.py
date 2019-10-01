@@ -92,9 +92,9 @@ def __name_relpace(paras, const_dict):
 def __trans_true_false(elems):
 	for e,(fun, mtuple, value) in enumerate(elems):
 		if value =="false":
-			elems[e] = (fun, mtuple, False)
+			elems[e] = (fun, mtuple, 'False')
 		elif value =="true":
-			elems[e] =(fun, mtuple, True)
+			elems[e] =(fun, mtuple, 'True')
 	return elems
 
 
@@ -156,51 +156,42 @@ def interpret_model(results, universe=None, max_value=99999):
 	#print results
 	#context_operator.set_counterexample_result(results)
 
-	#print '----------', universe
 	lambda_funs = util_z3_model.get_fun(results)
-	#print '@#$------',lambda_funs
+
+	# a dict maps constants to SMT constants
 	const_dict = util_z3_model.get_const(results)
-	#print '@#$-------',const_dict
 	#print '----------',context_operator.get_sort_symbols_dict()
 
 	universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
 	universe['Int'] =  list(set(universe['Int'] +__generate_num_universe(results)))
-	#if universe is None:
-		#print '-----------'
-	#	set_model_universe(const_dict)	
+
+	# get fluent names from the interpretation
 	fluents = __get_model_fluents(lambda_funs, const_dict, context_operator.get_fluents()) 
 	#Predicates is also included because they can be seen as two-value (true/false) functions.
-	#print '111111',fluents
 
 	scope = dict()
 	for fun in lambda_funs:
 		exec(fun,scope)
 
-	#print 'interplit model--------universe(1)', universe
 	fluent_sorts = context_operator.get_functions_sorts()
-	#### set constant fluent
-	#model = { fun+"()": value for fun, value in const_dict.iteritems() if fun in fluents}
-	#print model
-	#print sum(universe.values(),[])
-	#constraints = __parse_constraints(domain_constraints, const_dict)
+
+	#constraints = __parse_constraints(domain_constraints, const_dict)??
 	flag = True
 	value_constraints = list()
 	while flag is True and value_constraints == list():
 		flag = False
 		#elem_list = __get_model_elements(fluents, context_operator.get_fluent_constraint())
+		#generate parameters for fluents
 		elem_list = __get_model_elements(fluents, add_universe=universe)
 
 		const_symbols = sum(universe.values(),[])
-		#print '@#$model------',model
-		#print '~~~~~~~~~elem_list',elem_list
-		#exit(0)
-		#### set non-constant fluent
-		elem_value_list = [ (fun, tuple(), value) for fun, value in const_dict.iteritems() if fun in fluents]
+		# set non-constant fluent
+		elem_value_list = [ (fun, tuple(), value) for fun, value in const_dict.items() if fun in fluents]
+		# transform SMT true/false to 'True'/'False'
 		elem_value_list = __trans_true_false(elem_value_list)
 		elem_value_list += [ (fun, paras, apply(eval(fun,scope), __name_relpace(paras, const_dict))) for fun, paras in elem_list if fun not in const_dict.keys()]
-		#print '@#$elem_value_list------',elem_value_list
-		#2018,5.10: value ##########
-		anti_const_dict = {value:key for key,value in const_dict.items() if key not in fluents and key in const_symbols and  not isinstance(value,int) and not value.isdigit()}
+		# transform SMT constants to constant symbols
+		anti_const_dict = { value:key for key,value in const_dict.items() if key not in fluents and key in const_symbols and not isinstance(value,int) and not value.isdigit()}
 		elem_value_list = [ (fun, paras, anti_const_dict[value]) if value in anti_const_dict.keys() else (fun, paras, value) for (fun, paras, value) in elem_value_list  ]
 		#########################
 		for e, (fun, paras, value) in enumerate(elem_value_list):
@@ -220,12 +211,10 @@ def interpret_model(results, universe=None, max_value=99999):
 				else:
 					#print 'D'
 					universe[fun_sort].append(str(value))
-		#print flag
-		#print elem_value_list
-		#print universe
+
 	#print 'interplit model--------universe(2)', context_operator.get_universe()
 	#model.update({"%s(%s)"%(fun,','.join(paras)) : value for fun, paras, value in elem_value_list})
-	model = {"%s(%s)"%(fun,','.join(paras)) : value for fun, paras, value in elem_value_list}
+	model = {"%s(%s)"%(fun,','.join(paras)) : str(value) for fun, paras, value in elem_value_list}
 
 	lack_fluents =  [fun for fun in context_operator.get_fluents() if fun not in fluents ]
 	complete_part = __get_default_fluents(lack_fluents, fluent_sorts, universe)

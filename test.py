@@ -46,7 +46,7 @@ Init = get_inital_database()
 Goal = get_goal('p1')
 #pi_action = generate_pi_action()
 
-math_preds, fluent_preds = Predicate.genPreds('takeaway.sc')
+math_preds, fluent_preds = Predicate.generate_preds('takeaway.sc')
 
 #print math_preds+fluent_preds
 

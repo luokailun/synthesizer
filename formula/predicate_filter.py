@@ -69,6 +69,7 @@ def __filter_by_modular_property(math_pred_list, file_handler=None):
 	"""
 	delete predicates like x % 1 = y
 	delete predicates like x % 3 = 4
+	delete predicates like x1 % x2 = 1, x1 % x2 = x3 (since x2 may be 0)
 	"""
 	del_math_pred_list = list()
 	modular_pred_list = [ (var_list, sort_list, body) for var_list, sort_list, body in math_pred_list if body.find('%')!=-1]
@@ -80,7 +81,8 @@ def __filter_by_modular_property(math_pred_list, file_handler=None):
 			del_math_pred_list.append(math_pred)
 		elif mid.isdigit() and right.isdigit() and int(mid)<= int(right):
 			del_math_pred_list.append(math_pred)
-
+		elif not mid.isdigit():
+			del_math_pred_list.append(math_pred)
 	if file_handler:
 		file_handler.writelines('Delete Number(%s) \n %s \n\n'%(len(del_math_pred_list), '\n'.join([str(e) for e in del_math_pred_list])))
 	return [pred for pred in math_pred_list if pred not in del_math_pred_list]
