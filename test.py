@@ -4,7 +4,6 @@ from basic import context_operator
 from basic import Util
 from formula import Predicate
 import re
-#from parser import util_pred
 
 from regression import program_regress
 

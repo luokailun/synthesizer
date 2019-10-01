@@ -401,6 +401,7 @@ def parser(filename):
 
 		#print context_operator.get_feature()
 		sc_temp.writelines('\n\n')
+		sc_temp.writelines('feature pattern for regression:\n')
 		sc_temp.writelines('\n'.join([str(elem) for elem in context_operator.get_feature()]))
 		#exit(0)
 		sc_temp.writelines('\n')

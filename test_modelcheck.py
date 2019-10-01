@@ -18,7 +18,6 @@ C = (['X1'], ['Int'], ['! numStone() = 4', 'numStone()> X1', 'X1 >=0'])
 
 print model_checker.unsat_conjunct_math([M],C)
 
-
 from model import model_checker
 from model import model_interpretor
 from prover import z3prover

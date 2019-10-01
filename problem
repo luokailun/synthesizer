@@ -11,3 +11,9 @@ QAQ: C is actually equivalent to False (C \equiv False);  but we cannot use mode
 
 SOLVE: (1) add additional predicates: we require that X1>=0 since we only focus on the case natural number
 	   (2) add math checking about predicates by expanding the Int domain to 0-10 ??? (give up)
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+too slow and predicate problem
