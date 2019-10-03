@@ -17,3 +17,28 @@ SOLVE: (1) add additional predicates: we require that X1>=0 since we only focus 
 --------------------------------------------------------------------------------------------------------------------------------
 
 too slow and predicate problem
+
+has constructed 
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+too much conjuncts!
+
+
+1. detect free variables ??
+
+2. first combine one predicate (detect those fails to combine), then use the failure information to guide further combination ??
+	
+	When filtering a predicate:
+	(1) use P model?  No, because even this predicate include the P model, its conjunction may exclude it.
+		(when a predicate exclude the P model, so its conjunction do) (So the set of P model will gradually decrease)
+	(2) use N model?  Yes, but how to do it??
+
+
+3. first generate conjuncts of the same length, then generate longer conjuncts??
+
+
+
+
+

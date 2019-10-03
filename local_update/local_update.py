@@ -7,6 +7,9 @@ from model import model_checker
 import scoring
 import copy
 
+from formula import conjunct_filter
+from basic import context_operator
+
 
 def __find_repl_conjuncts(candicate_conjuncts_dict, conjunct_list, target_conjunct):
 	repl_conjunct_list = list()
@@ -18,10 +21,12 @@ def __find_repl_conjuncts(candicate_conjuncts_dict, conjunct_list, target_conjun
 
 
 
-def __get_repl_candidate_conjuncts(conjunct, model_neg_list, model_pos_list, base_conjunct_list):
+def __generate_adjacent_conjuncts(conjunct, model_neg_list, model_pos_list, basic_conjunct_list):
 	"""
- 		first generate sub-conjuncts C of conjunct 
- 		then combine each conjunct c1 in C with each conjunct c2 in base_conjunct_list to generate modified conjuncts
+ 		first generate sub-conjuncts of the conjunct 
+ 		then combine each sub-conjunct with each basic conjunct to generate modified conjuncts
+
+ 		@param conjunct 		the conjunct need to be modified
 	"""
 
 	candicate_conjunct_list = list()
@@ -33,34 +38,45 @@ def __get_repl_candidate_conjuncts(conjunct, model_neg_list, model_pos_list, bas
 
 		for subconjunct in subconjunct_list:
 			if subconjunct != ([], [], []):
+				# if a sub-conjunct unsat certain positive model, then this positive model will be unsat by conjuncts modified 
+				# 		based on the sub-conjunct.
 				sat_model_pos_list =  model_checker.get_sat_models(model_pos_list, subconjunct)
 				subconjunct = Conjunct.rename(subconjunct)
 			else:
 				sat_model_pos_list = model_pos_list
-			combined_conjunct_list = sum([Conjunct.combine_conjunct(subconjunct,c,3) for c in base_conjunct_list],[])
+			combined_conjunct_list = sum([Conjunct.combine_conjunct(subconjunct,c,3) for c in basic_conjunct_list],[])
 			candicate_conjunct_list += Conjunct.get_target_conjuncts(combined_conjunct_list, model_neg_list, sat_model_pos_list)
 
 	return candicate_conjunct_list
 
 
 
-def __get_target_conjuncts_from_preds(model_neg_list, model_pos_list, atomic_pred_list, length):
+def __generate_conjuncts_from_preds(model_neg_list, model_pos_list, atomic_pred_list, length):
 	"""
-	generating a set of conjuncts of limited length from a set of 
+	generating a set of conjuncts of limited length from a set of predicates
 	
 	"""
 	#math_pred_list, fluent_pred_list = atomic_pred_list
 	conjunct_list = [(var_list, sort_list, [pred]) for var_list, sort_list, pred in atomic_pred_list]
 
-	base_conjunct_list = Conjunct.get_target_conjuncts(conjunct_list, model_neg_list, model_pos_list)
-	print model_neg_list, len(conjunct_list), len(base_conjunct_list), base_conjunct_list
-	print
-	target_conjunct_list = copy.deepcopy(base_conjunct_list)
+	basic_conjunct_list = Conjunct.get_target_conjuncts(conjunct_list, model_neg_list, model_pos_list)
+	#print model_neg_list, len(conjunct_list), len(basic_conjunct_list), basic_conjunct_list
+	#print
+	target_conjunct_list = copy.deepcopy(basic_conjunct_list)
 	for n in range(2,length+1):
 		temp_conjunct_list = [Conjunct.rename(conjunct) for conjunct in target_conjunct_list]
-		combined_conjunct_list = sum([Conjunct.combine_conjunct(c1,c2,3) for c1 in temp_conjunct_list for c2 in base_conjunct_list],[])
+		combined_conjunct_list = sum([Conjunct.combine_conjunct(c1,c2,3) for c1 in temp_conjunct_list for c2 in basic_conjunct_list],[])
 		print len(combined_conjunct_list)
-		#print combined_conjunct_list
+
+		fluent_list = context_operator.get_fluents()
+		a_list, b_list = conjunct_filter.detect_varfree_conjuncts(combined_conjunct_list, fluent_list)
+		print len(a_list), len(b_list)
+		c_list = Conjunct.get_target_conjuncts(b_list, model_neg_list, model_pos_list)
+		print len(c_list)
+		d_list = Conjunct.get_target_conjuncts(a_list, model_neg_list, model_pos_list)
+		print len(d_list)
+		print 
+		exit(0)
 		#exit(0)
 		target_conjunct_list += Conjunct.get_target_conjuncts(combined_conjunct_list, model_neg_list, model_pos_list)
 		print(len(target_conjunct_list))
@@ -69,29 +85,36 @@ def __get_target_conjuncts_from_preds(model_neg_list, model_pos_list, atomic_pre
 	return target_conjunct_list
 
 
-### note the fstructure can be translated as:  Goal & !(C1 & C2 & C3 ...), where each Ci is exists(variables)[P1 & P2 &...].
 
 def N_update(fstructure, model_minus, atomic_pred_list, LENGTH=2):
+	"""
+		 Note the fstructure can be translated as:  Goal & !(C1 & C2 & C3 ...), 
+			where each Ci is of the form exists(X1,X2,...)[P1 & P2 &...].
+		 Modify certain conjunct in the fstructure to exclude the model.
+
+		 @param model_minus 		the model need to be excluded
+		 @param atomic_pred_list	the set of predicates used to modify conjuncts
+	"""
+	# get predicates' score for conjunct selection
 	pred_score_dict = Fstructure.get_pred_score_dict(fstructure)
 	# get the set of conjunct C1, C2,...
 	conjunct_list = Fstructure.to_conjuncts(fstructure)
 	# get the set of conjunct C1, C2... with M1, M2, where each Mi is a set of models that satisfy Ci
 	conjunct_model_list = Fstructure.to_conjunct_models(fstructure)
+	# get the set of positive models that falsify each conjunct
 	model_pos_list = Fstructure.get_pos_models(fstructure)
 
 	candicate_conjuncts_dict = dict()
 	for e, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
 		new_model_neg_list = [model_minus]+model_neg_list
-		# generate a set K of conjuncts of limited length (length=2) from predicates
-		base_conjunct_list = __get_target_conjuncts_from_preds(new_model_neg_list, list(), atomic_pred_list, LENGTH)
-		# generate candidate modified conjuncts C by modifying the conjunct with the set of conjuncts K
-		candicate_conjuncts_dict[e] = __get_repl_candidate_conjuncts(conjunct, new_model_neg_list, model_pos_list, base_conjunct_list)
-	candicate_conjuncts_dict['new'] = __get_target_conjuncts_from_preds([model_minus], model_pos_list , atomic_pred_list, LENGTH)
+		# generate a set of basic conjuncts of limited length (length=2) from predicates
+		basic_conjunct_list = __generate_conjuncts_from_preds(new_model_neg_list, list(), atomic_pred_list, LENGTH)
+		# generate candidate conjuncts by modifying the conjunct with the set of basic conjuncts
+		candicate_conjuncts_dict[e] = __generate_adjacent_conjuncts(conjunct, new_model_neg_list, model_pos_list, basic_conjunct_list)
+	candicate_conjuncts_dict['new'] = __generate_conjuncts_from_preds([model_minus], model_pos_list , atomic_pred_list, LENGTH)
 	#print candicate_conjuncts_dict['new']
 	
 	# sort and get one modified conjunct from C and replace the old one.
-	#print '@@@@;',fstructure
-	#print '@@@@;',model_minus
 
 	print '-----number of conjuncts:%s'%len(sum(candicate_conjuncts_dict.values(),[]))
 	exit(0)
@@ -119,9 +142,9 @@ def P_update(fstructure, model_plus, atomic_pred_list, LENGTH=2):
 	#print conjunct_model_list
 
 	for e, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
-		base_conjunct_list = __get_target_conjuncts_from_preds(model_neg_list, list(), atomic_pred_list, LENGTH)
-		#candicate_conjuncts_dict[e] = __get_repl_candidate_conjuncts(conjunct, model_neg_list, new_model_pos_list, base_conjunct_list)
-		candicate_conjunct_list = __get_repl_candidate_conjuncts(conjunct, model_neg_list, new_model_pos_list, base_conjunct_list)
+		basic_conjunct_list = __generate_conjuncts_from_preds(model_neg_list, list(), atomic_pred_list, LENGTH)
+		#candicate_conjuncts_dict[e] = __generate_adjacent_conjuncts(conjunct, model_neg_list, new_model_pos_list, basic_conjunct_list)
+		candicate_conjunct_list = __generate_adjacent_conjuncts(conjunct, model_neg_list, new_model_pos_list, basic_conjunct_list)
 
 		#print 'candidate', candicate_conjunct_list
 		if candicate_conjunct_list == list():

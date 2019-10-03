@@ -102,23 +102,13 @@ def __get_combined_conjunct(conjunctA, conjunctB, vars_repl_tuple):
 	var_listB, sort_listB, pred_listB = conjunctB
 	be_repl_var_list,  repl_var_list = vars_repl_tuple
 
-	#conjunctB_str = "%s#%s"(str(zip(var_listB, sort_listB)), '&'.join(pred_listB))
 
 	body_strB = '&'.join(pred_listB)
 	replace_list = [(r'\b%s\b'%old_var, '_%s'%repl_var_list[e]) for e, old_var in enumerate(be_repl_var_list) ]
 	new_body_strB = Util.repeat_do_function(Util.sub_lambda_exp, replace_list, body_strB)
 	new_pred_listB = new_body_strB.replace('_','').split('&')
 
-	'''
-	var_sort_str = '&'.join([ '%s:%s'%(v, sort_listB[e]) for e,v in enumerate(var_listB)] )
-	replace_list = [(r'\b%s:.+?\b'%old_var, '') for e, old_var in enumerate(be_repl_var_list) ]
-	new_var_sort_str = Util.repeat_do_function(Util.sub_lambda_exp, replace_list, var_sort_str)
 
-	#print new_var_sort_str
-	var_sort_tuple_list =  [ tuple(elem.split(':')) for elem in new_var_sort_str.split('&') if elem!=""]
-	new_var_list = [a for a, b in var_sort_tuple_list]
-	new_sort_list = [b for a,b in var_sort_tuple_list]
-	'''
 	new_var_listB, new_sort_listB = list(), list()
 	for e, var in enumerate(var_listB):
 		if var not in be_repl_var_list:
@@ -137,15 +127,8 @@ def ____get_combine_vars_tuples(varA_list, varB_list, share_var_num):
 	#print list(repl_vars_list)
 	#print list(be_repl_vars_list)
 	vars_repl_tuple_list = [ (list(be_repl_vars), list(repl_vars))  for be_repl_vars in be_repl_vars_list for repl_vars in repl_vars_list ]
-	#remain_vars_list = [ set(varA_list)| set(varB_list) - set(share_vars)- set(repl_vars) for (share_vars, repl_vars) in vars_tuple_list ]
-	#remain_vars_list = [ list((set(varA_list)| set(varB_list)) - set(share_vars)- set(repl_vars)) for share_vars, repl_vars in vars_repl_tuple_list]
-	
-	#print set(varA_list)| set(varB_list) - set(share_vars)- set(repl_vars) 
-	#vars_repl_tuple_list = [ zip(a,b) for a, b in vars_repl_tuple_list ]
-	#print '---------'
-	#print share_var_num
-	#print vars_repl_tuple_list
-	return vars_repl_tuple_list #, remain_vars_list
+
+	return vars_repl_tuple_list
 
 
 def __get_repl_vars_tuples(var_listA, sort_listA, var_listB, sort_listB, max_var_num):
