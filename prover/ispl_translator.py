@@ -24,28 +24,6 @@ end Evaluation
 InitStates
 	Environment.a=0 and Environment.b=0 and Tianji.state=HML and King.state=HML;
 end InitStates
-
-InitStates \n \
-%s\n\
-end InitStates \n \
-
-Groups
-	g1={Tianji};
-end Groups
-
-Groups \n\
-	g1={Player1}; \n
-end Groups \n\
-
-Formulae
-	<g1>F Tianjiwin;
-	<g1>G (<g1> F Tianjiwin);
-	<g1> (Tianjinotwin U Tianjiwin);
-end Formulae
-
-Formulae \n \
-	<g1>G p1win; \n\
-end Formulae \n\
 '''
 
 

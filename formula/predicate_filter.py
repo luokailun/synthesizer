@@ -113,7 +113,7 @@ def __filter_by_limited_constants(math_pred_list, file_handler=None):
 
 def __filter_by_duplicate_vars(math_pred_list, file_handler=None):
 	"""
-	delete predicates like X +1 =X
+	delete predicates like X +1 =X, Y+2 =Y
 	"""
 	new_math_pred_list = list()
 	del_math_pred_list = list()

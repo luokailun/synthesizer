@@ -9,9 +9,7 @@ BATparser.parser('takeaway.sc')
 
 from formula import Predicate
 
-Predicate.generate_preds('takeaway.sc')
+#Predicate.generate_preds('takeaway.sc')
 
 
-exit(0)
-
-#print '\n'.join([str(e) for e in p1+p2])
+print [e for e in range(0,3) if not None]

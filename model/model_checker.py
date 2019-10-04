@@ -180,9 +180,12 @@ def __get_const_value(universe, fluents, assignment):
 	return scope
 
 
+encode_pair_logic = (['>=', '<=','=<', '=>'],['@','#','$','~'])
 
 def __to_python_formula(formula):
-	formula = __to_python_equivalent(formula)
+	formula =Util.endecode_string(formula, encode_pair_logic[0], encode_pair_logic[1])
+	formula = formula.replace('=','==')
+	formula =Util.endecode_string(formula, encode_pair_logic[1], encode_pair_logic[0])
 	return formula.replace('!',' not ').replace('&', ' and ').replace('|', ' or ')
 
 

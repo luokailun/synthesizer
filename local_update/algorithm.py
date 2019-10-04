@@ -147,7 +147,7 @@ def __structure_regress_until_convergence(two_state_structure, predicate_list):
 				print('(2) N model %s\n'%str(negative_model2))
 				fstructure2 = local_update.N_update(fstructure2, negative_model2, predicate_list)
 
-		print('\n***************** Update Structure *****************:\n\n%s'%__printer((fstructure1, fstructure2)))
+		print('\n***************** N Update Structure *****************:\n\n%s'%__printer((fstructure1, fstructure2)))
 
 ################################################################################################################################################
 
@@ -199,6 +199,7 @@ def synthesis(Init, Goal, predicate_list):
 
 			print('P model:%s\nP progress model:%s\n'%(str(positive_model), '\n'.join([str(m) for m in update_model_list])))
 			two_state_structure = __structure_P_update(new_two_state_structure, ([positive_model], update_model_list), predicate_list)
+			print('\n***************** P Update Structure *****************:\n\n')
 		else:
 			print 'backtrack'
 			exit(0)
