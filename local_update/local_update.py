@@ -27,6 +27,16 @@ def __find_repl_conjuncts(candicate_conjuncts_dict, conjunct_list, target_conjun
 
 
 
+def __generate_new_conjuncts(model_neg, model_pos_list, atomic_pred_list, LENGTH):
+	"""
+	generate new conjuncts of limited length
+
+	"""
+	return sum([ Conjunct.generate_conjuncts([([],[],[])], [model_neg], model_pos_list, atomic_pred_list, l) \
+		for l in range(1, LENGTH+1)], list())
+
+
+
 def __generate_adjacent_conjuncts(conjunct, model_neg_list, model_pos_list, atomic_pred_list, LENGTH):
 	"""
  		first generate sub-conjuncts of the conjunct 
@@ -49,7 +59,7 @@ def __generate_adjacent_conjuncts(conjunct, model_neg_list, model_pos_list, atom
 		# 		based on the sub-conjunct. So we do not need to check it any more
 		sat_model_pos_list =  model_checker.get_sat_models(model_pos_list, subconjunct) if subconjunct != ([], [], []) else model_pos_list
 		#subconjunct = Conjunct.rename(subconjunct)
-		candicate_conjunct_list += Conjunct.generate_conjuncts(subconjunct, model_neg_list, sat_model_pos_list, atomic_pred_list, LENGTH)
+		candicate_conjunct_list += Conjunct.generate_conjuncts([subconjunct], model_neg_list, sat_model_pos_list, atomic_pred_list, LENGTH)
 		print("")
 	return candicate_conjunct_list
 
@@ -82,7 +92,7 @@ def N_update(fstructure, model_minus, atomic_pred_list, LENGTH=2):
 		# generate candidate conjuncts by modifying the conjunct with the set of predicates
 		candicate_conjuncts_dict[e] = __generate_adjacent_conjuncts(conjunct, new_model_neg_list, model_pos_list, atomic_pred_list, LENGTH)
 	# generate new conjuncts of length 2
-	candicate_conjuncts_dict['new'] = __generate_adjacent_conjuncts(([],[],[]), [model_minus], model_pos_list , atomic_pred_list, LENGTH)
+	candicate_conjuncts_dict['new'] = __generate_new_conjuncts(model_minus, model_pos_list, atomic_pred_list, LENGTH)
 	#print candicate_conjuncts_dict['new']
 	
 	# sort and get one modified conjunct from C and replace the old one.

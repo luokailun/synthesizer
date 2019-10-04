@@ -39,10 +39,16 @@ too much conjuncts!
 3. first generate conjuncts of the same length, then generate longer conjuncts??
 
 
-		# for each sub-conjunct, first divide variables according to different sorts
-		sort_vars_dict_list = [__get_sort_vars_dict(subconjunct) for subconjunct in subconjunct_list]
-		# get mappings on how to combine variables between two conjuncts
-		var_mapping_list = sum([ __get_var_mappings(subconjunct_sort_vars_dict, c, MAX_VAR) \
-			for subconjunct_sort_vars_dict in sort_vars_dict_list for c in  basic_conjunct_list],list())
+--------------------------------------------------------------------------------------------------------------------------------
+
+P0: still too slow !!!!
+
+
+P1: refine a conjunct should first check whether M+ \models it
+
+P2: generate small model fails
+
+P3: math grounding check fails sometimes because it's limited to a fixed number.
+
 
 

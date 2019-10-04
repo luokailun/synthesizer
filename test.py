@@ -27,6 +27,7 @@ def generate_pi_action():
 
 def get_inital_database():
 	return context_operator.get_axioms()['init']['']
+	
 
 def get_goal(player):
 	lambda_fun, para_list = context_operator.find_axiom_with_feature('win', Util.generate_function_feature(player+'()'))

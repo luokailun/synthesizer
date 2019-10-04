@@ -109,19 +109,22 @@ def unsat_conjunct(model_list, conjunct):
 
 # math checking is just approximated. We only expand the Int range
 
-'''
-def sat_conjunct_by_model_math(model, conjunct, MIN=0, MAX=11):
+
+def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	#print '!',model
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
 	universe, assignment = model
+	MAX = INC + max([int(e) for e in universe['Int']])
+	temp_list = universe['Int']
 	universe['Int'] = [str(e) for e in list(range(MIN,MAX))]
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
-	formula = __to_python_equivalent(' & '.join(pred_list))
+	formula = ' & '.join(pred_list)
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
 	ground_formula = formula if var_list == [] else __grounding_conjunct(var_list, sort_list, formula, universe)
+	universe['Int'] = temp_list
 	#print '--------ground formula',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
 	#logical_formula = unknown_pattern.sub(__mrepl_unknown,logical_formula)
@@ -137,16 +140,12 @@ def sat_conjunct_by_model_math(model, conjunct, MIN=0, MAX=11):
 
 
 def unsat_conjunct_math(model_list, conjunct):
-	print conjunct
+	
 	for model in model_list:
-		print model
 		if sat_conjunct_by_model_math(model, conjunct) is True:
-			print model
 			return False
-		print model
-		exit(0)
 	return True
-'''
+
 
 
 ##############################################################################################################################################################

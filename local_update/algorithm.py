@@ -29,6 +29,9 @@ def __printer(two_state_structure):
 ################################################################################################################################################
 
 def ____update_structure(fstructure, model_list, pred_list):
+	"""
+		update the formula structure such that it includes all the models
+	"""
 	poss_model_list = Fstructure.get_pos_models(fstructure)
 	for model in model_list:
 		if model not in poss_model_list:
@@ -37,6 +40,9 @@ def ____update_structure(fstructure, model_list, pred_list):
 
 
 def __structure_P_update(two_state_structure, two_state_models, pred_list):
+	"""
+		use models to update the two-state FSA
+	"""
 	fstructure1, fstructure2 = two_state_structure
 	model_list1, model_list2 = two_state_models
 
@@ -48,7 +54,9 @@ def __structure_P_update(two_state_structure, two_state_models, pred_list):
 ################################################################################################################################################
 
 def __progress_model(model):
-
+	"""
+		update the model to a set of models by doing any possible action
+	"""
 	universe, assignment = model
 	functions_sorts = context_operator.get_functions_sorts()
 	actions = context_operator.get_actions()
@@ -68,6 +76,10 @@ def __progress_model(model):
 ################################################################################################################################################
 
 def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
+	"""
+		generate a model that entails formula 1 but not formula2
+		the universe of the model should be smallest 
+	"""
 	#results = __interpret_model(__imply(formula1, formula2, "(set-option :timeout 10000)"), MAX_VALUE)
 	#print '----------org---------',results
 	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
@@ -75,7 +87,8 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 
 		value_constraints = ' '.join([ "(assert %s)"%util_trans_smt.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
 		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+z3prover.generate_head()+value_constraints)
-
+		print 'hello hello'
+		exit(0)
 		if model_interpretor.interpret_results(new_results) is False:
 			flag, element = model_interpretor.interpret_model(new_results, MAX_VALUE)
 
@@ -87,6 +100,9 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 
 
 def ____generate_pi_action(player):
+	"""
+		generate a program denoting doing any possible action
+	"""
 	functions_sorts = context_operator.get_functions_sorts()
 	sort_consts_dict = context_operator.get_sort_symbols_dict()
 	p_sort = [sort for sort, consts in sort_consts_dict.iteritems() if player in consts].pop()
@@ -103,8 +119,10 @@ def ____generate_pi_action(player):
 
 
 
-def ____check_convergence(formula1, formula2, predicate_list):
-
+def ____check_convergence(formula1, formula2):
+	"""
+		Checking whether formula 1 entails formula 2
+	"""
 	result = z3prover.imply(formula1, formula2, "(set-option :timeout 10000)")
 
 	if model_interpretor.interpret_result(result) is True:
@@ -121,8 +139,10 @@ def ____check_convergence(formula1, formula2, predicate_list):
 
 
 def __structure_regress_until_convergence(two_state_structure, predicate_list):
+	"""
+		update and check the two-state FSA until it becomes convergence (form an invariant)
+	"""
 	fstructure1, fstructure2 = two_state_structure
-
 	while True:
 		print('\n***************** Checking Convergence *****************:\n\n')
 
@@ -132,8 +152,8 @@ def __structure_regress_until_convergence(two_state_structure, predicate_list):
 		regress_formula1 = program_regress.A_regress(formula1, ____generate_pi_action('p2'))
 		regress_formula2 = program_regress.E_regress(formula2, ____generate_pi_action('p1'))
 
-		negative_model1 = ____check_convergence(formula1, regress_formula2, predicate_list)
-		negative_model2 = ____check_convergence(formula2, regress_formula1, predicate_list)
+		negative_model1 = ____check_convergence(formula1, regress_formula2)
+		negative_model2 = ____check_convergence(formula2, regress_formula1)
 
 		if negative_model1 is True and negative_model2 is True:
 			return (fstructure1, fstructure2)

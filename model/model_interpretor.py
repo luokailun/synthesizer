@@ -157,9 +157,11 @@ def interpret_model(results, universe=None, max_value=99999):
 	#context_operator.set_counterexample_result(results)
 
 	lambda_funs = util_z3_model.get_fun(results)
+	#print lambda_funs
 
 	# a dict maps constants to SMT constants
 	const_dict = util_z3_model.get_const(results)
+	#print const_dict
 	#print '----------',context_operator.get_sort_symbols_dict()
 
 	universe = copy.deepcopy(context_operator.get_sort_symbols_dict())

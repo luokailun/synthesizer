@@ -1,0 +1,924 @@
+2019-10-04 16:04:06,442 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 16:04:06,472 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 16:04:06,738 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&! numStone() = G0])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 1&! (numStone()=G0+K15)])) ]
+2019-10-04 16:04:06,766 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&! numStone() = G0])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 1&! (numStone()=G0+K14)])) ]
+2019-10-04 16:04:06,787 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&! numStone() = G0])
+2019-10-04 16:04:09,923 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! numStone() = G0&G0 > 1&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! (numStone()=G0+K17)&G1 > 0&(numStone()=G1+K17)])) ]
+2019-10-04 16:04:09,968 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&G1 > 0&numStone() = G1])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! (numStone()=G0+K16)&G0 > 1&(!turn(p2))])) ]
+2019-10-04 16:04:15,857 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! numStone() = G0&G0 > 1&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() = G0])
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! (numStone()=G0+K19)&G1 > 0&(numStone()=G1+K19)])) ]
+2019-10-04 16:04:15,885 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&G1 > 0&numStone() = G1])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! (numStone()=G0+K18)&G0 > 1&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 1&(numStone()=G0+K18)])) ]
+2019-10-04 16:04:15,906 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! numStone() = G0&G0 > 1&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() = G0])
+2019-10-04 16:04:23,251 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&turn(p2)&G0 > 1&! numStone() = G0])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G1 > 3&numStone() = G1])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! (numStone()=G0+K21)&G1 > 0&(numStone()=G1+K21)])) ]
+2019-10-04 16:04:23,300 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&G1 > 0&numStone() = G1])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 1&(!turn(p2))&G0 > 1&! (numStone()=G0+K20)])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&(numStone()=G0+K20)&G1 > 3&(numStone()=G1+K20)])) ]
+2019-10-04 16:04:23,325 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&turn(p2)&G0 > 1&! numStone() = G0])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G1 > 3&numStone() = G1])
+2019-10-04 16:05:49,735 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&turn(p2)&G1 > 1&! numStone() = G1])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G0 > 3&G1 > 1&! numStone() >= G1])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[ exists(K25:Int)[ (numStone()=K25+K24)&(G0>=0&G1>=0&(numStone()=G0+K24)&G0 > 0&G1 = 2&! K25 > G1)] ])) ]
+2019-10-04 16:05:49,768 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G0 > 0&G1 = 2&! numStone() > G1])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! (numStone()=G0+K22)&(!turn(p2))&G1 > 1&! (numStone()=G1+K22)])&!(exists(G0:Int,G1:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G1>=0&(numStone()=G0+K22)&G0 > 3&G1 > 1&! K23 >= G1)] ])) ]
+2019-10-04 16:06:24,565 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&turn(p2)&G1 > 1&! numStone() = G1])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G0 > 3&G1 > 1&! numStone() >= G1])
+ f2:exists(K28:Int)[ (numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p1))&((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int,G2:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G1>=0&G2>=0&(numStone()=G0+K28)&! K29 > G1&G0 > 0&G2 = 4&! (numStone()=G2+K28))] ])) ]
+2019-10-04 16:06:24,606 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int,G2:Int)[G0>=0&G1>=0&G2>=0&numStone() = G0&! numStone() > G1&G0 > 0&G2 = 4&! numStone() = G2])
+ f2:forall(K26:Int)[ numStone()>=K26&(K26=1|K26=2|K26=3)&turn(p2)=>((( (numStone()=0+K26) ) => ( (numStone()=0+K26)&!((!turn(p1))) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! (numStone()=G0+K26)&(!turn(p2))&G1 > 1&! (numStone()=G1+K26)])&!(exists(G0:Int,G1:Int)[ exists(K27:Int)[ (numStone()=K27+K26)&(G0>=0&G1>=0&(numStone()=G0+K26)&G0 > 3&G1 > 1&! K27 >= G1)] ])) ]
+2019-10-04 16:06:24,630 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&! numStone() = G0&turn(p2)&G1 > 1&! numStone() = G1])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&numStone() = G0&G0 > 3&G1 > 1&! numStone() >= G1])
+2019-10-04 16:19:55,890 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 16:19:55,918 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 16:20:23,220 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 16:20:23,249 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:16:18,307 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:16:18,338 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:22:20,198 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:22:20,236 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:22:55,127 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:22:55,157 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:22:55,333 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:22:55,359 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:22:55,380 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+2019-10-04 17:22:56,462 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(p2)&turn(X0)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:_S1,G1:Int)[G1>=0&(!turn(G0))&G1 > 0&(numStone()=G1+K17)])) ]
+2019-10-04 17:32:50,723 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:32:50,751 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:32:50,893 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:32:50,925 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:32:50,952 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+2019-10-04 17:32:52,234 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(p2)&turn(X0)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:_S1,G1:Int)[G1>=0&(!turn(G0))&G1 > 0&(numStone()=G1+K17)])) ]
+2019-10-04 17:34:45,477 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:34:45,522 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:34:45,713 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:34:45,737 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(G0:_S1,X0:_S1)[(!turn(G0))&(!turn(X0))])) ]
+2019-10-04 17:34:45,761 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(X0)])
+2019-10-04 17:34:46,830 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1,X0:_S1)[turn(G0)&turn(p2)&turn(X0)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:_S1,G1:Int)[G1>=0&(!turn(G0))&G1 > 0&(numStone()=G1+K17)])) ]
+2019-10-04 17:40:29,128 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:40:29,160 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:42:20,266 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 17:42:20,296 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 17:42:20,484 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 17:42:20,511 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 17:42:20,533 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 17:42:20,819 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 17:42:20,857 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 17:42:21,507 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 17:42:21,540 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 17:42:21,566 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 17:42:22,401 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 17:42:22,441 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 17:42:22,465 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 17:42:26,983 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 17:42:27,012 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 17:42:29,017 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 17:42:29,048 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 17:42:31,148 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 17:42:31,187 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 17:42:37,397 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 17:42:37,425 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 17:42:37,450 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 17:42:43,384 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:exists(K38:Int)[ (numStone()>=K38&(K38=1|K38=2|K38=3)&turn(p1))&(( (numStone()=0+K38) ) => ( (numStone()=0+K38)&!((!turn(p1))) )) ]
+2019-10-04 17:42:43,409 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K36:Int)[ (numStone()=K36+K35)&(G0>=0&G0 > 4&! K36 >= G0)] ])&!(exists(G0:Int)[ exists(K37:Int)[ (numStone()=K37+K35)&(G0>=0&G0 > 4&! K37 >= G0)] ])) ]
+2019-10-04 17:42:43,456 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:exists(K42:Int)[ (numStone()>=K42&(K42=1|K42=2|K42=3)&turn(p1))&((( (numStone()=0+K42) ) => ( (numStone()=0+K42)&!((!turn(p1))) ))&!((numStone()=1+K42))) ]
+2019-10-04 17:42:43,479 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(numStone() = 1)
+ f2:forall(K39:Int)[ numStone()>=K39&(K39=1|K39=2|K39=3)&turn(p2)=>((( (numStone()=0+K39) ) => ( (numStone()=0+K39)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K40:Int)[ (numStone()=K40+K39)&(G0>=0&G0 > 4&! K40 >= G0)] ])&!(exists(G0:Int)[ exists(K41:Int)[ (numStone()=K41+K39)&(G0>=0&G0 > 4&! K41 >= G0)] ])) ]
+2019-10-04 17:42:43,675 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:exists(K46:Int)[ (numStone()>=K46&(K46=1|K46=2|K46=3)&turn(p1))&((( (numStone()=0+K46) ) => ( (numStone()=0+K46)&!((!turn(p1))) ))&!((numStone()=1+K46))&!((numStone()=2+K46))) ]
+2019-10-04 17:42:43,703 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(numStone() = 1)&!(numStone() = 2)
+ f2:forall(K43:Int)[ numStone()>=K43&(K43=1|K43=2|K43=3)&turn(p2)=>((( (numStone()=0+K43) ) => ( (numStone()=0+K43)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K44:Int)[ (numStone()=K44+K43)&(G0>=0&G0 > 4&! K44 >= G0)] ])&!(exists(G0:Int)[ exists(K45:Int)[ (numStone()=K45+K43)&(G0>=0&G0 > 4&! K45 >= G0)] ])) ]
+2019-10-04 17:42:44,056 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:exists(K50:Int)[ (numStone()>=K50&(K50=1|K50=2|K50=3)&turn(p1))&((( (numStone()=0+K50) ) => ( (numStone()=0+K50)&!((!turn(p1))) ))&!((numStone()=1+K50))&!((numStone()=2+K50))&!((numStone()=3+K50))) ]
+2019-10-04 17:42:44,082 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(numStone() = 1)&!(numStone() = 2)&!(numStone() = 3)
+ f2:forall(K47:Int)[ numStone()>=K47&(K47=1|K47=2|K47=3)&turn(p2)=>((( (numStone()=0+K47) ) => ( (numStone()=0+K47)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K48:Int)[ (numStone()=K48+K47)&(G0>=0&G0 > 4&! K48 >= G0)] ])&!(exists(G0:Int)[ exists(K49:Int)[ (numStone()=K49+K47)&(G0>=0&G0 > 4&! K49 >= G0)] ])) ]
+2019-10-04 19:37:04,575 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:37:32,912 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and !(turn(p1)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:37:36,775 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and !(turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:37:50,628 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and !(turn(p1)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:38:41,538 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and ! turn(p1)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:38:44,586 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and turn(p1)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:38:51,459 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:40:10,794 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:40:22,982 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:40:48,305 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=1 and turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:40:53,885 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=2 and turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:40:59,553 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:numStone()=1 and turn(p1)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:42:06,470 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:43:31,278 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:43:58,916 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:43:58,944 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:false
+2019-10-04 19:44:25,527 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+2019-10-04 19:44:25,554 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&! numStone() >= G0])
+ f2:false
+2019-10-04 19:45:01,201 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+2019-10-04 19:45:01,231 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 19:45:12,583 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+2019-10-04 19:45:12,608 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:false
+2019-10-04 19:45:35,689 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+2019-10-04 19:45:35,725 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:56:22,155 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 19:57:44,638 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 19:58:18,043 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 19:58:24,892 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 19:58:55,230 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+2019-10-04 19:58:55,254 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:01,958 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:11,441 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:12,251 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:12,579 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:17,478 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:\!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:17,854 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:\!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:18,545 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:\!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:22,378 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 19:59:59,328 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 19:59:59,367 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:12,390 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(X1:Int)[X1>=0&! numStone() = 4&numStone()> X1])
+ f2:false
+2019-10-04 20:00:12,419 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:34,111 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:00:34,136 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:37,279 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:00:37,312 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:37,839 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:00:37,865 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:38,184 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:00:38,205 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:38,555 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:00:38,577 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0 & G0 > 4 & !numStone() >= G0])
+ f2:false
+2019-10-04 20:00:56,855 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:21,190 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:22,345 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:22,673 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:22,993 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:23,452 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 20:01:41,001 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:01:23,330 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:01:23,360 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:02:03,905 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:02:03,938 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:02:04,097 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:02:04,120 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:02:04,145 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 21:03:04,644 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:03:04,672 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:03:04,804 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:03:04,828 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:03:04,849 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 21:03:05,142 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 21:03:05,178 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 21:03:05,750 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 21:03:05,777 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 21:03:05,798 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 21:03:06,459 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 21:03:06,492 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 21:03:06,513 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 21:03:10,850 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 21:03:10,894 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 21:03:12,965 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 21:03:13,007 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 21:03:15,147 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 21:03:15,181 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 21:03:21,596 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 21:03:21,625 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 21:03:21,647 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 21:03:27,562 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K37:Int)[ (numStone()>=K37&(K37=1|K37=2|K37=3)&turn(p1))&(( (numStone()=0+K37) ) => ( (numStone()=0+K37)&!((!turn(p1))) )) ]
+2019-10-04 21:03:27,593 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K36:Int)[ (numStone()=K36+K35)&(G0>=0&X1>=0& K36 > G0&G0 > 4&! K36 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K35)])) ]
+2019-10-04 21:20:05,670 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:20:05,704 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:20:05,973 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:20:05,996 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:20:06,017 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 21:20:06,278 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 21:20:06,315 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 21:20:07,013 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 21:20:07,042 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 21:20:07,062 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 21:20:07,740 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 21:20:07,776 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 21:20:07,798 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 21:20:12,303 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 21:20:12,333 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 21:20:14,438 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 21:20:14,466 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 21:20:16,603 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 21:20:16,638 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 21:20:22,980 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 21:20:23,011 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 21:20:23,035 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 21:20:28,894 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K37:Int)[ (numStone()>=K37&(K37=1|K37=2|K37=3)&turn(p1))&(( (numStone()=0+K37) ) => ( (numStone()=0+K37)&!((!turn(p1))) )) ]
+2019-10-04 21:20:28,920 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K36:Int)[ (numStone()=K36+K35)&(G0>=0&X1>=0& K36 > G0&G0 > 4&! K36 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K35)])) ]
+2019-10-04 21:20:29,070 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K40:Int)[ (numStone()>=K40&(K40=1|K40=2|K40=3)&turn(p1))&((( (numStone()=0+K40) ) => ( (numStone()=0+K40)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K40)])) ]
+2019-10-04 21:20:29,102 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K38:Int)[ numStone()>=K38&(K38=1|K38=2|K38=3)&turn(p2)=>((( (numStone()=0+K38) ) => ( (numStone()=0+K38)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K39:Int)[ (numStone()=K39+K38)&(G0>=0&X1>=0& K39 > G0&G0 > 4&! K39 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K38)])) ]
+2019-10-04 21:20:33,059 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K43:Int)[ (numStone()>=K43&(K43=1|K43=2|K43=3)&turn(p1))&((( (numStone()=0+K43) ) => ( (numStone()=0+K43)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&(numStone()=G0+K43)])) ]
+2019-10-04 21:20:33,095 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&numStone() = G0])
+ f2:forall(K41:Int)[ numStone()>=K41&(K41=1|K41=2|K41=3)&turn(p2)=>((( (numStone()=0+K41) ) => ( (numStone()=0+K41)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K42:Int)[ (numStone()=K42+K41)&(G0>=0&X1>=0& K42 > G0&G0 > 4&! K42 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K41)])) ]
+2019-10-04 21:29:11,237 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:29:20,563 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:false
+2019-10-04 21:33:04,391 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=11&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:25,665 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:29,210 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=3&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:31,552 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=2&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:34,739 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=4&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:41,182 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=5&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:53,652 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=6&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:35:57,457 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=7&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:36:48,999 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:36:51,172 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:36:53,360 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:36:55,734 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:36:59,609 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:37:00,278 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:37:00,621 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(exists(G0:Int)[G0>=0&G0 > 4&!numStone() >= G0])
+ f2:false
+2019-10-04 21:37:30,949 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:37:33,529 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=2&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:37:35,842 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=3&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:37:38,920 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=5&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:37:40,810 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=11&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:38:56,704 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=7&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:39:22,206 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=4&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 21:41:22,539 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:41:22,573 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:41:22,817 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:41:22,842 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:41:22,862 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 21:41:23,158 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 21:41:23,195 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 21:41:23,947 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 21:41:23,982 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 21:41:24,007 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 21:41:24,662 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 21:41:24,697 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 21:41:24,719 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 21:41:29,153 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 21:41:29,185 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 21:41:31,203 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 21:41:31,249 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 21:41:33,409 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 21:41:33,443 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 21:41:39,892 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 21:41:39,924 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 21:41:39,946 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 21:41:45,845 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K37:Int)[ (numStone()>=K37&(K37=1|K37=2|K37=3)&turn(p1))&(( (numStone()=0+K37) ) => ( (numStone()=0+K37)&!((!turn(p1))) )) ]
+2019-10-04 21:41:45,874 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K36:Int)[ (numStone()=K36+K35)&(G0>=0&X1>=0& K36 > G0&G0 > 4&! K36 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K35)])) ]
+2019-10-04 21:41:46,017 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K40:Int)[ (numStone()>=K40&(K40=1|K40=2|K40=3)&turn(p1))&((( (numStone()=0+K40) ) => ( (numStone()=0+K40)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K40)])) ]
+2019-10-04 21:41:46,055 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K38:Int)[ numStone()>=K38&(K38=1|K38=2|K38=3)&turn(p2)=>((( (numStone()=0+K38) ) => ( (numStone()=0+K38)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K39:Int)[ (numStone()=K39+K38)&(G0>=0&X1>=0& K39 > G0&G0 > 4&! K39 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K38)])) ]
+2019-10-04 21:41:50,164 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int,X1:Int)[G0>=0&X1>=0&numStone() > G0&G0 > 4&! numStone() >= X1])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K43:Int)[ (numStone()>=K43&(K43=1|K43=2|K43=3)&turn(p1))&((( (numStone()=0+K43) ) => ( (numStone()=0+K43)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&(numStone()=G0+K43)])) ]
+2019-10-04 21:41:50,202 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&numStone() = G0])
+ f2:forall(K41:Int)[ numStone()>=K41&(K41=1|K41=2|K41=3)&turn(p2)=>((( (numStone()=0+K41) ) => ( (numStone()=0+K41)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int,X1:Int)[ exists(K42:Int)[ (numStone()=K42+K41)&(G0>=0&X1>=0& K42 > G0&G0 > 4&! K42 >= X1)] ])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K41)])) ]
+2019-10-04 21:53:24,138 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 21:53:24,178 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 21:53:24,433 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:53:24,457 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 21:53:24,479 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 21:53:24,727 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 21:53:24,761 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 21:53:25,440 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 21:53:25,467 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 21:53:25,493 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 21:53:26,121 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 21:53:26,153 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 21:53:26,176 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 21:53:30,511 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 21:53:30,551 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 21:53:32,504 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 21:53:32,534 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 21:53:34,618 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 21:53:34,661 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 21:53:40,959 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 21:53:40,987 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 21:53:41,010 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 21:53:46,763 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K36:Int)[ (numStone()>=K36&(K36=1|K36=2|K36=3)&turn(p1))&(( (numStone()=0+K36) ) => ( (numStone()=0+K36)&!((!turn(p1))) )) ]
+2019-10-04 21:53:46,793 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K35)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K35)])) ]
+2019-10-04 21:53:46,935 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K38:Int)[ (numStone()>=K38&(K38=1|K38=2|K38=3)&turn(p1))&((( (numStone()=0+K38) ) => ( (numStone()=0+K38)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K38)])) ]
+2019-10-04 21:53:46,965 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K37:Int)[ numStone()>=K37&(K37=1|K37=2|K37=3)&turn(p2)=>((( (numStone()=0+K37) ) => ( (numStone()=0+K37)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K37)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K37)])) ]
+2019-10-04 21:53:50,852 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K40:Int)[ (numStone()>=K40&(K40=1|K40=2|K40=3)&turn(p1))&((( (numStone()=0+K40) ) => ( (numStone()=0+K40)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&(numStone()=G0+K40)])) ]
+2019-10-04 21:53:50,891 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&numStone() = G0])
+ f2:forall(K39:Int)[ numStone()>=K39&(K39=1|K39=2|K39=3)&turn(p2)=>((( (numStone()=0+K39) ) => ( (numStone()=0+K39)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K39)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K39)])) ]
+2019-10-04 22:09:06,717 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:exists(K13:Int)[ (numStone()>=K13&(K13=1|K13=2|K13=3)&turn(p1))&(( (numStone()=0+K13) ) => ( (numStone()=0+K13)&!((!turn(p1))) )) ]
+2019-10-04 22:09:06,748 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K12:Int)[ numStone()>=K12&(K12=1|K12=2|K12=3)&turn(p2)=>(( (numStone()=0+K12) ) => ( (numStone()=0+K12)&!((!turn(p1))) )) ]
+2019-10-04 22:09:07,024 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:exists(K15:Int)[ (numStone()>=K15&(K15=1|K15=2|K15=3)&turn(p1))&((( (numStone()=0+K15) ) => ( (numStone()=0+K15)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 22:09:07,058 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+ f2:forall(K14:Int)[ numStone()>=K14&(K14=1|K14=2|K14=3)&turn(p2)=>((( (numStone()=0+K14) ) => ( (numStone()=0+K14)&!((!turn(p1))) ))&!(exists(X0:_S1)[(!turn(X0))])) ]
+2019-10-04 22:09:07,088 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+2019-10-04 22:09:07,394 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+ f2:exists(K17:Int)[ (numStone()>=K17&(K17=1|K17=2|K17=3)&turn(p1))&((( (numStone()=0+K17) ) => ( (numStone()=0+K17)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K17)])) ]
+2019-10-04 22:09:07,442 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K16:Int)[ numStone()>=K16&(K16=1|K16=2|K16=3)&turn(p2)=>((( (numStone()=0+K16) ) => ( (numStone()=0+K16)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])) ]
+2019-10-04 22:09:08,350 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+ f2:exists(K19:Int)[ (numStone()>=K19&(K19=1|K19=2|K19=3)&turn(p1))&((( (numStone()=0+K19) ) => ( (numStone()=0+K19)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K19)])) ]
+2019-10-04 22:09:08,385 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K18:Int)[ numStone()>=K18&(K18=1|K18=2|K18=3)&turn(p2)=>((( (numStone()=0+K18) ) => ( (numStone()=0+K18)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(! (numStone()=1+K18))) ]
+2019-10-04 22:09:08,415 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(! numStone() = 1)
+2019-10-04 22:09:09,238 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+ f2:exists(K21:Int)[ (numStone()>=K21&(K21=1|K21=2|K21=3)&turn(p1))&((( (numStone()=0+K21) ) => ( (numStone()=0+K21)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 > 0&(numStone()=G0+K21)])) ]
+2019-10-04 22:09:09,270 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 0&numStone() = G0])
+ f2:forall(K20:Int)[ numStone()>=K20&(K20=1|K20=2|K20=3)&turn(p2)=>((( (numStone()=0+K20) ) => ( (numStone()=0+K20)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 3&(numStone()=G0+K20)])) ]
+2019-10-04 22:09:09,293 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 3&numStone() = G0])
+2019-10-04 22:09:14,518 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K24:Int)[ (numStone()>=K24&(K24=1|K24=2|K24=3)&turn(p1))&((( (numStone()=0+K24) ) => ( (numStone()=0+K24)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 = 1&(numStone()=G0+K24)])) ]
+2019-10-04 22:09:14,551 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 1&numStone() = G0])
+ f2:forall(K22:Int)[ numStone()>=K22&(K22=1|K22=2|K22=3)&turn(p2)=>((( (numStone()=0+K22) ) => ( (numStone()=0+K22)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K23:Int)[ (numStone()=K23+K22)&(G0>=0&G0 > 4& K23 > G0)] ])) ]
+2019-10-04 22:09:17,059 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K27:Int)[ (numStone()>=K27&(K27=1|K27=2|K27=3)&turn(p1))&((( (numStone()=0+K27) ) => ( (numStone()=0+K27)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K27)])) ]
+2019-10-04 22:09:17,097 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K25:Int)[ numStone()>=K25&(K25=1|K25=2|K25=3)&turn(p2)=>((( (numStone()=0+K25) ) => ( (numStone()=0+K25)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K26:Int)[ (numStone()=K26+K25)&(G0>=0&G0 > 4& K26 > G0)] ])) ]
+2019-10-04 22:09:19,612 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])
+ f2:exists(K30:Int)[ (numStone()>=K30&(K30=1|K30=2|K30=3)&turn(p1))&((( (numStone()=0+K30) ) => ( (numStone()=0+K30)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K30)])&!((numStone()=2+K30))) ]
+2019-10-04 22:09:19,656 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])&!(numStone() = 2)
+ f2:forall(K28:Int)[ numStone()>=K28&(K28=1|K28=2|K28=3)&turn(p2)=>((( (numStone()=0+K28) ) => ( (numStone()=0+K28)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K29:Int)[ (numStone()=K29+K28)&(G0>=0&G0 > 4& K29 > G0)] ])) ]
+2019-10-04 22:09:26,765 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+ f2:exists(K33:Int)[ (numStone()>=K33&(K33=1|K33=2|K33=3)&turn(p1))&((( (numStone()=0+K33) ) => ( (numStone()=0+K33)&!((!turn(p1))) ))&!(exists(G0:Int)[ exists(K34:Int)[ (numStone()=K34+K33)&(G0>=0& K34 > G0&! (numStone()=4+K33))] ])) ]
+2019-10-04 22:09:26,798 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! numStone() = 4])
+ f2:forall(K31:Int)[ numStone()>=K31&(K31=1|K31=2|K31=3)&turn(p2)=>((( (numStone()=0+K31) ) => ( (numStone()=0+K31)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[ exists(K32:Int)[ (numStone()=K32+K31)&(G0>=0&G0 > 4& K32 > G0)] ])&!((numStone()=4+K31))) ]
+2019-10-04 22:09:26,826 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:!(numStone()%4=0)&numStone()>0&turn(p1)&!turn(p2)
+ f2:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&numStone() > G0])&!(numStone() = 4)
+2019-10-04 22:09:33,353 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K36:Int)[ (numStone()>=K36&(K36=1|K36=2|K36=3)&turn(p1))&(( (numStone()=0+K36) ) => ( (numStone()=0+K36)&!((!turn(p1))) )) ]
+2019-10-04 22:09:33,383 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+ f2:forall(K35:Int)[ numStone()>=K35&(K35=1|K35=2|K35=3)&turn(p2)=>((( (numStone()=0+K35) ) => ( (numStone()=0+K35)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K35)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K35)])) ]
+2019-10-04 22:09:33,564 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K38:Int)[ (numStone()>=K38&(K38=1|K38=2|K38=3)&turn(p1))&((( (numStone()=0+K38) ) => ( (numStone()=0+K38)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K38)])) ]
+2019-10-04 22:09:33,598 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&numStone() = G0])
+ f2:forall(K37:Int)[ numStone()>=K37&(K37=1|K37=2|K37=3)&turn(p2)=>((( (numStone()=0+K37) ) => ( (numStone()=0+K37)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K37)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K37)])) ]
+2019-10-04 22:09:37,778 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+ f2:exists(K40:Int)[ (numStone()>=K40&(K40=1|K40=2|K40=3)&turn(p1))&((( (numStone()=0+K40) ) => ( (numStone()=0+K40)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&(numStone()=G0+K40)])) ]
+2019-10-04 22:09:37,817 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&! G0 % 4 = 0&numStone() = G0])
+ f2:forall(K39:Int)[ numStone()>=K39&(K39=1|K39=2|K39=3)&turn(p2)=>((( (numStone()=0+K39) ) => ( (numStone()=0+K39)&!((!turn(p1))) ))&!(exists(G0:_S1)[(!turn(G0))&(!turn(p2))])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&(numStone()=G0+K39)])&!(exists(G0:Int)[G0>=0&G0 = 4&(numStone()=G0+K39)])) ]
+2019-10-04 22:12:15,901 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=1&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 22:12:26,559 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=3&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 22:12:28,919 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=5&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 22:12:30,883 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=11&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 22:13:06,271 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=6&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])
+2019-10-04 22:13:08,777 -- z3prover.py -- [function:imply][line:46] -- DEBUG: #checking imply:
+ f1:turn(p1)&numStone()=7&!turn(p2)
+ f2: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])

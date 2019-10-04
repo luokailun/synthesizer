@@ -203,7 +203,7 @@ def __get_character_conjunct_indexs(conjunct_list, model_sat_list, model_unsat_l
 #------------------------------------------------------------------------------------------------------------------------------
 
 
-def generate_conjuncts(subconjunct, model_neg_list, model_pos_list, atomic_pred_list, LENGTH, MAX_VAR=3):
+def generate_conjuncts(subconjunct_list, model_neg_list, model_pos_list, atomic_pred_list, LENGTH, MAX_VAR=3):
 	"""
 		main-procedure: generate conjuncts based on the sub-conjunct and a set of predicates, 
 		the new conjuncts should be under the limitation of maximal number of variables for every sort.
@@ -234,7 +234,7 @@ def generate_conjuncts(subconjunct, model_neg_list, model_pos_list, atomic_pred_
 	# get those satisfy all negative models
 	basic_conjunct_list = __get_character_conjuncts(basic_conjunct_list, model_neg_list, [])
 
-	subconjunct_list = [ __rename(subconjunct) ]
+	subconjunct_list = [ __rename(c) for c in  subconjunct_list ]
 	# (1) Internal step:
 	failure_set = set()
 	for step in range(1, LENGTH):
