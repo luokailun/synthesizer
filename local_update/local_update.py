@@ -123,14 +123,17 @@ def P_update(fstructure, model_plus, atomic_pred_list, LENGTH=2):
 	for num, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
 		print('(A%s)**** Generate adjacent conjuncts for  %s'%(num, Conjunct.to_formula(conjunct)))
 		candicate_conjunct_list = __generate_adjacent_conjuncts(conjunct, model_neg_list, new_model_pos_list, atomic_pred_list, LENGTH)
-		#print 'candidate', candicate_conjunct_list
+
 		if candicate_conjunct_list == list():
+			updated_conjunct = None
+		else:
+			scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
+			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, new_model_pos_list)
+
+		if updated_conjunct is None:
 			fstructure = Fstructure.delete_conjunct(fstructure, conjunct)
 			print('****** Delete conjunct %s \n'%( Conjunct.to_formula(conjunct)))
 		else:
-			scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
-			#print scoring_conjunct_dict
-			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, new_model_pos_list)
 			print('****** Change %s ---> %s \n'%(Conjunct.to_formula(conjunct), Conjunct.to_formula(updated_conjunct)))
 			fstructure = Fstructure.update(fstructure, [conjunct], updated_conjunct, [], [])
 

@@ -152,7 +152,7 @@ def __generate_num_universe(results):
 
 
 
-def interpret_model(results, universe=None, max_value=99999):
+def interpret_model(results, max_value=99999):
 	#print results
 	#context_operator.set_counterexample_result(results)
 
@@ -204,7 +204,6 @@ def interpret_model(results, universe=None, max_value=99999):
 					logger.info('ERROR: model has negative value \n %s'%results)
 					exit(0)
 				if fun_sort == 'Int' and int(value)>max_value:
-					#print 'B'
 					value_constraints.append("%s(%s)"%(fun,','.join(paras)))
 				elif fun_sort == 'Int':
 					#print 'C'
@@ -228,13 +227,13 @@ def interpret_model(results, universe=None, max_value=99999):
 		return True, (universe, model)
 
 
+##############################################################################################################################
 
 
 def interpret_result(result, M_MAX_VALUE=99999):
 	#print result
 	#print
 	if result[0] == 'sat\n':
-		#return interpret_model(result, max_value=M_MAX_VALUE)
 		return False
 	elif result[0] == 'unsat\n':
 		return True

@@ -13,7 +13,7 @@ def __get_vars(sorts):
 
 
 def generate_pi_action():
-	functions_sorts = context_operator.get_functions_sorts()
+	functions_sorts = context_operator.get_functions_sorts() 
 
 	actions_sorts = [ (fun, sorts) for fun, sorts in functions_sorts.iteritems() if fun in context_operator.get_actions() ]
 	action_vars_sorts = [ (action, __get_vars(sorts[0:len(sorts)-1])) for action, sorts in actions_sorts]

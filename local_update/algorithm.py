@@ -5,6 +5,7 @@ from model import model_interpretor
 from model import model_progress
 from basic import context_operator
 from model import model_checker
+from prover import smt_translator
 #from local_update import local_update
 import local_update
 import copy
@@ -80,16 +81,15 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 		generate a model that entails formula 1 but not formula2
 		the universe of the model should be smallest 
 	"""
-	#results = __interpret_model(__imply(formula1, formula2, "(set-option :timeout 10000)"), MAX_VALUE)
 	#print '----------org---------',results
 	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
 	while flag is False:
 
-		value_constraints = ' '.join([ "(assert %s)"%util_trans_smt.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
-		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+z3prover.generate_head()+value_constraints)
-		print 'hello hello'
-		exit(0)
-		if model_interpretor.interpret_results(new_results) is False:
+		value_constraints = ' '.join([ "(assert %s)"%smt_translator.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
+		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+value_constraints)
+		#print 'hello hello'
+		#exit(0)
+		if model_interpretor.interpret_result(new_results) is False:
 			flag, element = model_interpretor.interpret_model(new_results, MAX_VALUE)
 
 		MAX_VALUE = MAX_VALUE+2
@@ -129,7 +129,6 @@ def ____check_convergence(formula1, formula2):
 		return True
 	elif model_interpretor.interpret_result(result) is False:
 			negative_model = __generate_small_model(formula1, formula2, result)
-			#print 'N model:', negative_model
 			return negative_model
 	else:
 		print 'backtrack'
@@ -187,6 +186,8 @@ def synthesis(Init, Goal, predicate_list):
 	# return: a game invariant F s.t.  (1) Init \models F,  (2) F \models Goal  (3) F \models AEregression(F)
 	"""
 	n=1
+	# the size of universe of sort Int for models
+	MODEL_SIZE = 2 
 	# Set the inital score (c=0) for each generated predicate
 	pred_score_dict1 = scoring.init_preds_base_score(predicate_list)
 	pred_score_dict2 = copy.deepcopy(pred_score_dict1)
@@ -198,6 +199,7 @@ def synthesis(Init, Goal, predicate_list):
 	two_state_structure = (fstructure1, fstructure2)
 
 	while n>0:
+		n += 1
 		print(__printer(two_state_structure))
 		# Getting a sufficient invariant
 		new_two_state_structure= __structure_regress_until_convergence(two_state_structure, predicate_list)

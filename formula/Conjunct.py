@@ -13,7 +13,7 @@ import itertools
 
 
 
-def __refresh_vars(conjuct):
+def __refresh_vars(conjunct):
 	"""
 	delete redundant variables
 
@@ -21,7 +21,7 @@ def __refresh_vars(conjuct):
 	then __refresh_vars(k) will return  (['X'], ['Int'], ['! numStone() = X'])
 
 	"""
-	var_list, sort_list, pred_list = conjuct
+	var_list, sort_list, pred_list = conjunct
 	new_var_list, new_sort_list = list(),list()
 	preds_str = '&'.join(pred_list)
 	for e, var in enumerate(var_list):
@@ -55,11 +55,11 @@ def get_sat_subconjuncts(conjunct, model_list, length):
 
 
 
-def to_formula(conjuct):
+def to_formula(conjunct):
 	"""
 		transform a conjunct structure to the formula form
 	"""
-	var_list, sort_list, pred_list = conjuct
+	var_list, sort_list, pred_list = conjunct
 	if var_list !=list():
 		add_pred_list = ['%s>=0'%(x) for e, x in enumerate(var_list) if sort_list[e] == 'Int']
 		return "exists(%s)[%s]"%(','.join([ "%s:%s"%(var,sort) for var,sort in zip(var_list,sort_list)]), '&'.join(add_pred_list+pred_list))
