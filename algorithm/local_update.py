@@ -5,6 +5,7 @@ from formula import Fstructure
 from formula import Conjunct
 from model import model_checker
 import scoring
+import backtrack
 import copy
 
 from formula import conjunct_filter
@@ -98,13 +99,17 @@ def N_update(fstructure, model_minus, atomic_pred_list, LENGTH=2):
 	# sort and get one modified conjunct from C and replace the old one.
 	scoring_conjunct_dict = scoring.compute_conjuncts_score(sum(candicate_conjuncts_dict.values(),[]), pred_score_dict)
 	updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, model_pos_list)
+	# store the choice for possible backtrack
+	backtrack.store_choice(fstructure, model_minus, candicate_conjuncts_dict, scoring_conjunct_dict)
 
-	del candicate_conjuncts_dict['new']
-	old_conjunct_list = __find_repl_conjuncts(candicate_conjuncts_dict, conjunct_list, updated_conjunct)
-
-	print('***** Change %s ---> %s \n'%(' and '.join([Conjunct.to_formula(c) for c in old_conjunct_list]), Conjunct.to_formula(updated_conjunct)))
-
-	return Fstructure.update(fstructure, old_conjunct_list, updated_conjunct, [model_minus], [])
+	if updated_conjunct is None:
+		print('***** Local update fails ')
+		return None
+	else:
+		del candicate_conjuncts_dict['new']
+		old_conjunct_list = __find_repl_conjuncts(candicate_conjuncts_dict, conjunct_list, updated_conjunct)
+		print('***** Change %s ---> %s \n'%(' and '.join([Conjunct.to_formula(c) for c in old_conjunct_list]), Conjunct.to_formula(updated_conjunct)))
+		return Fstructure.update(fstructure, old_conjunct_list, updated_conjunct, [model_minus], [])
 
 
 	#new_conjunct = util_pred_score.sort_and_get_conjunct(candicate_conjuncts_dict.values(), pred_score_dict)
@@ -118,17 +123,19 @@ def P_update(fstructure, model_plus, atomic_pred_list, LENGTH=2):
 	#candicate_conjuncts_dict = dict()
 	new_model_pos_list = model_pos_list + [model_plus]
 
+	fstructure_copy = copy.deepcopy(fstructure)
 	#print conjunct_model_list
-
 	for num, (conjunct, model_neg_list) in enumerate(conjunct_model_list):
 		print('(A%s)**** Generate adjacent conjuncts for  %s'%(num, Conjunct.to_formula(conjunct)))
 		candicate_conjunct_list = __generate_adjacent_conjuncts(conjunct, model_neg_list, new_model_pos_list, atomic_pred_list, LENGTH)
 
-		if candicate_conjunct_list == list():
-			updated_conjunct = None
-		else:
-			scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
-			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, new_model_pos_list)
+		#if candicate_conjunct_list == list():
+		#	updated_conjunct = None
+		#else:
+		scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjunct_list, pred_score_dict)
+		updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, new_model_pos_list)
+		# store the choice for possible backtrack
+		backtrack.store_choice(fstructure_copy, model_plus, None, scoring_conjunct_dict)
 
 		if updated_conjunct is None:
 			fstructure = Fstructure.delete_conjunct(fstructure, conjunct)

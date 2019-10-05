@@ -4,8 +4,9 @@ import re
 from basic import pattern
 import random
 
-var_pattern = re.compile(r'[A-Z]\d+')
+##############################################################################################################################################################
 
+var_pattern = re.compile(r'[A-Z]\d+')
 
 def __unify_vars(pred):
 	replace_var = 'W'
@@ -16,13 +17,14 @@ def __unify_vars(pred):
 	return pred
 #print __unify_vars(s)
 
-##############################################################################################################################################################
+
 
 def init_preds_base_score(pred_list):
 	return { __unify_vars(pred): -1 for var_list, sorts, pred in pred_list} 
 
 
 ##############################################################################################################################################################
+
 
 def __compute_conjunct_score(conjunct, pred_score_dict):
 	#print conjunct
@@ -40,7 +42,21 @@ def compute_conjuncts_score(conjunct_list, pred_score_dict):
 		else:
 			scoring_dict[score] = [conjunct]
 	return scoring_dict
-	
+
+##############################################################################################################################################################
+
+
+def decrease_preds_score(conjunct_list, pred_score_dict):
+	"""
+		decrease all the score of predicates in the conjunct list
+	"""
+	preds = sum([p_list for v_list, s_list, p_list in conjunct_list], list())
+	preds = list(set([__unify_vars(p) for p in preds]))
+	for p in preds:
+		pred_score_dict[p] = pred_score_dict[p]-1	
+	return pred_score_dict
+
+
 ##############################################################################################################################################################
 
 '''

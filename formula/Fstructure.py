@@ -68,6 +68,7 @@ def printer(fstructure):
 
 ##############################################################################################################################	
 
+
 def delete_conjunct(fstructure, conjunct):
 	formula, pos_model_list, conjunct_model_list, pred_score_dict = fstructure
 	conjunct_model_list = [(c,m) for (c, m) in conjunct_model_list if c!=conjunct]

@@ -53,7 +53,7 @@ math_preds, fluent_preds = Predicate.generate_preds('takeaway.sc')
 
 
 from regression import program_regress
-from local_update import algorithm 
+from algorithm import algorithm2 
 
 #f = "(( !Ch(1,1) ) => ( !Ch(1,1)&turn(p1) ))&!exists(K266:Int)[! xlen() = K266&K266 > 1&! ylen() = K266]"
 
@@ -62,7 +62,7 @@ from local_update import algorithm
 #exit(0)
 
 
-algorithm.synthesis(Init, Goal, math_preds+fluent_preds)
+algorithm2.synthesis(Init, Goal, math_preds+fluent_preds)
 
 
 

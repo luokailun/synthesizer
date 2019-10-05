@@ -41,17 +41,25 @@ too much conjuncts!
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-P0: still too slow !!!!
+P2(FIX): generate small model fails 
+
+P3(FIX): math grounding check fails sometimes because it's limited to a fixed number. 
+
+p6(FIX?): restart 
+
+p5(FIX?): backtrack
+
+
+P0: still too slow !!!! (cache??)
 
 P1: refine a conjunct should first check whether M+ \models it
-
-P2: generate small model fails
-
-P3: math grounding check fails sometimes because it's limited to a fixed number. (Y)
 
 P4: ??? the types of models: 
 	--- reachable states? (do not care) 
 	---- illegal states?? ( can not Finally reach goal ?? some states are illegal but goal achievable?? )
+
+p5: +updates will generate two same conjuncts??
+
 
 
 
