@@ -50,8 +50,9 @@ def structure_P_update(two_state_structure, two_state_models, pred_list):
 	model_list1, model_list2 = two_state_models
 
 	# initialize the choice structure for possible backtrack
-	backtrack.init_choice(fstructure1, fstructure2, 'P')
+	backtrack.set_update('P','q1')
 	fstructure1 = __update_structure(fstructure1, model_list1, pred_list)
+	backtrack.set_update('P','q2')
 	fstructure2 = __update_structure(fstructure2, model_list2, pred_list)
 
 	return (fstructure1, fstructure2)
@@ -171,14 +172,17 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 			return (fstructure1, fstructure2)
 		elif negative_model1 is None or negative_model2 is None:
 			print 'try backtrack....'
-			fstructure1, fstructure2 = backtrack.backtrack()
+			fstructure1, fstructure2 = backtrack.backtrack(two_state_structure)
 		else:
-			# initialize choice structure for possible backtrack
-			backtrack.init_choice(fstructure1, fstructure2, 'N')
+			# initialize the choice structure for possible backtrack
+			backtrack.init_choice()
 			if negative_model1 is not True:
+				# memory the type and the state of update for possible backtrack
+				backtrack.set_update('N','q1')
 				print('(1) N model %s\n'%str(negative_model1))
 				fstructure1 = local_update.N_update(fstructure1, negative_model1, predicate_list)
 			if negative_model2 is not True:
+				backtrack.set_update('N','q2')
 				print('(2) N model %s\n'%str(negative_model2))
 				fstructure2 = local_update.N_update(fstructure2, negative_model2, predicate_list)
 			# if the local update fails, we restart by decreasing the score of the predicates
@@ -248,6 +252,6 @@ def synthesis(Init, Goal, predicate_list):
 			print('\n***************** P Update Structure *****************:\n\n')
 		else:
 			print 'try backtrack....'
-			two_state_structure = backtrack.backtrack()
+			two_state_structure = backtrack.backtrack(new_two_state_structure)
 
 

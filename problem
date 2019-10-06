@@ -50,6 +50,7 @@ p6(FIX?): restart
 p5(FIX?): backtrack
 
 
+
 P0: still too slow !!!! (cache??)
 
 P1: refine a conjunct should first check whether M+ \models it

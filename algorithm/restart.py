@@ -11,7 +11,7 @@ import global_structure
 
 
 def init_conjunct_storer():
-	global_structure.STORER = ([], [])
+	global_structure.CONJUNCT_STORER = ([], [])
 
 
 
@@ -19,7 +19,7 @@ def store_two_state_conjuncts(two_state_structure):
 	"""
 		store conjuncts for the two state structure
 	"""
-	s1, s2 = global_structure.STORER
+	s1, s2 = global_structure.CONJUNCT_STORER
 	fstructure1, fstructure2 = two_state_structure
 	conjunct_list1 = Fstructure.to_conjuncts(fstructure1)
 	conjunct_list2 = Fstructure.to_conjuncts(fstructure2)
@@ -38,7 +38,7 @@ def restart(two_state_structure):
 	"""
 	fstructure1, fstructure2 = two_state_structure
 	Goal = fstructure1[0]
-	conjunct_list1, conjunct_list2 = global_structure.STORER
+	conjunct_list1, conjunct_list2 = global_structure.CONJUNCT_STORER
 	pred_score_dict1 = Fstructure.get_pred_score_dict(fstructure1)
 	pred_score_dict2 = Fstructure.get_pred_score_dict(fstructure2)
 

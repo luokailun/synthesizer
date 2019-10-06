@@ -9,45 +9,8 @@ from itertools import groupby
 import re
 import itertools
 
-##############################################################################################################################################################
 
 
-
-def __refresh_vars(conjunct):
-	"""
-	delete redundant variables
-
-	If k = (['X','Y'], ['Int','Int'],['! numStone() = N']) , 
-	then __refresh_vars(k) will return  (['X'], ['Int'], ['! numStone() = X'])
-
-	"""
-	var_list, sort_list, pred_list = conjunct
-	new_var_list, new_sort_list = list(),list()
-	preds_str = '&'.join(pred_list)
-	for e, var in enumerate(var_list):
-		if re.search(r'\b%s\b'%var, preds_str):
-			new_var_list.append(var)
-			new_sort_list.append(sort_list[e])
-	return (new_var_list, new_sort_list, pred_list)
-
-
-
-def get_sat_subconjuncts(conjunct, model_list, length):
-	"""
-		(1) get sub-conjuncts of by dropping certain number (length) of predicates 
-		(2) the sub-conjuncts should satisfy the model set
-
-	"""
-	var_list, sort_list, pred_list = conjunct
-	subconjunct_list = list()
-	if len(pred_list)<=length:
-		return [([],[],[])]
-	del_preds_list = list(itertools.combinations(pred_list,length))
-	for del_preds in del_preds_list:
-		rest_preds = list(set(pred_list) - set(list(del_preds)))
-		if  model_list is None or model_checker.sat_conjunct(model_list, (var_list, sort_list, rest_preds)) is True:
-			subconjunct_list.append( __refresh_vars((var_list, sort_list, rest_preds))) 
-	return subconjunct_list
 
 
 ##############################################################################################################################################################
@@ -182,17 +145,16 @@ def __rename(conjunct):
 
 
 
-
-def __get_character_conjuncts(conjunct_list, model_sat_list, model_unsat_list):
+def get_characteristic_conjuncts(conjunct_list, model_sat_list, model_unsat_list):
 	"""
-		sub-procedure: return a conjunct list where every conjunct satisfies model_sat_list but falsifies model_unsat_list
+		main-procedure: return a conjunct list where every conjunct satisfies model_sat_list but falsifies model_unsat_list
 	"""
 	sat_conjunct_list = [conjunct for conjunct in conjunct_list if model_checker.sat_conjunct(model_sat_list, conjunct)]
 	return [conjunct for conjunct in sat_conjunct_list if model_checker.unsat_conjunct(model_unsat_list, conjunct)]
 
 
 
-def __get_character_conjunct_indexs(conjunct_list, model_sat_list, model_unsat_list):
+def __get_characteristic_conjunct_indexs(conjunct_list, model_sat_list, model_unsat_list):
 	"""
 		sub-procedure: return a conjunct index list where every conjunct satisfies model_sat_list but falsifies model_unsat_list
 	"""
@@ -232,7 +194,7 @@ def generate_conjuncts(subconjunct_list, model_neg_list, model_pos_list, atomic_
 	# generate basic conjuncts (only one predicate in a conjunct)
 	basic_conjunct_list = [(var_list, sort_list, [pred]) for var_list, sort_list, pred in atomic_pred_list]
 	# get those satisfy all negative models
-	basic_conjunct_list = __get_character_conjuncts(basic_conjunct_list, model_neg_list, [])
+	basic_conjunct_list = get_characteristic_conjuncts(basic_conjunct_list, model_neg_list, [])
 
 	subconjunct_list = [ __rename(c) for c in  subconjunct_list ]
 	# (1) Internal step:
@@ -247,7 +209,7 @@ def generate_conjuncts(subconjunct_list, model_neg_list, model_pos_list, atomic_
 		conjunct_list  =  [ __combine_conjunct(s, b, from_list, to_list) for s, from_list, to_list, b in conjunct_mapping_list]
 		print('------Step %s: number of sub-conjunct (%s)'%(step, len(conjunct_list)) )
 		# get those conjuncts (index) satisfying all negative models
-		sat_conjunct_index_list = __get_character_conjunct_indexs(conjunct_list, model_neg_list, [])
+		sat_conjunct_index_list = __get_characteristic_conjunct_indexs(conjunct_list, model_neg_list, [])
 		# from index to conjunct
 		subconjunct_list = [ __rename(conjunct_list[e]) for e in sat_conjunct_index_list]
 		print('------Step %s: number of sub-conjunct after MC (%s)'%(step, len(subconjunct_list)) )
@@ -270,10 +232,81 @@ def generate_conjuncts(subconjunct_list, model_neg_list, model_pos_list, atomic_
 	print('------Step %s: number of conjunct (%s)'%(LENGTH, len(conjunct_list)) )
 	conjunct_list = conjunct_filter.filter_by_varfree(conjunct_list, fluent_list)
 	print('------Step %s: number of conjunct after free-var filter (%s)'%(LENGTH, len(conjunct_list)) )
-	conjunct_list = __get_character_conjuncts(conjunct_list, model_neg_list, model_pos_list)
+	conjunct_list = get_characteristic_conjuncts(conjunct_list, model_neg_list, model_pos_list)
 	print('------Step %s: number of conjunct after MC (%s)'%(LENGTH, len(conjunct_list)) )
 
 	return conjunct_list
 
 
+
+##############################################################################################################################################################
+
+
+
+
+def ____refresh_vars(conjunct):
+	"""
+		sub-sub-procedure:	delete redundant variables
+
+	If k = (['X','Y'], ['Int','Int'],['! numStone() = N']) , 
+	then ____refresh_vars(k) will return  (['X'], ['Int'], ['! numStone() = X'])
+
+	"""
+	var_list, sort_list, pred_list = conjunct
+	new_var_list, new_sort_list = list(),list()
+	preds_str = '&'.join(pred_list)
+	for e, var in enumerate(var_list):
+		if re.search(r'\b%s\b'%var, preds_str):
+			new_var_list.append(var)
+			new_sort_list.append(sort_list[e])
+	return (new_var_list, new_sort_list, pred_list)
+
+
+
+def __get_sat_subconjuncts(conjunct, model_list, length):
+	"""
+		sub-procedure:
+		(1) get sub-conjuncts of by dropping certain number (length) of predicates 
+		(2) the sub-conjuncts should satisfy the model set
+
+	"""
+	var_list, sort_list, pred_list = conjunct
+	subconjunct_list = list()
+	if len(pred_list)<=length:
+		return [([],[],[])]
+	del_preds_list = list(itertools.combinations(pred_list,length))
+	for del_preds in del_preds_list:
+		rest_preds = list(set(pred_list) - set(list(del_preds)))
+		if  model_list is None or model_checker.sat_conjunct(model_list, (var_list, sort_list, rest_preds)) is True:
+			subconjunct_list.append( ____refresh_vars((var_list, sort_list, rest_preds))) 
+	return subconjunct_list
+
+
+
+def generate_adjacent_conjuncts(conjunct, model_neg_list, model_pos_list, atomic_pred_list, LENGTH):
+	"""
+		main-procedure: generate adjacent conjuncts by modifying the conjunct with the set of predicates:
+ 		---first generate sub-conjuncts of the conjunct 
+ 		---then combine each sub-conjunct with each basic conjunct to generate modified conjuncts
+
+ 		@param conjunct 		the conjunct need to be modified
+	"""
+	print('****** Generate adjacent conjuncts for  %s'%(to_formula(conjunct)))
+	adjacent_conjunct_list = list()
+	var_list, sorts, pred_list = conjunct
+
+	mrange = LENGTH+1 if len(pred_list)>1 else 2
+	# mlen means how many predicates should be replaced
+	# get all the sub-conjuncts of the modified mlen
+	subconjunct_list = sum([__get_sat_subconjuncts(conjunct, model_neg_list, mlen) for mlen in range(1,mrange)],[])
+	print('------Number of sub-conjunct (%s)\n'%(len(subconjunct_list)))
+	for e, subconjunct in enumerate(subconjunct_list):
+		print('(B%s)-----Generate conjuncts for %s'%(e, to_formula(subconjunct)))
+		# if a sub-conjunct unsat certain positive model, then this positive model will be unsat by conjuncts modified 
+		# 		based on the sub-conjunct. So we do not need to check it any more
+		sat_model_pos_list =  model_checker.get_sat_models(model_pos_list, subconjunct) if subconjunct != ([], [], []) else model_pos_list
+		#subconjunct = Conjunct.rename(subconjunct)
+		adjacent_conjunct_list += generate_conjuncts([subconjunct], model_neg_list, sat_model_pos_list, atomic_pred_list, LENGTH)
+		print("")
+	return adjacent_conjunct_list
 

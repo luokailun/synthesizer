@@ -104,6 +104,16 @@ def unsat_conjunct(model_list, conjunct):
 			return False
 	return True
 
+##############################################################################################################################################################
+
+def get_unsat_models(model_list, conjunct):
+	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is False]
+
+
+def get_sat_models(model_list, conjunct):
+	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is True]
+
+
 
 ##############################################################################################################################################################
 
@@ -115,14 +125,14 @@ def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
 	universe, assignment = model
-	MAX = INC + max([int(e) for e in universe['Int']])
-	temp_list = universe['Int']
-	universe['Int'] = [str(e) for e in list(range(MIN,MAX))]
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
 	formula = ' & '.join(pred_list)
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
+	MAX = INC + max([int(e) for e in universe['Int']])
+	temp_list = universe['Int']
+	universe['Int'] = [str(e) for e in list(range(MIN,MAX))]
 	ground_formula = formula if var_list == [] else __grounding_conjunct(var_list, sort_list, formula, universe)
 	universe['Int'] = temp_list
 	#print '--------ground formula',ground_formula
@@ -145,18 +155,6 @@ def unsat_conjunct_math(model_list, conjunct):
 		if sat_conjunct_by_model_math(model, conjunct) is True:
 			return False
 	return True
-
-
-
-##############################################################################################################################################################
-
-
-def get_unsat_models(model_list, conjunct):
-	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is False]
-
-
-def get_sat_models(model_list, conjunct):
-	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is True]
 
 
 
@@ -206,7 +204,29 @@ def sat_formula(model, formula):
 	#logger.debug('sat?: \n%s'%flag)
 	return flag
 
+'''
+def sat_formula_math(model, formula, INC=6):
 
+	universe, assignment = model
+	formula = __to_python_formula(formula)
+	#print '1,---------',formula
+	formula = Formula.transform_entailment(formula)
+	#print '2,---------',formula
+	MAX = INC + max([int(e) for e in universe['Int']])
+	temp_list = universe['Int']
+	universe['Int'] = [str(e) for e in list(range(MIN,MAX))]
+	ground_formula = Formula.grounding(formula, model)
+	universe['Int'] = temp_list
+	#print '3,--------',ground_formula
+	logical_formula = __assignment(ground_formula, assignment)
+	#print '4,--------model replace',logical_formula
+	#print 'kkkk',context_operator.get_sort_symbols_dict()
+	#logger.debug("Checking formula %s with model %s \n formula after grounding: %s \n after model_replace %s"%(formula,model,ground_formula,logical_formula))
+	scope = __get_const_value(context_operator.get_sort_symbols_dict(), context_operator.get_fluents(), assignment)
+	flag = eval(logical_formula,scope)
+	#logger.debug('sat?: \n%s'%flag)
+	return flag
+'''
 
 ##############################################################################################################################################################
 

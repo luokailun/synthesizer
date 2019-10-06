@@ -3,6 +3,6 @@
 (declare-fun numStone() Int)(declare-const p2 _S1)
 (declare-const p1 _S1)
 (declare-const True Bool)
-(declare-const False Bool)(set-option :timeout 10000) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not   (=> (and (and (and (not (= (mod numStone 4) 0)) (> numStone 0)) (turn p1)) (not (turn p2))) (and (and (=> (= numStone 0) (and (= numStone 0) (not (turn p1)))) (not (exists ((G0 Int)) (and (and (>= G0 0) (>= numStone G0)) (turn p2))))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= (mod G0 4) 0)) (= numStone G0))))))  ))
+(declare-const False Bool)(set-option :timeout 10000) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not   (=> (and (and (and (not (= (mod numStone 4) 0)) (> numStone 0)) (turn p1)) (not (turn p2))) (and (and (=> (= numStone 0) (and (= numStone 0) (not (turn p1)))) (not (exists ((G0 Int)) (and (and (>= G0 0) (> numStone G0)) (not (turn p1)))))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= numStone G0)) (= (mod G0 4) 0))))))  ))
 (check-sat)
 (get-model)
