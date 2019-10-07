@@ -251,9 +251,12 @@ def synthesis(Init, Goal, predicate_list):
 			format_output.format_output(positive_model, 'Ch')
 
 			progress_model_list = __progress_model(positive_model)
-			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
+			print('P progress model:%s\n'%('\n'.join([str(m) for m in progress_model_list]))) 
+			for model in progress_model_list:
+				format_output.format_output(model, 'Ch')
 
-			print('P progress model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
+			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
+			print('P update model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
 			for model in update_model_list:
 				format_output.format_output(model, 'Ch')
 

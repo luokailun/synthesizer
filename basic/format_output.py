@@ -34,15 +34,23 @@ def format_output(M, keyword):
 			print '------'
 	print '\n-------\n'
 '''
+import re
+num_pattern = re.compile(r"\d+")
+
+def __isbounded(elem, ylen):
+	max_num = max([ int(num) for num in num_pattern.findall(elem)]+[-1])
+	return max_num < ylen
 
 
 def format_output(model, keyword):
 	universe, M = model
-	elems  = [elem for elem in M.keys() if elem.find(keyword)!=-1]
-	elems.sort()
-	#elems = elems[len(elems)/3:]
 	xlen = M['xlen()']
 	ylen = M['ylen()']
+	elems  = [elem for elem in M.keys() if elem.find('Ch')!=-1]
+	elems  = [elem for elem in elems if __isbounded(elem, int(ylen))]
+	elems.sort()
+	#elems = elems[len(elems)/3:]
+
 	#print elems
 	for e, elem in enumerate(elems):
 		if M[elem]== "True":
@@ -53,20 +61,19 @@ def format_output(model, keyword):
 			print ""
 	print '\n-------\n'
 
+'''
+M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'False', 'Ch(0,1)': 'False', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'xlen()': '2'})
+format_output(M, 'Ch')
+'''
 
 
 '''
-fail
-Mlist = [{u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'False', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'2', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'True', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'False', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'False', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'1', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'False', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'False', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'True', u'turn(p2)': u'False', u'lasty()': u'2', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}]
-
-L ={u'q_3': [{u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'False', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'2', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'True', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'False', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'False', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'True', u'turn(p2)': u'False', u'lasty()': u'2', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'True', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}], u'q_2': [{u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'True', u'turn(p2)': u'True', u'lasty()': u'2', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'False', u'lastx()': u'2', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'True', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'True', u'lasty()': u'1', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'False', u'lastx()': u'2', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}, {u'Ch(1,1)': u'True', u'Ch(1,0)': u'False', u'Ch(0,2)': u'False', u'Ch(2,1)': u'False', u'turn(p2)': u'True', u'lasty()': u'2', u'Ch(0,0)': u'False', u'xlen()': u'2', u'turn(p1)': u'False', u'lastx()': u'1', u'Ch(2,0)': u'False', u'Ch(2,2)': u'False', u'ylen()': u'2', u'Ch(1,2)': u'False', u'Ch(0,1)': u'False'}], u'q_1': [{'Ch(1,1)': True, 'Ch(1,0)': False, 'Ch(0,2)': False, 'Ch(2,1)': True, 'turn(p2)': False, 'lasty()': 1, 'Ch(0,0)': False, 'xlen()': 2, 'turn(p1)': True, 'lastx()': 1, 'Ch(2,0)': False, 'Ch(2,2)': True, 'ylen()': 2, 'Ch(1,2)': True, 'Ch(0,1)': False}]}
-
 for key, Mlist in L.iteritems():
 	print key
 	for M in Mlist:
 		format_output(M, 'Ch')
 	print 
-	
 '''
+
 
 

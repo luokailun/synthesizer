@@ -5,6 +5,6 @@
 (declare-fun turn(_S1) Bool)(declare-const p2 _S1)
 (declare-const p1 _S1)
 (declare-const True Bool)
-(declare-const False Bool)(set-option :timeout 10000)(assert (= xlen ylen) ) (assert (> xlen 0) ) (assert (> ylen 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not  (=> (and (and (forall ((K16 Int) (K17 Int)) (=> (and (and (and (>= K16 0) (< K16 xlen)) (>= K17 0)) (< K17 ylen)) (Ch K16 K17))) (turn p1)) (not (turn p2))) (and (=> (not (Ch 0 0)) (and (not (Ch 0 0)) (turn p1))) (not (exists ((X0 _S1)) (turn X0)))))  ))
+(declare-const False Bool)(set-option :timeout 10000)(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not  (=> (and (and (forall ((K16 Int) (K17 Int)) (=> (and (and (and (>= K16 0) (< K16 xlen)) (>= K17 0)) (< K17 ylen)) (Ch K16 K17))) (turn p1)) (not (turn p2))) (and (=> (not (Ch 0 0)) (and (not (Ch 0 0)) (turn p1))) (not (exists ((X0 _S1)) (turn X0)))))  ))
 (check-sat)
 (get-model)

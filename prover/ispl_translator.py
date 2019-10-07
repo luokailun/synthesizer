@@ -74,6 +74,7 @@ def ____ispl_simplify(formula, eq_symbol):
 	else:
 		return formula
 
+
 ##############################################################################################################
 
 
@@ -164,21 +165,29 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 	ispl_p2_action_list = ['Player2.Action = %s%s'%(a,'_'.join(para_list)) for a, para_list in p2_action_tuple_list]
 	p2_action_list = ['%s(%s)'%(a,','.join(para_list)) for a, para_list in p2_action_tuple_list]
 
-	pred_fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list \
-				if f in predicates]
-
 	action_pair_list = [(a,b) for a, b in zip(p1_action_list+p2_action_list, ispl_p1_action_list+ispl_p2_action_list)]
 	update_pair_list = [ (a,b,c) for a, (b,c) in itertools.product(fluent_value_list, action_pair_list)]
 	update_pair_list = [ (fluent, atomic_regress.poss_or_ssa(action, fluent), ispl_action) \
 						for fluent, action, ispl_action in update_pair_list]
+	# transform (=>) to (not or)
 	update_pair_list = [ (a, Formula.transform_entailment(b), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, Formula.grounding(b,model), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, ____ispl_simplify(b,'Player1.Action'), c) for a, b, c in update_pair_list]
 	#update_pair_list = [ (a, b, c) for a, b, c in update_pair_list if b is not None]
-	update_list = ['%s if (%s) and %s;'%(fluent, update, ispl_action)\
-						for fluent, update, ispl_action in  update_pair_list if update !='false']
-	update_list = [____to_ispl_preds(formula, pred_fluent_list) for formula in update_list]
-	update_list.extend(turn_list)
+
+	pred_fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list if f in predicates]
+	# add =true to each predicates
+	update_pair_list = [ (fluent, ____to_ispl_preds(update, pred_fluent_list), ispl_action) for fluent, update, ispl_action in  update_pair_list]
+
+	fun_update_pair_list = [ (fluent, update, ispl_action) for fluent, update, ispl_action in  update_pair_list if fluent not in pred_fluent_list and update !='false'] 
+	pred_update_pair_list = [ (fluent, update, ispl_action) for fluent, update, ispl_action in  update_pair_list if fluent in pred_fluent_list] 
+
+
+	update_list = ['%s if (%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  fun_update_pair_list ]
+	update_list += ['%s=true if (%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update !='false' ]
+	update_list += ['%s=false if !(%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update !='false' ]
+	update_list += ['%s=false if %s;'%(fluent, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update =='false' ]
+	update_list += turn_list
 	#update_list = [____add_env(formula, fluent_list) for formula in update_list]
 	update_list = [ Util.endecode_string(formula, fluent_list, ispl_fluent_list) for formula in update_list]
 	update_list = [ ____to_ispl_logic(formula) for formula in update_list]
@@ -353,8 +362,10 @@ def to_ispl(model, goal):
 	useless_actions = __get_useless_actions(ispl_p1_actions+ispl_p2_actions, ispl_p1_actions_poss+ispl_p2_actions_poss)
 	ispl_p1_actions = list(set(ispl_p1_actions) - set(useless_actions))
 	ispl_p2_actions = list(set(ispl_p2_actions) - set(useless_actions))
-	ispl_updates = __delete_useless_updates(ispl_updates, useless_actions)
+	if useless_actions!=list():
+		ispl_updates = __delete_useless_updates(ispl_updates, useless_actions)
 	
+
 	ispl_vars = '\n    '.join(ispl_vars)
 	ispl_p1_actions = ','.join(ispl_p1_actions+['none'])
 	ispl_p2_actions = ','.join(ispl_p2_actions+['none'])
