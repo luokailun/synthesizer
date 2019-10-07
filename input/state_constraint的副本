@@ -4,7 +4,7 @@
     },
 
     "new_chompNN": {
-        "sc": "(assert (= xlen ylen) ) (assert (> xlen 0) ) (assert (> ylen 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+        "sc": "(assert (= xlen ylen) ) (assert (>= xlen 0) ) (assert (>= ylen 0) )  (assert (>= lastx 0) ) (assert (< lastx xlen) ) (assert (>= lasty 0) ) (assert (< lasty ylen) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false))))(assert (forall ((X Int) (Y Int) (W Int) (Z Int)) (=> (and (and (and (and (not (Ch X Y)) (>= X 0)) (>= Y 0)) (>= W X)) (>= Z Y)) (not (Ch W Z)))))(assert (forall ((X Int) (Y Int)) (=> (and (= X lastx) (= Y lasty)) (not (Ch X Y)))))"
     },
 
     "chomp2N": {

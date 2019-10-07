@@ -1,37 +1,40 @@
-('SSA', 'numStone=Y,take(P,X)', 'numStone=Y+X')
+('SSA', 'Ch(X,Y),eat(P,I,J)', 'Ch(X,Y)&(I>X|J>Y)')
+('SSA', 'xlen=Y,pi(A)', 'xlen=Y')
+('SSA', 'ylen=Y,pi(A)', 'ylen=Y')
+('End', '', '!Ch(0,0)')
+('Win', 'pi(P)', '!Ch(0,0)&turn(P)')
 ('SSA', 'turn(P),pi(A)', '!turn(P)')
-('End', '', 'numStone=0')
-('Win', 'pi(P)', 'numStone=0&!(turn(P))')
-('SSA', 'turn(P),pi(A)', '!turn(P)')
-('Poss', 'take(P,X)', 'numStone>=X&(X=1|X=2|X=3)&turn(P)')
-('Init', '', '!(numStone%4=0)&numStone>0')
+('Poss', 'eat(P,X,Y)', 'Ch(X,Y)&turn(P)&X>=0&X<xlen&Y>=0&Y<ylen')
+('Init', '', 'forall(X,Y)[X>=0&X<xlen&Y>=0&Y<ylen=>Ch(X,Y)]')
 ('Init', '', 'turn(p1)&!turn(p2)')
 ('Basic', '', 'forall(P)[(P=p1|P=p2)&!(p1=p2)]')
 
 
-('SSA', 'numStone()=K1,take(K2,K3)', 'numStone()=K1+K3')
-('SSA', 'turn(K4),pi(K5)', '!turn(K4)')
-('End', '', 'numStone()=0')
-('Win', 'pi(K6)', 'numStone()=0&!(turn(K6))')
-('SSA', 'turn(K7),pi(K8)', '!turn(K7)')
-('Poss', 'take(K9,K10)', 'numStone()>=K10&(K10=1|K10=2|K10=3)&turn(K9)')
-('Init', '', '!(numStone()%4=0)&numStone()>0')
+('SSA', 'Ch(K1,K2),eat(K3,K4,K5)', 'Ch(K1,K2)&(K4>K1|K5>K2)')
+('SSA', 'xlen()=K6,pi(K7)', 'xlen()=K6')
+('SSA', 'ylen()=K8,pi(K9)', 'ylen()=K8')
+('End', '', '!Ch(0,0)')
+('Win', 'pi(K10)', '!Ch(0,0)&turn(K10)')
+('SSA', 'turn(K11),pi(K12)', '!turn(K11)')
+('Poss', 'eat(K13,K14,K15)', 'Ch(K14,K15)&turn(K13)&K14>=0&K14<xlen()&K15>=0&K15<ylen()')
+('Init', '', 'forall(K16:Int,K17:Int)[K16>=0&K16<xlen()&K17>=0&K17<ylen()=>Ch(K16,K17)]')
 ('Init', '', 'turn(p1)&!turn(p2)')
-('Basic', '', 'forall(K11:_S1)[(K11=p1|K11=p2)&!(p1=p2)]')
+('Basic', '', 'forall(K18:_S1)[(K18=p1|K18=p2)&!(p1=p2)]')
 
 feature pattern for regression:
-(['take_K9_K10_'], ['K9', 'K10'], 'take_(.+?)_(.+?)_')
-(['numStone__K1', 'take_K2_K3_'], ['K1', 'K2', 'K3'], 'numStone__(.+?)_take_(.+?)_(.+?)_')
-(['turn_K4_', 'pi_K5_'], ['K4', 'K5'], 'turn_(.+?)__(.+?)_')
-(['turn_K7_', 'pi_K8_'], ['K7', 'K8'], 'turn_(.+?)__(.+?)_')
-(['pi_K6_'], ['K6'], '(.+?)_')
+(['eat_K13_K14_K15_'], ['K13', 'K14', 'K15'], 'eat_(.+?)_(.+?)_(.+?)_')
+(['Ch_K1_K2_', 'eat_K3_K4_K5_'], ['K1', 'K2', 'K3', 'K4', 'K5'], 'Ch_(.+?)_(.+?)__eat_(.+?)_(.+?)_(.+?)_')
+(['xlen__K6', 'pi_K7_'], ['K6', 'K7'], 'xlen__(.+?)_(.+?)_')
+(['ylen__K8', 'pi_K9_'], ['K8', 'K9'], 'ylen__(.+?)_(.+?)_')
+(['turn_K11_', 'pi_K12_'], ['K11', 'K12'], 'turn_(.+?)__(.+?)_')
+(['pi_K10_'], ['K10'], '(.+?)_')
 
- actions:['take']
- fluents:['turn', 'numStone']
- 0arity-fluents:['numStone']
- predicates:['turn']
- functional fluents:['numStone']
+ actions:['eat']
+ fluents:['xlen', 'ylen', 'Ch', 'turn']
+ 0arity-fluents:['xlen', 'ylen']
+ predicates:['Ch', 'turn']
+ functional fluents:['xlen', 'ylen']
 
- sort for constants:{'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}
- sort for functions:{'turn': ['_S1', 'Bool'], 'take': ['_S1', 'Int', 'Bool'], 'numStone': ['Int']}
- sort for predicates:{'turn': ['_S1']}
+ sort for constants:{'_S1': ['p2', 'p1'], 'Int': ['0'], 'Bool': ['True', 'False']}
+ sort for functions:{'xlen': ['Int'], 'ylen': ['Int'], 'Ch': ['Int', 'Int', 'Bool'], 'eat': ['_S1', 'Int', 'Int', 'Bool'], 'turn': ['_S1', 'Bool']}
+ sort for predicates:{'turn': ['_S1'], 'Ch': ['Int', 'Int']}

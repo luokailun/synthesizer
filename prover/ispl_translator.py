@@ -54,15 +54,21 @@ def __delete_useless_updates(update_list, useless_action_list):
 
 ##############################################################################################################
 
-illgal_pattern = re.compile(r"(?P<exp>\d+\s*=\s*\d+)")
+illgal_pattern1 = re.compile(r"(?P<exp>\d+\s*(?:=|>|<)\s*\d+)")
+illgal_pattern2 = re.compile(r"(?P<exp>\d+\s*(?:>=|<=)\s*\d+)")
+
 '''
 def __del_illgal_exp(formula):
 	return re.sub(illgal_pattern, lambda x: str(eval(x.group('exp').replace('=','=='))), formula)
 '''
 
 def ____ispl_simplify(formula, eq_symbol):
-	formula = re.sub(illgal_pattern, lambda x: str(eval(x.group('exp').replace('=','=='))), formula)
+	#print 'aaa',formula
+	formula = re.sub(illgal_pattern1, lambda x: str(eval(x.group('exp').replace('=','=='))), formula)
+	formula = re.sub(illgal_pattern2, lambda x: str(eval(x.group('exp'))), formula)
+	#print 'bbb',formula
 	formula = simplify.simplify(formula).replace(" ",'')
+	#print 'ccc',formula
 	if formula == 'true':
 		return "%s=%s"%(eq_symbol, eq_symbol)
 	else:
@@ -194,14 +200,12 @@ def __get_ispl_poss(action_tuple_list, model, fluent_tuple_list):
 				if f in context_operator.get_predicates()]
 
 	action_poss_list = [ atomic_regress.poss_or_ssa(action) for action in action_list ]
-	#print action_poss_list
+	#print '\n    '.join(action_poss_list)
 	action_poss_list = [ Formula.transform_entailment(poss) for poss in action_poss_list ]
-	#print action_poss_list
 	action_poss_list = [ ____add_env(poss, fluent_list) for poss in action_poss_list ]
-	#print action_poss_list
 	action_poss_list = [ Formula.grounding(poss, model) for poss in action_poss_list ]
+
 	action_poss_list = [ ____ispl_simplify(poss, 'state') for poss in action_poss_list]
-	#action_poss_list = [ poss for poss in action_poss_list if poss is not None]
 	action_poss_list = [ ____to_ispl_preds(poss, pred_fluent_list) for poss in action_poss_list ]
 	action_poss_list = [ ____to_ispl_vars(poss, fluent_list, ispl_fluent_list) for poss in action_poss_list]
 	action_poss_list = [ ____to_ispl_logic(poss) for poss in action_poss_list]
@@ -341,6 +345,7 @@ def to_ispl(model, goal):
 
 	ispl_p1_actions_poss = __get_ispl_poss(p1_action_tuple_list, model, fluent_tuple_list)
 	ispl_p2_actions_poss = __get_ispl_poss(p2_action_tuple_list, model, fluent_tuple_list)
+
 
 	ispl_updates = __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_list, model)
 

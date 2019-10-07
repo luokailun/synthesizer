@@ -41,13 +41,13 @@ def __before_verify(domain_file):
 	#__load_state_constaints(domain_name)
 
 
-__before_verify('takeaway.sc')
+__before_verify('new_chompNN.sc')
 
 Init = get_inital_database()
 Goal = get_goal('p1')
 #pi_action = generate_pi_action()
 
-math_preds, fluent_preds = Predicate.generate_preds('takeaway.sc')
+math_preds, fluent_preds = Predicate.generate_preds('new_chompNN.sc')
 
 #print math_preds+fluent_preds
 

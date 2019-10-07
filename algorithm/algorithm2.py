@@ -14,9 +14,10 @@ from formula import Fstructure
 import scoring
 import restart
 import backtrack
+from basic import format_output
 
 ################################################################################################################################################
-file_regress = open('./temp/regress','write')
+#file_regress = open('./temp/regress','write')
 
 
 def __printer(two_state_structure):
@@ -180,10 +181,12 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 				# memory the type and the state of update for possible backtrack
 				backtrack.set_update('N','q1')
 				print('(1) N model %s\n'%str(negative_model1))
+				format_output.format_output(negative_model1, 'Ch')
 				fstructure1 = local_update.N_update(fstructure1, negative_model1, predicate_list)
 			if negative_model2 is not True:
 				backtrack.set_update('N','q2')
 				print('(2) N model %s\n'%str(negative_model2))
+				format_output.format_output(negative_model2, 'Ch')
 				fstructure2 = local_update.N_update(fstructure2, negative_model2, predicate_list)
 			# if the local update fails, we restart by decreasing the score of the predicates
 			if fstructure1 is None or fstructure2 is None:
@@ -244,10 +247,16 @@ def synthesis(Init, Goal, predicate_list):
 		elif model_interpretor.interpret_result(result) is False:
 
 			positive_model = __generate_small_model(Init, formula1, result)
+			print('P model:%s\n'%(str(positive_model)))
+			format_output.format_output(positive_model, 'Ch')
+
 			progress_model_list = __progress_model(positive_model)
 			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
 
-			print('P model:%s\nP progress model:%s\n'%(str(positive_model), '\n'.join([str(m) for m in update_model_list])))
+			print('P progress model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
+			for model in update_model_list:
+				format_output.format_output(model, 'Ch')
+
 			two_state_structure = structure_P_update(new_two_state_structure, ([positive_model], update_model_list), predicate_list)
 			print('\n***************** P Update Structure *****************:\n\n')
 		else:

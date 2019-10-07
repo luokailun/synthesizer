@@ -46,7 +46,7 @@ def imply(formula1, formula2, add_head=""):
 	logger.debug("#checking imply:\n f1:%s\n f2:%s"%(formula1, formula2))
 	formula = "( %s ) => ( %s )" % (formula1 , formula2)
 	sc_formula = context_operator.get_state_constraints()
-
+	
 	with open("./input_z3/smt_input","write") as input_file:
 		#print "-------",encoded_formula
 		#smt_body = util_transiform.decode_formula(util_prolog.get_smt_format_body(encoded_formula))

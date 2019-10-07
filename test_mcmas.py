@@ -3,7 +3,7 @@
 
 
 from parser import BATparser
-BATparser.parser('takeaway.sc')
+BATparser.parser('new_chompNN.sc')
 from basic import context_operator
 from regression import atomic_regress
 
@@ -31,12 +31,16 @@ print atomic_regress.poss_or_ssa('take(p1,1)','numStone()=0')
 #or Player1.Action=none and Player2.Action=none
 
 
-M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': True, 'numStone()': 1, 'turn(p2)': False})
+M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'True', 'Ch(1,0)': 'True', 'Ch(0,2)': 'True', 'Ch(2,1)': 'True', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'Ch(0,1)': 'True', 'turn(p1)': 'True', 'Ch(2,0)': 'True', 'Ch(2,2)': 'True', 'ylen()': '1', 'Ch(1,2)': 'True', 'xlen()': '1'})
 
-Goal = "numStone()=0 => !turn(p1)"
+Goal = "! Ch(0,0) => turn(p1)"
 
 
 from prover import mcmas
+from prover import ispl_translator
+
+#print ispl_translator.to_ispl(M,Goal)
+
 
 print mcmas.interpret_result(mcmas.check_win(M,Goal))
 

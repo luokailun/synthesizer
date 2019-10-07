@@ -10,27 +10,30 @@ from model import util_model
 
 
 '''
-#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
-#(+)model:
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'})
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'})
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '5', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '5', 'turn(p2)': 'False'})
-  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '11', 'turn(p2)': 'False'})
-#conjuncts:
-(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'})
-(1):(['G0'], ['Int'], ['G0 > 4', 'G0 % 3 = 1', 'numStone() = G0'])
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '5', '4', '7', '6', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'})
-(2):(['G0'], ['Int'], ['G0 = 4', 'numStone() = G0'])
-  ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '5', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'})
+X1 = "(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! turn(p1)])&!(exists(G0:Int)[G0>=0 &  numStone() = G0 & G0 % 4 = 0 ])"
+X2 = "exists(K100:Int)[ (numStone()>=K100&(K100=1|K100=2|K100=3)&turn(p1))&((( (numStone()=0+K100) ) => ( (numStone()=0+K100)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K100)])&!(exists(G0:Int)[G0>=0&G0 % 4 = 2&(numStone()=G0+K100)])) ]"
+
+
+Y1 = "(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&numStone() > G0&! turn(p1)])&!(exists(G0:Int)[G0>=0&numStone() = G0&G0 % 4 = 0])"
+Y2 = "exists(K103:Int)[ (numStone()>=K103&(K103=1|K103=2|K103=3)&turn(p1))&((( (numStone()=0+K103) ) => ( (numStone()=0+K103)&!((!turn(p1))) ))&!(exists(G0:Int)[G0>=0&G0 % 2 = 1&(numStone()=G0+K103)])&!(exists(G0:Int)[G0>=0&G0 % 4 = 2&(numStone()=G0+K103)])) ]"
+
+print z3prover.imply(X1, 'false')
+print z3prover.imply(Y1, 'false')
+print
+print z3prover.imply(X1, Y1)
+print z3prover.imply(Y1, X1)
+
+print z3prover.imply(X2, Y2)
+print z3prover.imply(Y2, X2)
+
+print z3prover.imply(Y1, Y2)
+print z3prover.imply(X1, X2)
+#print z3prover.imply(Y1, X2)
 '''
 
-X1 = " (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(exists(G0:Int)[G0>=0&G0 > 4&G0 % 3 = 1&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 = 4&numStone() = G0])"
-#RM1 = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '3', '2', '5', '4'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'})
-M1 =  ({'_S1': ['p2', 'p1'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'})
-FM1 = util_model.to_formula(M1)
-print FM1
-#print z3prover.imply(FM1, X1)
-print z3prover.imply(FM1, X1)
+
+
+
+
 
 
