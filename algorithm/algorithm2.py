@@ -181,12 +181,12 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 				# memory the type and the state of update for possible backtrack
 				backtrack.set_update('N','q1')
 				print('(1) N model %s\n'%str(negative_model1))
-				format_output.format_output(negative_model1, 'Ch')
+				print format_output.format_output(negative_model1, 'Ch')
 				fstructure1 = local_update.N_update(fstructure1, negative_model1, predicate_list)
 			if negative_model2 is not True:
 				backtrack.set_update('N','q2')
 				print('(2) N model %s\n'%str(negative_model2))
-				format_output.format_output(negative_model2, 'Ch')
+				print format_output.format_output(negative_model2, 'Ch')
 				fstructure2 = local_update.N_update(fstructure2, negative_model2, predicate_list)
 			# if the local update fails, we restart by decreasing the score of the predicates
 			if fstructure1 is None or fstructure2 is None:
@@ -204,7 +204,37 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 ################################################################################################################################################
 
 
+def decide_update(model, state_type, Goal):
+	"""
+		decide to use the N update or P update
+		@param 		model 			the model needed to use by N update or P update
+		@param 		state_type		in the A state or E state
+		@param 		Goal 			the goal needed be checked
+		@return 	two models set (M1, M2), where
+				        --- M1 means models need to be excluded in the current; 
+				        --- M2 means models need to be included in the next state.
+	"""
+	my_exclude_models, your_include_models = list(), list()
+	if mcmas.interpret_result(mcmas.check_win(model,Goal)) is True:
+		progress_model_list = __progress_model(model)
+		update_model_list = [m for m in progress_model_list if mcmas.interpret_result(mcmas.check_win(m,Goal))]
+		# if the state is in our turn, then we only choice an action to progress
+		if state_type == 'E':
+			your_include_models = [update_model_list.pop(0)]
+		# if the state is in opponent's turn, then we know all actions should be performed
+		else:
+			your_include_models = update_model_list
+	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is False:
+		my_exclude_models = [model]
+	else:
+		print 'Model Error!'
+		exit(0)
+	return my_exclude_models, your_include_models
 
+
+
+
+################################################################################################################################################
 
 
 def synthesis(Init, Goal, predicate_list):
@@ -247,17 +277,17 @@ def synthesis(Init, Goal, predicate_list):
 		elif model_interpretor.interpret_result(result) is False:
 			positive_model = __generate_small_model(Init, formula1, result)
 			print('P model:%s\n'%(str(positive_model)))
-			format_output.format_output(positive_model, 'Ch')
+			print format_output.format_output(positive_model, 'Ch')
 
 			progress_model_list = __progress_model(positive_model)
 			print('P progress model:%s\n'%('\n'.join([str(m) for m in progress_model_list]))) 
 			for model in progress_model_list:
-				format_output.format_output(model, 'Ch')
+				print format_output.format_output(model, 'Ch')
 
 			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
 			print('P update model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
 			for model in update_model_list:
-				format_output.format_output(model, 'Ch')
+				print format_output.format_output(model, 'Ch')
 
 			two_state_structure = structure_P_update(new_two_state_structure, ([positive_model], update_model_list), predicate_list)
 			print('\n***************** P Update Structure *****************:\n\n')

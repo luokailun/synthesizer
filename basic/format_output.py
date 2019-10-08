@@ -50,20 +50,22 @@ def format_output(model, keyword):
 	elems  = [elem for elem in elems if __isbounded(elem, int(ylen))]
 	elems.sort()
 	#elems = elems[len(elems)/3:]
-
+	format_str = ''
 	#print elems
 	for e, elem in enumerate(elems):
 		if M[elem]== "True":
-			print 'O',
+			format_str = "%sO"%(format_str)
 		elif M[elem]== "False":
-			print '#',
+			format_str = "%s#"%(format_str),
 		if (e+1)%int(ylen)==0:
-			print ""
-	print '\n-------\n'
+			format_str = "%s\n"%(format_str),
+	format_str ='%s-------\n'%format_str
+	return format_str
+
 
 '''
-M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'False', 'Ch(0,1)': 'False', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'xlen()': '2'})
-format_output(M, 'Ch')
+M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'False', 'Ch(0,1)': 'False', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'xlen()': '2'}, {})
+print format_output(M, 'Ch')
 '''
 
 

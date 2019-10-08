@@ -4,7 +4,7 @@
     },
 
     "new_chompNN": {
-        "sc": "(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+        "sc": "(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false))))"
     },
 
     "chomp2N": {

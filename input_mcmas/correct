@@ -1,5 +1,7 @@
 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas -s -c 1 -l 1 -f 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/model.ispl
 
+/Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas  -f 1 -l 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/model.ispl
+
 
 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas  -c 1 -l 1 -f 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/model.ispl
 

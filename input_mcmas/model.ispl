@@ -430,11 +430,11 @@ Agent Player2
 end Agent
  
 Evaluation 
-	p1win if !((!Environment.Ch0_0=true)) or (!Environment.Ch0_0=true and Environment.turnp1=true); 
+	p1win if !(!Environment.Ch0_0=true) or Environment.turnp1=true; 
 end Evaluation 
 
 InitStates 
- 	!Environment.Ch1_1=true and !Environment.Ch1_0=true and !Environment.Ch0_2=true and !Environment.Ch2_1=true and Environment.turnp2=true and !Environment.Ch0_0=true and Environment.xlen=2 and !Environment.turnp1=true and !Environment.Ch2_0=true and !Environment.Ch2_2=true and Environment.ylen=2 and !Environment.Ch1_2=true and !Environment.Ch0_1=true;
+ 	!Environment.Ch1_1=true and Environment.Ch1_0=true and !Environment.Ch2_0=true and !Environment.Ch2_1=true and Environment.turnp2=true and !Environment.Ch2_2=true and !Environment.turnp1=true and Environment.ylen=2 and !Environment.Ch1_2=true and !Environment.Ch0_2=true and Environment.Ch0_0=true and Environment.xlen=2 and Environment.Ch0_1=true;
 end InitStates 
 
 Groups 
