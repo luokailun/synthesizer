@@ -43,7 +43,7 @@ def __isbounded(elem, ylen):
 
 
 def format_output(model, keyword):
-	universe, M = model
+	universe, M, default_value = model
 	xlen = M['xlen()']
 	ylen = M['ylen()']
 	elems  = [elem for elem in M.keys() if elem.find('Ch')!=-1]

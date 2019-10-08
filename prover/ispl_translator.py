@@ -145,7 +145,7 @@ turn_list = [
 
 def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_list, model):
 
-	universe, assignment = model
+	universe, assignment, default_value = model
 	ispl_fluent_list = ['%s%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 
@@ -181,7 +181,6 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 
 	fun_update_pair_list = [ (fluent, update, ispl_action) for fluent, update, ispl_action in  update_pair_list if fluent not in pred_fluent_list and update !='false'] 
 	pred_update_pair_list = [ (fluent, update, ispl_action) for fluent, update, ispl_action in  update_pair_list if fluent in pred_fluent_list] 
-
 
 	update_list = ['%s if (%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  fun_update_pair_list ]
 	update_list += ['%s=true if (%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update !='false' ]
@@ -342,7 +341,7 @@ end Formulae \n\
 
 
 def to_ispl(model, goal):
-	universe, assignment = model
+	universe, assignment, default_value = model
 
 	fluent_tuple_list  = __get_fluents(universe)
 	ispl_vars = __get_ispl_vars(fluent_tuple_list, universe)

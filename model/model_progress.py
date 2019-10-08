@@ -36,7 +36,7 @@ def __model_ssa(fluent, action_str, model):
 
 def progress(action_str, model):     # here action is a ground term
 	
-	universe, assignment = model
+	universe, assignment, default_value = model
 	fluent_sorts = context_operator.get_functions_sorts()
 	fluents = context_operator.get_fluents()
 	predicates = context_operator.get_predicates()
@@ -67,6 +67,6 @@ def progress(action_str, model):     # here action is a ground term
 
 	new_assignment = { fluent.split("=")[0]: fluent.split("=")[1] for fluent in new_model_list}
 
-	return (universe, new_assignment)
+	return (universe, new_assignment, default_value)
 
 

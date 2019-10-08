@@ -60,7 +60,7 @@ def __mrepl_ground(match):
 	logical_connector = "&" if match.group('head') =='forall' else '|'
 	
 	#universe = {'Int': ['1', '0', '3', '2'], '_S1': [], '_S2': ['p2', 'p1'], 'Bool': ['True', 'False']}
-	universe, assignment = context_operator.get_current_model()
+	universe, assignment, default_value = context_operator.get_current_model()
 
 	vars_sorts = { elem.split(':')[0]: elem.split(':')[1] for elem in  match.group('var').split(',') }
 	var_list = vars_sorts.keys()

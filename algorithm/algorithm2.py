@@ -65,7 +65,7 @@ def __progress_model(model):
 	"""
 		update the model to a set of models by doing any possible action
 	"""
-	universe, assignment = model
+	universe, assignment, default_value = model
 	functions_sorts = context_operator.get_functions_sorts()
 	actions = context_operator.get_actions()
 	actions_sorts = [ (fun, sorts[0:len(sorts)-1]) for fun, sorts in functions_sorts.iteritems() if fun in actions ]
@@ -245,7 +245,6 @@ def synthesis(Init, Goal, predicate_list):
 
 		# If the invariant is not necessary, update the formulas using the counterexamples.
 		elif model_interpretor.interpret_result(result) is False:
-
 			positive_model = __generate_small_model(Init, formula1, result)
 			print('P model:%s\n'%(str(positive_model)))
 			format_output.format_output(positive_model, 'Ch')

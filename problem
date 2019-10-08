@@ -49,11 +49,12 @@ p6(FIX?): restart
 
 p5(FIX?): backtrack
 
+P0(FIX): still too slow !!!! (cache??)
+
+P1(FIX): refine a conjunct should first check whether M+ \models it
 
 
-P0: still too slow !!!! (cache??)
 
-P1: refine a conjunct should first check whether M+ \models it
 
 P4: ??? the types of models: 
 	--- reachable states? (do not care) 

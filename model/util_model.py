@@ -4,7 +4,7 @@
 # model is a tuple (U, S) where U is universe and S is an assignment
 
 def to_formula(model):
-	universe, assignment = model
+	universe, assignment, default_value = model
 	formula_list = list()
 	for key,value in assignment.iteritems():
 		if value is True or str(value) == 'True':
@@ -27,8 +27,8 @@ print is_lager_model(M1, M2)
 
 
 def model_equivalent(M1, M2):
-	universe1, assignment1 = M1
-  	universe2, assignment2 = M2
+	universe1, assignment1, default_value = M1
+  	universe2, assignment2, default_value = M2
   	if cmp(assignment1, assignment2) == 0:
   		return True
   	else:
@@ -36,8 +36,8 @@ def model_equivalent(M1, M2):
 
 
 def is_lager_model(M1, M2):
-	universe1, assignment1 = M1
-  	universe2, assignment2 = M2
+	universe1, assignment1, default_value = M1
+  	universe2, assignment2, default_value = M2
   	temp1 = max([ int(e) for e in universe1['Int']])
   	temp2 = max([ int(e) for e in universe2['Int']])
   	return temp1>temp2

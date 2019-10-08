@@ -81,10 +81,16 @@ def __get_default_fluents(fluents, fluent_sorts, universe, constraints=None):
 
 
 def ____int_detect(mtuple):
+	"""
+		change '1' to 1
+	"""
 	return tuple(int(elem) if elem.isdigit() else elem for elem in mtuple)
 
 
 def __name_relpace(paras, const_dict):
+	"""
+		change domain constants to SMT constants
+	"""
 	return ____int_detect(tuple([const_dict[para] if para in const_dict.keys() else para for para in paras ]))
 
 
@@ -145,11 +151,38 @@ def __generate_num_universe(results):
 	return [ str(i) for i in range(int(min(nlist)),int(max(nlist))+1)]
 
 
+
 ##############################################################################################################################
 
+num_pattern = re.compile(r'\b\d+\b')
+
+
+def get_default_value(elem_list, scope, const_dict, anti_const_dict):
+	"""
+		get default value for fluents who have parameters of Int sort
+
+		@param elem_list 		elements like ('Ch', ('1', '1'))
+		@param scope 			the scope for executing lambda expression
+		@param const_dict 		from domain constants to SMT constants
+		@param anti_const_dict 	from SMT constants to domain constants
+	"""
+	default_num = '9999'
+	elem_list = [ (fun, num_pattern.sub(default_num, ','.join(paras))) for fun, paras in elem_list]
+	elem_list = list(set([(fun, para_str) for fun, para_str in elem_list if para_str.find(default_num)!=-1 ]))
+	elem_list = [(fun, tuple(para_str.split(','))) for fun, para_str in elem_list]
+
+	elem_value_list = [ (fun, paras, apply(eval(fun,scope), __name_relpace(paras, const_dict))) for fun, paras in elem_list]
+	elem_value_list = [ (fun, paras, anti_const_dict[value]) if value in anti_const_dict.keys() else (fun, paras, value) for (fun, paras, value) in elem_value_list  ]
+
+	default_value = {("%s\(%s\)"%(fun,','.join(paras))).replace(default_num, '\d+') : str(value) for fun, paras, value in elem_value_list}
+	
+	return default_value
 
 
 
+
+
+##############################################################################################################################
 
 
 def interpret_model(results, max_value=99999):
@@ -157,7 +190,6 @@ def interpret_model(results, max_value=99999):
 	#context_operator.set_counterexample_result(results)
 
 	lambda_funs = util_z3_model.get_fun(results)
-	#print lambda_funs
 
 	# a dict maps constants to SMT constants
 	const_dict = util_z3_model.get_const(results)
@@ -187,7 +219,7 @@ def interpret_model(results, max_value=99999):
 		elem_list = __get_model_elements(fluents, add_universe=universe)
 
 		const_symbols = sum(universe.values(),[])
-		# set non-constant fluent
+		# set non-constant fluent, lile xlen, numStone
 		elem_value_list = [ (fun, tuple(), value) for fun, value in const_dict.items() if fun in fluents]
 		# transform SMT true/false to 'True'/'False'
 		elem_value_list = __trans_true_false(elem_value_list)
@@ -213,18 +245,24 @@ def interpret_model(results, max_value=99999):
 					#print 'D'
 					universe[fun_sort].append(str(value))
 
-	#print 'interplit model--------universe(2)', context_operator.get_universe()
-	#model.update({"%s(%s)"%(fun,','.join(paras)) : value for fun, paras, value in elem_value_list})
+
 	model = {"%s(%s)"%(fun,','.join(paras)) : str(value) for fun, paras, value in elem_value_list}
 
 	lack_fluents =  [fun for fun in context_operator.get_fluents() if fun not in fluents ]
 	complete_part = __get_default_fluents(lack_fluents, fluent_sorts, universe)
 	model.update(complete_part)
-	#print 'model,,,,, model', model
+
+	"""
+		get default value for fluents who have parameters of Int sort
+	"""
+	default_value  = get_default_value(elem_list, scope, const_dict, anti_const_dict)
+
+	""" 
+	"""
 	if value_constraints!=list():
 		return False, value_constraints
 	else:
-		return True, (universe, model)
+		return True, (universe, model, default_value)
 
 
 ##############################################################################################################################

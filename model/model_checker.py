@@ -60,7 +60,7 @@ def sat_conjunct_by_model(model, conjunct):
 	#print '!',model
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
-	universe, assignment = model
+	universe, assignment, default_value = model
 
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
@@ -120,11 +120,20 @@ def get_sat_models(model_list, conjunct):
 # math checking is just approximated. We only expand the Int range
 
 
+def __set_default_value(logical_formula, default_value):
+	"""
+		set the unknown fluent not in assignment with the default value
+	"""
+	encode_pair_list = default_value.items()
+	logical_formula = Util.repeat_do_function(Util.sub_lambda_exp, encode_pair_list, logical_formula)
+	return logical_formula
+
+
 def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	#print '!',model
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
-	universe, assignment = model
+	universe, assignment, default_value = model
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
 	formula = ' & '.join(pred_list)
@@ -137,7 +146,7 @@ def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	universe['Int'] = temp_list
 	#print '--------ground formula',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
-	#logical_formula = unknown_pattern.sub(__mrepl_unknown,logical_formula)
+	logical_formula = __set_default_value(logical_formula, default_value)
 	#print '--------logical',logical_formula
 	if var_list == []:
 		return evaluation.eval_expression(logical_formula, {'True':True, 'False':False})
@@ -188,7 +197,7 @@ def __to_python_formula(formula):
 
 def sat_formula(model, formula):
 
-	universe, assignment = model
+	universe, assignment, default_value = model
 	formula = __to_python_formula(formula)
 	#print '1,---------',formula
 	formula = Formula.transform_entailment(formula)
