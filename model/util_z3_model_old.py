@@ -1,5 +1,5 @@
 #-*- coding:utf8 -*-
-# z3 version 4.8.4
+# z3 version 4.6.x
 # By lijian
 #coding=utf-8
 import itertools
@@ -60,11 +60,56 @@ def z3item(oneline,num):                #oneline 为需要拆分的内容如（A
         index = index + len(nextpart(oneline,index)) + 1
     return nextpart(oneline,index)
 
+def parseZ3fun(oneline):                     #把一个define-fun进行分解
+    fun = ''
+    funname = z3item(oneline,2)                 #第二项为函数名字
+    funargs = z3item(oneline,3)                 #第三项为函数的参数列表
+    funbody = z3item(oneline,5)                 #第五项为函数体
+    if '()' == funargs and not funbody.startswith('('):    #零元函数为常量，存放在一个字典里
+        if not funbody.isdigit():
+            #print funbody                              #函数体不是数字
+            valuecharlist.append(funbody)
+            constlist[funname] = funbody
+        else:
+            constlist[funname] = int(funbody)
+    else:
+        fun = parsefun(oneline).replace('true',"True").replace('false',"False")        #不是零元函数，进一步分解
+        #print(fun)
+    return fun
 
+def parsefun(oneline):
+    name = z3item(oneline,2)
+    argslist = parseArg(z3item(oneline,3))             #分解参数
+    args = ','.join(arg for arg in argslist)
+    body = parsebody(z3item(oneline,5))             #分解函数体
+    return name + "=lambda " + args +": " + body
 
-
-
-
+def parsebody(body):
+    num = numberitem(body)        #函数体的项数
+    type = z3item(body,1)           #函数体的类型
+    if type == 'ite':
+        return ite(body)
+    if type == 'let':
+        return let(body)
+    if type in mathlogic:
+        if type == 'mod':
+            return parsebody(z3item(body,2)) + '%' + parsebody(z3item(body,3))
+        elif type == '-':
+            if num <= 3:
+                return '-' + parsebody(z3item(body,2))
+            else:
+                return ' - '.join("(" + parsebody(z3item(body,i)) + ")" for i in range(2,num))
+        else:
+            return (" " + type + " ").join("(" + parsebody(z3item(body,i))+")" for i in range(2,num))
+    else:           #其他类型有 ： 不含括号字符串 abx0/123 , (p x) ,p(x y),(p x y z ....)
+        if num <= 2:          #不含括号
+            return body
+        else:
+            bodys = z3item(body, 1) + '('
+            for i in range(2, num):
+                bodys = bodys + parsebody(z3item(body, i)) + ','
+            bodys = bodys[0:len(bodys) - 1] + ")"
+        return bodys
 
 def ite(body):             #分解(ite (and (= x1 1) (= x2)) 1 2)
     condition = z3item(body,2)           #第二部分为条件
@@ -135,52 +180,6 @@ def let(body):
         letfunbody = re.sub(r"\b%s\b"%funname, funbody, letfunbody)
     return parsebody(letfunbody)
 
-
-
-
-def parsebody(body):
-    num = numberitem(body)        #函数体的项数
-    type = z3item(body,1)           #函数体的类型
-    if type == 'ite':
-        #print 'type1'
-        #exit(0)
-        return ite(body)
-    if type == 'let':
-        #print 'type2'
-        #exit(0)
-        return let(body)
-    if type in mathlogic: 
-        #print 'type3'
-        #exit(0)
-        if type == 'mod':
-            return "(%s)%(%s)"%(parsebody(z3item(body,2)), parsebody(z3item(body,3)))
-        elif type == '-':
-            if num <= 3:
-                return '-' + parsebody(z3item(body,2))
-            else:
-                return ' - '.join("(" + parsebody(z3item(body,i)) + ")" for i in range(2,num))
-        else:
-            return (" " + type + " ").join("(" + parsebody(z3item(body,i))+")" for i in range(2,num))
-    if type == '=':
-        return '(%s)==(%s)'%(parsebody(z3item(body,2)), parsebody(z3item(body,3)))
-    else:  
-        #其他类型有 ： 不含括号字符串 abx0/123 , (p x) ,p(x y),(p x y z ....)
-        if num <= 2:          #不含括号
-            return body
-        else:
-            bodys = z3item(body, 1) + '('
-            for i in range(2, num):
-                bodys = bodys + parsebody(z3item(body, i)) + ','
-            bodys = bodys[0:len(bodys) - 1] + ")"
-        return bodys
-
-'''
-body = "(= (ite (= x0 _S1val0) _S1val0 _S1val1) _S1val0)"
-print parsebody(body)
-'''
-
-
-
 def parseArg(args):
     args = args[2:len(args)-2]
     argsli = args.split(") (")
@@ -190,60 +189,73 @@ def parseArg(args):
        argsli2.append(templi[0])
     return argsli2
 
-
-
-def parsefun(oneline):
-    name = z3item(oneline,2)
-    argslist = parseArg(z3item(oneline,3))             #分解参数
-    args = ','.join(arg for arg in argslist)
-    body = parsebody(z3item(oneline,5))             #分解函数体
-    return name + "=lambda " + args +": " + body
-
-
-
-
-def parseZ3fun(oneline):                     #把一个define-fun进行分解
-    fun = ''
-    funname = z3item(oneline,2)                 #第二项为函数名字
-    funargs = z3item(oneline,3)                 #第三项为函数的参数列表
-    funbody = z3item(oneline,5)                 #第五项为函数体
-    if '()' == funargs and not funbody.startswith('('):    #零元函数为常量，存放在一个字典里
-        if not funbody.isdigit():
-            #print funbody                              #函数体不是数字
-            valuecharlist.append(funbody)
-            constlist[funname] = funbody
-        else:
-            constlist[funname] = int(funbody)
-    else:
-        fun = parsefun(oneline).replace('true',"True").replace('false',"False")        #不是零元函数，进一步分解
-        #print(fun)
-    return fun
-
-
-
-################################################################################################################################
-
 def get_fun(results):
     funlist = []
     fun_list = []
     for line in z3list(results):
-        #print '---',line
+        #print line
         if parseZ3fun(line) != '':
             funlist.append(parseZ3fun(line))
     charset = set(valuecharlist)
     for fun in funlist:
         for valuechar in charset:
             if valuechar not in ['true','false']:
-                #把已经成型的lambda表达式中的字符加引号，如 a 变 ‘a'
-               fun = re.sub(r'\b' + valuechar + r'\b',"'" + valuechar + "'",fun)                           
+               fun = re.sub(r'\b' + valuechar + r'\b',"'" + valuechar + "'",fun)                           #把已经成型的lambda表达式中的字符加引号，如 a 变 ‘a'
         fun_list.append(fun)
     return fun_list
-
 
 def get_const(results):
     for line in z3list(results):
         parseZ3fun(line)
     return constlist
 
+'''
+with open("2",'read') as mflie:
+    print parsebody(mflie.readlines())
+'''
 
+#for fun in get_fun(results):
+#   exec(fun)
 
+'''
+def get_small_models(fun_list,preds_list,const_list,results):
+    conslists = get_const(results)
+    funAndarg = {}
+    initN = 3 #conslists['initN']
+    initN_num = [str(i) for i in range(1,initN+1)]
+    funlist = get_fun(results)
+    #用来存储给函数变量赋值之后的函数形式如：[f(1,1)=a,f(1,2)=b,f(2,1)=c,f(2,2)=d]
+    for fun in funlist:
+       exec(fun)
+    dic = {}
+    for fun in funlist:
+        fun = fun[0:fun.find(':')].replace('=lambda', '')
+        funtemp = fun.split(' ')
+        funAndarg[funtemp[0]] = funtemp[1].split(',')
+    for funname in funAndarg.keys():
+        if funname in fun_list or funname in preds_list:
+            length  = len(funAndarg[funname])
+            num_list_per = list(itertools.product(initN_num,repeat = length))
+            num_list_per = [list(temp) for temp in num_list_per]
+            for num_list in num_list_per:
+                #funAndarg[funname] = num_list
+                funvalue = funname + "(" + ','.join(arg for arg in num_list) + ")"
+                dic[funvalue] = eval(funvalue)
+    #return dict(dic.items() + conslists.items())
+    return dic
+
+fun_list = ['numStone']
+preds_list = ['turn']
+const_list = ['p2','p1','numStone']
+
+def get_fun_dict(fun_list,preds_list,const_list,results):
+    fun_dict = get_small_models(fun_list,preds_list,const_list,results)
+    const_dict = get_const(results)
+    for fun_key in fun_dict.keys():
+        for const_key in const_dict.keys():
+            if fun_dict[fun_key] == const_dict[const_key] and type(fun_dict[fun_key]) == str and const_key in const_list:
+                fun_dict[fun_key] = const_key
+    return fun_dict
+'''
+#print get_fun_dict(fun_list,preds_list,const_list)
+#print get_const()

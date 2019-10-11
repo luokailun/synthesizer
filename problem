@@ -54,15 +54,21 @@ P0(FIX): still too slow !!!! (cache??)
 P1(FIX): refine a conjunct should first check whether M+ \models it
 
 
-
-
-P4: ??? the types of models: 
+P4:(FIX) the types of models: 
 	--- reachable states? (do not care) 
 	---- illegal states?? ( can not Finally reach goal ?? some states are illegal but goal achievable?? )
 
 p5: +updates will generate two same conjuncts??
 
 
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+two much P updates ???
+
+P1: Restart may be too weak???
+
+P2: Consider more powerful template???
 
 
 

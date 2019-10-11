@@ -2,7 +2,7 @@
 
 
 from parser import BATparser
-BATparser.parser('takeaway.sc')
+BATparser.parser('new_chompNN.sc')
 from prover import z3prover
 from model import model_checker
 from model import model_interpretor
@@ -30,6 +30,18 @@ print z3prover.imply(Y1, Y2)
 print z3prover.imply(X1, X2)
 #print z3prover.imply(Y1, X2)
 '''
+
+
+F1 = "(( !Ch(0,0) ) => ( !Ch(0,0)&turn(p1) ))&!(exists(G0:Int)[G0>=0&ylen() > G0&! Ch(0,G0)])"
+F2 = "forall(K100:Int,K101:Int)[ Ch(K100,K101)&turn(p2)&K100>=0&K100<xlen()&K101>=0&K101<ylen()=>((( !(Ch(0,0)&(K100>0|K101>0)) ) => ( !(Ch(0,0)&(K100>0|K101>0))&(!turn(p1)) ))&!(exists(G0:Int)[ exists(K102:Int)[ (xlen()=K102)&(G0>=0& K102 > G0&! (Ch(G0,G0)&(K100>G0|K101>G0)))] ])) ]"
+
+
+
+result = z3prover.imply(F1, F2)
+#print model_interpretor.interpret_model(result)
+
+from algorithm import algorithm2
+print algorithm2.__generate_small_model(F1, F2, result,  MAX_VALUE=2)
 
 
 

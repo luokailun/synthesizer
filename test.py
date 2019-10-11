@@ -35,19 +35,23 @@ def get_goal(player):
 	End = context_operator.get_axioms()['end']['']
 	return "( %s ) => ( %s )"%(End, Win)
 
+def get_end():
+	End = context_operator.get_axioms()['end']['']
+	return End
 
 def __before_verify(domain_file):
-	BATparser.parser(domain_file)
+	BATparser.parser(domain_file) 
 	#__load_state_constaints(domain_name)
 
 
-__before_verify('new_chompNN.sc')
+__before_verify('takeaway.sc')
 
 Init = get_inital_database()
 Goal = get_goal('p1')
+End = get_end()
 #pi_action = generate_pi_action()
 
-math_preds, fluent_preds = Predicate.generate_preds('new_chompNN.sc')
+math_preds, fluent_preds = Predicate.generate_preds('takeaway.sc')
 
 #print math_preds+fluent_preds
 
@@ -61,8 +65,7 @@ from algorithm import algorithm2
 
 #exit(0)
 
-
-algorithm2.synthesis(Init, Goal, math_preds+fluent_preds)
+algorithm2.synthesis(Init, End, Goal, math_preds+fluent_preds)
 
 
 

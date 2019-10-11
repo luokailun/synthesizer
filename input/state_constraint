@@ -3,6 +3,10 @@
         "sc": " (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
     },
 
+     "takeaway134": {
+        "sc": " (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+    },
+
     "new_chompNN": {
         "sc": "(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false))))"
     },
@@ -22,13 +26,7 @@
         "action_function":"quantifier_first"
     },
     
-    "takeaway134": {
-        "sc": " (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )",
-        "unknown": "0",
-        "bound": ["%s>=0"],
-        "template":"template2",
-        "action_function":"quantifier_first"
-    },
+   
 
     "chompNN": {
         "sc": "(assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (> len 0) ) (assert  (> mrow 0) ) (assert (> line 0) )(assert (forall ((X Int)) (>= (row X) 0))) (assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (row X) 0))))(assert (<= mrow len) ) (assert (<= line len) )(assert (= (row 1) mrow)) (assert (> (row 1) 0)) (assert (<= (row 1) len))(assert (forall ((U Int)) (=> (and (> U line) (<= U len)) (= (row U) 0))) )",

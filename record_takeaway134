@@ -1,0 +1,1083 @@
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  
+
+#conjuncts:
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  
+
+#conjuncts:
+
+
+[Formula1]: ( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+[Formula2]:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})]
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (16)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (846)
+***** Change  ---> exists(X0:_S1)[turn(X0)] 
+
+State q2: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})]
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (16)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (872)
+***** Change  ---> exists(X0:_S1)[turn(X0)] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  
+
+#conjuncts:
+(0):(['X0'], ['_S1'], ['turn(X0)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  
+
+#conjuncts:
+(0):(['X0'], ['_S1'], ['turn(X0)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(X0:_S1)[turn(X0)])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+
+***************** Checking DS0 *****************:
+
+
+DS0 model:({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+DS0 progressed updated model:({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+
+---------------------------------------------------
+State q1: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})]
+
+****** Generate adjacent conjuncts for  exists(X0:_S1)[turn(X0)]
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (846)
+
+****** Change exists(X0:_S1)[turn(X0)] ---> exists(G0:_S1)[turn(G0)&turn(p2)] 
+
+State q2: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})]
+
+****** Generate adjacent conjuncts for  exists(X0:_S1)[turn(X0)]
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (872)
+
+****** Change exists(X0:_S1)[turn(X0)] ---> exists(G0:Int)[G0>=0&G0 > 1&numStone() = G0] 
+
+
+***************** P Update Structure *****************:
+
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 > 1', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() = G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {})
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+State q2: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})]
+
+****** Change exists(G0:Int)[G0>=0&G0 > 1&numStone() = G0] ---> exists(G0:Int)[G0>=0&G0 > 1&numStone() > G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 > 1', 'numStone() > G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() > G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})]
+
+****** Generate new conjuncts
+------Step 1: number of mappings (15)
+------Step 1: number of mappings after filter (15)
+------Step 1: number of conjunct (15)
+------Step 1: number of conjunct after free-var filter (15)
+------Step 1: number of conjunct after MC (2)
+------Step 1: number of sub-conjunct (113)
+------Step 1: number of sub-conjunct after MC (113)
+------Step 2: number of mappings (2966)
+------Step 2: number of mappings after filter (2966)
+------Step 2: number of conjunct (2966)
+------Step 2: number of conjunct after free-var filter (874)
+------Step 2: number of conjunct after MC (180)
+***** Change  ---> numStone() = 7 
+
+State q2: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})]
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (1)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (47)
+***** Change  ---> numStone() = 1 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 > 1', 'numStone() > G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 1'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() > G0])&!(numStone() = 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})]
+
+****** Generate adjacent conjuncts for  numStone() = 7
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (113)
+------Step 1: number of sub-conjunct after MC (113)
+------Step 2: number of mappings (2966)
+------Step 2: number of mappings after filter (2966)
+------Step 2: number of conjunct (2966)
+------Step 2: number of conjunct after free-var filter (874)
+------Step 2: number of conjunct after MC (180)
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (2)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (124)
+***** Change  ---> numStone() = 2 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 > 1', 'numStone() > G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 1'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 > 1&numStone() > G0])&!(numStone() = 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '8', 'turn(p2)': 'False'}, {})
+
+State q2: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})]
+
+****** Change exists(G0:Int)[G0>=0&G0 > 1&numStone() > G0] ---> exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):([], [], ['numStone() = 1'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(numStone() = 1)&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+State q2: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})]
+
+****** Generate adjacent conjuncts for  numStone() = 1
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (37)
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (1)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (35)
+***** Change  ---> numStone() = 4 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 1'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(2):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 1)&!(numStone() = 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+
+State q2: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})]
+
+****** Generate adjacent conjuncts for  numStone() = 4
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (35)
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (0)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (2)
+***** Change numStone() = 1 ---> exists(G0:Int)[G0>=0&G0 % 4 = 1&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['G0 % 4 = 1', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&G0 % 4 = 1&numStone() = G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+
+State q2: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})]
+
+****** Generate adjacent conjuncts for  exists(G0:Int)[G0>=0&G0 % 4 = 1&numStone() = G0]
+------Number of sub-conjunct (3)
+
+(B0)-----Generate conjuncts for exists(G0:Int)[G0>=0&numStone() = G0]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (191)
+------Step 2: number of mappings (13967)
+------Step 2: number of mappings after filter (11093)
+------Step 2: number of conjunct (11093)
+------Step 2: number of conjunct after free-var filter (3013)
+------Step 2: number of conjunct after MC (107)
+
+(B1)-----Generate conjuncts for exists(G0:Int)[G0>=0&G0 % 4 = 1]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (230)
+------Step 2: number of mappings (5224)
+------Step 2: number of mappings after filter (4680)
+------Step 2: number of conjunct (4680)
+------Step 2: number of conjunct after free-var filter (480)
+------Step 2: number of conjunct after MC (79)
+
+(B2)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (113)
+------Step 1: number of sub-conjunct after MC (113)
+------Step 2: number of mappings (3441)
+------Step 2: number of mappings after filter (3441)
+------Step 2: number of conjunct (3441)
+------Step 2: number of conjunct after free-var filter (1009)
+------Step 2: number of conjunct after MC (2)
+
+****** Generate new conjuncts
+------Step 1: number of mappings (16)
+------Step 1: number of mappings after filter (16)
+------Step 1: number of conjunct (16)
+------Step 1: number of conjunct after free-var filter (16)
+------Step 1: number of conjunct after MC (0)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (0)
+***** Change exists(G0:Int)[G0>=0&G0 % 4 = 1&numStone() = G0] ---> exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['numStone() = G0', '! G0 = 2', '! G0 % 7 = 0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})]
+
+****** Generate adjacent conjuncts for  numStone() = 2
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (3472)
+------Step 2: number of mappings after filter (3472)
+------Step 2: number of conjunct (3472)
+------Step 2: number of conjunct after free-var filter (1040)
+------Step 2: number of conjunct after MC (124)
+
+****** Generate new conjuncts
+------Step 1: number of mappings (15)
+------Step 1: number of mappings after filter (15)
+------Step 1: number of conjunct (15)
+------Step 1: number of conjunct after free-var filter (15)
+------Step 1: number of conjunct after MC (1)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (2990)
+------Step 2: number of mappings after filter (2990)
+------Step 2: number of conjunct (2990)
+------Step 2: number of conjunct after free-var filter (884)
+------Step 2: number of conjunct after MC (165)
+***** Change  ---> ! numStone() = 1 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+(3):([], [], ['! numStone() = 1'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['numStone() = G0', '! G0 = 2', '! G0 % 7 = 0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)&!(! numStone() = 1)
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+State q1: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {}), ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'}, {}), ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'}, {})]
+
+****** Generate adjacent conjuncts for  ! numStone() = 1
+------Number of sub-conjunct (1)
+
+(B0)-----Generate conjuncts for 
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (2990)
+------Step 2: number of mappings after filter (2990)
+------Step 2: number of conjunct (2990)
+------Step 2: number of conjunct after free-var filter (884)
+------Step 2: number of conjunct after MC (165)
+
+****** Change ! numStone() = 1 ---> exists(G0:Int)[G0>=0&G0 > 7&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+(3):(['G0'], ['Int'], ['G0 > 7', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['numStone() = G0', '! G0 = 2', '! G0 % 7 = 0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)&!(exists(G0:Int)[G0>=0&G0 > 7&numStone() = G0])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking A model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '14', 'turn(p2)': 'True'}, {})
+
+State q1: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '13', 'turn(p2)': 'False'}, {}), ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '11', 'turn(p2)': 'False'}, {}), ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '10', 'turn(p2)': 'False'}, {})]
+
+****** Change exists(G0:Int)[G0>=0&G0 > 7&numStone() = G0] ---> exists(G0:Int)[G0>=0&G0 % 7 = 2&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '13', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '11', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '10', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+(3):(['G0'], ['Int'], ['G0 % 7 = 2', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['numStone() = G0', '! G0 = 2', '! G0 % 7 = 0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)&!(exists(G0:Int)[G0>=0&G0 % 7 = 2&numStone() = G0])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '12', 'turn(p2)': 'False'}, {})
+
+State q2: P models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '9', 'turn(p2)': 'True'}, {})]
+
+****** Generate adjacent conjuncts for  exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0]
+------Number of sub-conjunct (6)
+
+(B0)-----Generate conjuncts for exists(G0:Int)[G0>=0&! G0 % 7 = 0&! G0 = 2]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (241)
+------Step 2: number of mappings (5378)
+------Step 2: number of mappings after filter (4856)
+------Step 2: number of conjunct (4856)
+------Step 2: number of conjunct after free-var filter (568)
+------Step 2: number of conjunct after MC (69)
+
+(B1)-----Generate conjuncts for exists(G0:Int)[G0>=0&! G0 % 7 = 0&numStone() = G0]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (185)
+------Step 2: number of mappings (12682)
+------Step 2: number of mappings after filter (9917)
+------Step 2: number of conjunct (9917)
+------Step 2: number of conjunct after free-var filter (2642)
+------Step 2: number of conjunct after MC (207)
+
+(B2)-----Generate conjuncts for exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (185)
+------Step 2: number of mappings (12682)
+------Step 2: number of mappings after filter (9917)
+------Step 2: number of conjunct (9917)
+------Step 2: number of conjunct after free-var filter (2642)
+------Step 2: number of conjunct after MC (117)
+
+(B3)-----Generate conjuncts for exists(G0:Int)[G0>=0&! G0 % 7 = 0]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (243)
+------Step 2: number of mappings (5406)
+------Step 2: number of mappings after filter (4888)
+------Step 2: number of conjunct (4888)
+------Step 2: number of conjunct after free-var filter (584)
+------Step 2: number of conjunct after MC (6)
+
+(B4)-----Generate conjuncts for exists(G0:Int)[G0>=0&! G0 = 2]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (251)
+------Step 2: number of mappings (6008)
+------Step 2: number of mappings after filter (5996)
+------Step 2: number of conjunct (5996)
+------Step 2: number of conjunct after free-var filter (936)
+------Step 2: number of conjunct after MC (2)
+
+(B5)-----Generate conjuncts for exists(G0:Int)[G0>=0&numStone() = G0]
+------Step 1: number of sub-conjunct (253)
+------Step 1: number of sub-conjunct after MC (185)
+------Step 2: number of mappings (12682)
+------Step 2: number of mappings after filter (9917)
+------Step 2: number of conjunct (9917)
+------Step 2: number of conjunct after free-var filter (2642)
+------Step 2: number of conjunct after MC (6)
+
+****** Change exists(G0:Int)[G0>=0&numStone() = G0&! G0 = 2&! G0 % 7 = 0] ---> exists(G0:Int)[G0>=0&! G0 % 7 = 0&! G0 % 7 = 2&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '13', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '11', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '10', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 7'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+(2):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+(3):(['G0'], ['Int'], ['G0 % 7 = 2', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '9', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['! G0 % 7 = 0', '! G0 % 7 = 2', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 7)&!(numStone() = 2)&!(exists(G0:Int)[G0>=0&G0 % 7 = 2&numStone() = G0])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&! G0 % 7 = 0&! G0 % 7 = 2&numStone() = G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+Checking E model: ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '14', 'turn(p2)': 'False'}, {})
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '14', 'turn(p2)': 'False'}, {})]
+
+****** Generate new conjuncts
+------Step 1: number of mappings (15)
+------Step 1: number of mappings after filter (15)
+------Step 1: number of conjunct (15)
+------Step 1: number of conjunct after free-var filter (15)
+------Step 1: number of conjunct after MC (0)
+------Step 1: number of sub-conjunct (114)
+------Step 1: number of sub-conjunct after MC (114)
+------Step 2: number of mappings (2990)
+------Step 2: number of mappings after filter (2990)
+------Step 2: number of conjunct (2990)
+------Step 2: number of conjunct after free-var filter (884)
+------Step 2: number of conjunct after MC (2)
+***** Change numStone() = 7 ---> exists(G0:Int)[G0>=0&G0 % 7 = 0&numStone() = G0] 
+
+
+***************** Convergence Update Structure *****************:
+
+--------------------------
+[Structure1]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '1', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '6', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '4', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '3', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '13', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '11', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '10', 'turn(p2)': 'False'}, {})
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', 'turn(p2)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 2'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '2', 'turn(p2)': 'False'}, {})
+
+(2):(['G0'], ['Int'], ['G0 % 7 = 2', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '9', 'turn(p2)': 'False'}, {})
+
+(3):(['G0'], ['Int'], ['G0 % 7 = 0', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '14', 'turn(p2)': 'False'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'True', 'numStone()': '7', 'turn(p2)': 'False'}, {})
+
+
+[Structure2]
+#Goal:( numStone()=0 ) => ( numStone()=0&!(turn(p1)) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '0', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '2', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '7', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '9', 'turn(p2)': 'True'}, {})
+
+#conjuncts:
+(0):(['G0'], ['Int'], ['G0 = 3', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '3', 'turn(p2)': 'True'}, {})
+
+(1):([], [], ['numStone() = 4'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '4', 'turn(p2)': 'True'}, {})
+
+(2):(['G0'], ['Int'], ['! G0 % 7 = 0', '! G0 % 7 = 2', 'numStone() = G0'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '6', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '5', 'turn(p2)': 'True'}, {})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4', '5', '6', '7'], 'Bool': ['True', 'False']}, {'turn(p1)': 'False', 'numStone()': '1', 'turn(p2)': 'True'}, {})
+
+
+[Formula1]: (( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:_S1)[turn(G0)&turn(p2)])&!(numStone() = 2)&!(exists(G0:Int)[G0>=0&G0 % 7 = 2&numStone() = G0])&!(exists(G0:Int)[G0>=0&G0 % 7 = 0&numStone() = G0])
+[Formula2]:(( numStone()=0 ) => ( numStone()=0&!(turn(p1)) ))&!(exists(G0:Int)[G0>=0&G0 = 3&numStone() = G0])&!(numStone() = 4)&!(exists(G0:Int)[G0>=0&! G0 % 7 = 0&! G0 % 7 = 2&numStone() = G0])
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+***************** Checking Convergence *****************:
+
+
+
+***************** Checking DS0 *****************:
+
+
+#success~~~~~:
+[Finished in 47.2s]

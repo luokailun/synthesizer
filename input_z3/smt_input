@@ -1,10 +1,8 @@
 
-(declare-sort _S1)(declare-fun xlen() Int)
-(declare-fun ylen() Int)
-(declare-fun Ch(Int Int) Bool)
-(declare-fun turn(_S1) Bool)(declare-const p2 _S1)
+(declare-sort _S1)(declare-fun turn(_S1) Bool)
+(declare-fun numStone() Int)(declare-const p2 _S1)
 (declare-const p1 _S1)
 (declare-const True Bool)
-(declare-const False Bool)(set-option :timeout 4000)(assert (<= ylen 2)) (assert (<= xlen 2))(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false)))) (assert (not    (=> (and (and (=> (not (Ch 0 0)) (and (not (Ch 0 0)) (turn p1))) (not (exists ((G0 Int)) (and (and (>= G0 0) (not (= G0 0))) (Ch G0 G0))))) (not (exists ((G0 Int)) (and (and (>= G0 0) (> ylen G0)) (not (Ch 0 G0)))))) (forall ((K252 Int) (K253 Int)) (=> (and (and (and (and (and (Ch K252 K253) (turn p2)) (>= K252 0)) (< K252 xlen)) (>= K253 0)) (< K253 ylen)) (and (=> (not (and (Ch 0 0) (or (> K252 0) (> K253 0)))) (and (not (and (Ch 0 0) (or (> K252 0) (> K253 0)))) (not (turn p1)))) (not (exists ((G0 Int)) (exists ((K254 Int)) (and (= ylen K254) (and (and (>= G0 0) (> K254 G0)) (not (and (Ch G0 0) (or (> K252 G0) (> K253 0)))))))))))))  ))
+(declare-const False Bool)(set-option :timeout 10000) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not   (=> (and (and (and (not (= (mod numStone 4) 0)) (> numStone 0)) (turn p1)) (not (turn p2))) (and (and (and (=> (= numStone 0) (and (= numStone 0) (not (turn p1)))) (not (exists ((G0 _S1)) (and (turn G0) (turn p2))))) (not (= numStone 4))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= numStone G0)) (= (mod G0 4) 0))))))  ))
 (check-sat)
 (get-model)

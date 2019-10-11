@@ -5,6 +5,9 @@
 # @Link    : https://sdcs.sysu.edu.cn
 # @Version : $Id$
 
+##
+## Z3 version 4.6.0 - 64 bit
+##
 
 
 import os

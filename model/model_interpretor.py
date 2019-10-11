@@ -136,20 +136,20 @@ def __get_model_fluents(lambda_funs, const_dict, fluents):
 	return [fun for fun in fluents if ____fluent_in_model(fun, model_funs, const_dict)]
 
 
-
+'''
 number = r"\b\d+\b"
 number_pattern = re.compile(number)
 
-number_not_var = r"[^!](\d)+\b"
-number_not_var_pattern  = re.compile(number_not_var)
+number_not_neg = r"[^-](\d+)\b"
+number_not_neg_pattern  = re.compile(number_not_neg)
 
 
 def __generate_num_universe(results):
 	num1 = set(number_pattern.findall(''.join(results)))
-	num2 = set(number_not_var_pattern.findall(''.join(results)))
+	num2 = set(number_not_neg_pattern.findall(''.join(results)))
 	nlist = list(num1&num2)
 	return [ str(i) for i in range(int(min(nlist)),int(max(nlist))+1)]
-
+'''
 
 
 ##############################################################################################################################
@@ -190,15 +190,20 @@ def interpret_model(results, max_value=99999):
 	#context_operator.set_counterexample_result(results)
 
 	lambda_funs = util_z3_model.get_fun(results)
-
+	#print lambda_funs
+	#print results
 	# a dict maps constants to SMT constants
 	const_dict = util_z3_model.get_const(results)
+	#print const_dict
 	#print const_dict
 	#print '----------',context_operator.get_sort_symbols_dict()
 
 	universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
-	universe['Int'] =  list(set(universe['Int'] +__generate_num_universe(results)))
-
+	min_num = min([int(e) for e in universe['Int']])
+	max_num = max([int(e) for e in universe['Int']])
+	universe['Int'] = [str(e) for e in range(min_num,max_num+1)]
+	#universe['Int'] =  list(set(universe['Int'] +__generate_num_universe(str(lambda_funs)+str(const_dict))))
+	#print universe['Int']
 	# get fluent names from the interpretation
 	fluents = __get_model_fluents(lambda_funs, const_dict, context_operator.get_fluents()) 
 	#Predicates is also included because they can be seen as two-value (true/false) functions.
@@ -217,7 +222,6 @@ def interpret_model(results, max_value=99999):
 		#elem_list = __get_model_elements(fluents, context_operator.get_fluent_constraint())
 		#generate parameters for fluents
 		elem_list = __get_model_elements(fluents, add_universe=universe)
-
 		const_symbols = sum(universe.values(),[])
 		# set non-constant fluent, lile xlen, numStone
 		elem_value_list = [ (fun, tuple(), value) for fun, value in const_dict.items() if fun in fluents]
@@ -230,12 +234,14 @@ def interpret_model(results, max_value=99999):
 		#########################
 		for e, (fun, paras, value) in enumerate(elem_value_list):
 			fun_sort = fluent_sorts[fun][-1]
+			## ???????
 			if str(value) not in universe[fun_sort]:
 				flag = True
 				if int(value)<0:
 					logger.info('ERROR: model has negative value \n %s'%results)
 					exit(0)
 				if fun_sort == 'Int' and int(value)>max_value:
+					#print 'Hello'
 					value_constraints.append("%s(%s)"%(fun,','.join(paras)))
 				elif fun_sort == 'Int':
 					#print 'C'
@@ -246,22 +252,22 @@ def interpret_model(results, max_value=99999):
 					universe[fun_sort].append(str(value))
 
 
-	model = {"%s(%s)"%(fun,','.join(paras)) : str(value) for fun, paras, value in elem_value_list}
-
-	lack_fluents =  [fun for fun in context_operator.get_fluents() if fun not in fluents ]
-	complete_part = __get_default_fluents(lack_fluents, fluent_sorts, universe)
-	model.update(complete_part)
-
-	"""
-		get default value for fluents who have parameters of Int sort
-	"""
-	default_value  = get_default_value(elem_list, scope, const_dict, anti_const_dict)
-
-	""" 
-	"""
 	if value_constraints!=list():
 		return False, value_constraints
 	else:
+		model = {"%s(%s)"%(fun,','.join(paras)) : str(value) for fun, paras, value in elem_value_list}
+
+		lack_fluents =  [fun for fun in context_operator.get_fluents() if fun not in fluents ]
+		complete_part = __get_default_fluents(lack_fluents, fluent_sorts, universe)
+		model.update(complete_part)
+
+		"""
+			get default value for fluents who have parameters of Int sort
+		"""
+		default_value  = get_default_value(elem_list, scope, const_dict, anti_const_dict)
+
+		""" 
+		"""
 		return True, (universe, model, default_value)
 
 

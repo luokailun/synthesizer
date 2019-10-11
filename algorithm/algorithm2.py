@@ -16,6 +16,8 @@ import restart
 import backtrack
 from basic import format_output
 
+
+
 ################################################################################################################################################
 #file_regress = open('./temp/regress','write')
 
@@ -30,33 +32,7 @@ def __printer(two_state_structure):
 	print_list.append('~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
 	return '\n'.join(print_list)
 
-################################################################################################################################################
 
-def __update_structure(fstructure, model_list, pred_list):
-	"""
-		update the formula structure such that it includes all the models
-	"""
-	poss_model_list = Fstructure.get_pos_models(fstructure)
-	for model in model_list:
-		if model not in poss_model_list:
-			fstructure = local_update.P_update(fstructure, model, pred_list)
-	return fstructure
-
-
-def structure_P_update(two_state_structure, two_state_models, pred_list):
-	"""
-		use models to update the two-state FSA
-	"""
-	fstructure1, fstructure2 = two_state_structure
-	model_list1, model_list2 = two_state_models
-
-	# initialize the choice structure for possible backtrack
-	backtrack.set_update('P','q1')
-	fstructure1 = __update_structure(fstructure1, model_list1, pred_list)
-	backtrack.set_update('P','q2')
-	fstructure2 = __update_structure(fstructure2, model_list2, pred_list)
-
-	return (fstructure1, fstructure2)
 
 
 ################################################################################################################################################
@@ -88,13 +64,11 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 		generate a model that entails formula 1 but not formula2
 		the universe of the model should be smallest 
 	"""
-	#print '----------org---------',results
 	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
 	while flag is False:
 
 		value_constraints = ' '.join([ "(assert %s)"%smt_translator.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
 		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+value_constraints)
-		#print 'hello hello'
 		#exit(0)
 		if model_interpretor.interpret_result(new_results) is False:
 			flag, element = model_interpretor.interpret_model(new_results, MAX_VALUE)
@@ -106,6 +80,69 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 ################################################################################################################################################
 
 
+def __update_structure(state, fstructure, neg_model_list, pos_model_list, pred_list):
+	"""
+	 P update is prefer than N update
+	"""
+	if pos_model_list!=list():
+		update_type = 'P'
+		update_model_list = pos_model_list
+		update_function = local_update.P_update
+	elif neg_model_list:
+		update_type = 'N'
+		update_model_list = neg_model_list
+		update_function = local_update.N_update
+	else:
+		return fstructure
+
+	# memory the type and the state of update for possible backtrack
+	backtrack.set_update(update_type, state)
+	print('State %s: %s models %s\n'%(state, update_type, str(update_model_list)))
+	#print format_output.format_outputs(update_model_list, 'Ch')
+	fstructure = update_function(fstructure, update_model_list, pred_list)
+	return fstructure
+
+
+
+def __decide_update_model(model, state_type, Goal):
+	"""
+		decide to use the N update or P update
+		@param 		model 			the model needed to use by N update or P update
+		@param 		state_type		in the A state or E state
+		@param 		Goal 			the goal needed be checked
+		@return 	two models set (M1, M2), where
+				        --- M1 means models need to be excluded in the current; 
+				        --- M2 means models need to be included in the next state.
+	"""
+	#print("Checking %s model: %s\n%s"%(state_type, str(model), format_output.format_output(model,'Ch')))
+	print("Checking %s model: %s\n"%(state_type, str(model)))
+	universe, assignment, default_value = model
+	right_turn = True if assignment['turn(p1)'] == 'True' and state_type == 'E' or assignment['turn(p2)'] == 'True' and state_type == 'A' else False
+
+	current_exclude_models, next_include_models = list(), list()
+
+	if right_turn is False:
+		current_exclude_models = [model]
+	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is True:
+		progress_model_list = __progress_model(model)
+		update_model_list = [m for m in progress_model_list if mcmas.interpret_result(mcmas.check_win(m,Goal))]
+		# ?????
+		if update_model_list==list():
+			print "Mdel Error update_model_list is empty!"
+			exit(0)
+			current_exclude_models = [model]
+		# if the state is in our turn, then we only choice an action to progress
+		elif state_type == 'E':
+			next_include_models = [update_model_list.pop(0)]
+		# if the state is in opponent's turn, then we know all actions should be performed
+		else:
+			next_include_models = update_model_list
+	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is False:
+		current_exclude_models = [model]
+	else:
+		print 'Model Error!'
+		exit(0)
+	return current_exclude_models, next_include_models
 
 
 
@@ -135,7 +172,7 @@ def __check_convergence(formula1, formula2):
 		Checking whether formula 1 entails formula 2
 	"""
 	result = z3prover.imply(formula1, formula2, "(set-option :timeout 10000)")
-
+	#print 'rrrr', result
 	if model_interpretor.interpret_result(result) is True:
 		return True
 	elif model_interpretor.interpret_result(result) is False:
@@ -148,14 +185,12 @@ def __check_convergence(formula1, formula2):
 
 
 
-def structure_regress_until_convergence(two_state_structure, predicate_list):
+
+def structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal):
 	"""
 		update and check the two-state FSA until it becomes convergence (form an invariant)
 	"""
 	fstructure1, fstructure2 = two_state_structure
-	# initialize to storing conjuncts for possible restart
-	restart.init_conjunct_storer()
-	restart.store_two_state_conjuncts(two_state_structure)
 
 	while True:
 		print('\n***************** Checking Convergence *****************:\n\n')
@@ -164,7 +199,7 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 		formula2 = Fstructure.to_formula(fstructure2)
 
 		regress_formula1 = program_regress.A_regress(formula1, __generate_pi_action('p2'))
-		regress_formula2 = program_regress.E_regress(formula2, __generate_pi_action('p1'))
+		regress_formula2 = "!(%s)=>(%s)"%(End, program_regress.E_regress(formula2, __generate_pi_action('p1')))
 
 		negative_model1 = __check_convergence(formula1, regress_formula2)
 		negative_model2 = __check_convergence(formula2, regress_formula1)
@@ -175,19 +210,17 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 			print 'try backtrack....'
 			fstructure1, fstructure2 = backtrack.backtrack(two_state_structure)
 		else:
+			e_neg_model_list, e_pos_model_list, a_neg_model_list, a_pos_model_list = list(), list(), list(), list()
+			if negative_model1 is not True:
+				e_neg_model_list, a_pos_model_list = __decide_update_model(negative_model1, 'E', Goal)
+			if negative_model2 is not True:
+				a_neg_model_list, e_pos_model_list = __decide_update_model(negative_model2, 'A', Goal)
+
 			# initialize the choice structure for possible backtrack
 			backtrack.init_choice()
-			if negative_model1 is not True:
-				# memory the type and the state of update for possible backtrack
-				backtrack.set_update('N','q1')
-				print('(1) N model %s\n'%str(negative_model1))
-				print format_output.format_output(negative_model1, 'Ch')
-				fstructure1 = local_update.N_update(fstructure1, negative_model1, predicate_list)
-			if negative_model2 is not True:
-				backtrack.set_update('N','q2')
-				print('(2) N model %s\n'%str(negative_model2))
-				print format_output.format_output(negative_model2, 'Ch')
-				fstructure2 = local_update.N_update(fstructure2, negative_model2, predicate_list)
+			fstructure1 = __update_structure('q1', fstructure1, e_neg_model_list, e_pos_model_list, pred_list)
+			fstructure2 = __update_structure('q2', fstructure2, a_neg_model_list, a_pos_model_list, pred_list)
+
 			# if the local update fails, we restart by decreasing the score of the predicates
 			if fstructure1 is None or fstructure2 is None:
 				print('\n\n\n***************** Restart *****************:\n\n\n\n')
@@ -199,45 +232,13 @@ def structure_regress_until_convergence(two_state_structure, predicate_list):
 				two_state_structure = (fstructure1, fstructure2)
 				restart.store_two_state_conjuncts(two_state_structure)
 		#print '#######~~~~~~~', storer[0]
-		print('\n***************** N Update Structure *****************:\n\n%s'%__printer((fstructure1, fstructure2)))
-
-################################################################################################################################################
-
-
-def decide_update(model, state_type, Goal):
-	"""
-		decide to use the N update or P update
-		@param 		model 			the model needed to use by N update or P update
-		@param 		state_type		in the A state or E state
-		@param 		Goal 			the goal needed be checked
-		@return 	two models set (M1, M2), where
-				        --- M1 means models need to be excluded in the current; 
-				        --- M2 means models need to be included in the next state.
-	"""
-	my_exclude_models, your_include_models = list(), list()
-	if mcmas.interpret_result(mcmas.check_win(model,Goal)) is True:
-		progress_model_list = __progress_model(model)
-		update_model_list = [m for m in progress_model_list if mcmas.interpret_result(mcmas.check_win(m,Goal))]
-		# if the state is in our turn, then we only choice an action to progress
-		if state_type == 'E':
-			your_include_models = [update_model_list.pop(0)]
-		# if the state is in opponent's turn, then we know all actions should be performed
-		else:
-			your_include_models = update_model_list
-	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is False:
-		my_exclude_models = [model]
-	else:
-		print 'Model Error!'
-		exit(0)
-	return my_exclude_models, your_include_models
-
-
+		print('\n***************** Convergence Update Structure *****************:\n\n%s'%__printer((fstructure1, fstructure2)))
 
 
 ################################################################################################################################################
 
 
-def synthesis(Init, Goal, predicate_list):
+def synthesis(Init, End, Goal, pred_list):
 	"""
 	Synthesize sufficient and necessary invariants X, where each formula f in X is of the form:
 				f= \forall* Goal and clause1 and clause2 and ...
@@ -250,7 +251,7 @@ def synthesis(Init, Goal, predicate_list):
 	"""
 	n=1
 	# Set the inital score (c=0) for each generated predicate
-	pred_score_dict1 = scoring.init_preds_base_score(predicate_list)
+	pred_score_dict1 = scoring.init_preds_base_score(pred_list)
 	pred_score_dict2 = copy.deepcopy(pred_score_dict1)
 
 	# See the definition of Fstructure in formula dir
@@ -259,40 +260,43 @@ def synthesis(Init, Goal, predicate_list):
 	## Divide into two states: player1's state and player2's state
 	two_state_structure = (fstructure1, fstructure2)
 
+	# initialize to storing conjuncts for possible restart
+	restart.init_conjunct_storer()
+
 	while n>0:
 		n += 1
 		print(__printer(two_state_structure))
 		# Getting a sufficient invariant
-		new_two_state_structure= structure_regress_until_convergence(two_state_structure, predicate_list)
+		new_two_state_structure = structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal)
 		formula1 = Fstructure.to_formula(new_two_state_structure[0])
 
 		print('\n***************** Checking DS0 *****************:\n\n')
 		# Proving the invariant is necessary
 		result = z3prover.imply(Init, formula1, "(set-option :timeout 10000)")
 		if model_interpretor.interpret_result(result) is True:
-			print '#success~~~~~:'#, new_two_state_structure
+			print('#success~~~~~:')#, new_two_state_structure
 			return new_two_state_structure #return the result (we have guaranteed condition (2) holds)
 
 		# If the invariant is not necessary, update the formulas using the counterexamples.
 		elif model_interpretor.interpret_result(result) is False:
 			positive_model = __generate_small_model(Init, formula1, result)
-			print('P model:%s\n'%(str(positive_model)))
-			print format_output.format_output(positive_model, 'Ch')
+			print('DS0 model:%s\n'%(str(positive_model)))
+			#print(format_output.format_output(positive_model, 'Ch'))
 
 			progress_model_list = __progress_model(positive_model)
-			print('P progress model:%s\n'%('\n'.join([str(m) for m in progress_model_list]))) 
-			for model in progress_model_list:
-				print format_output.format_output(model, 'Ch')
-
 			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
-			print('P update model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
-			for model in update_model_list:
-				print format_output.format_output(model, 'Ch')
-
-			two_state_structure = structure_P_update(new_two_state_structure, ([positive_model], update_model_list), predicate_list)
+			print('DS0 progressed updated model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
+			#print(format_output.format_outputs(update_model_list, 'Ch'))
+			print('---------------------------------------------------')
+			fstructure1, fstructure2 = new_two_state_structure
+			fstructure1 = __update_structure('q1',fstructure1,  [], [positive_model], pred_list)
+			fstructure2 = __update_structure('q2', fstructure2, [], update_model_list, pred_list)
+			two_state_structure = fstructure1, fstructure2
+			# record for possible restart
+			restart.store_two_state_conjuncts(two_state_structure)
 			print('\n***************** P Update Structure *****************:\n\n')
 		else:
-			print 'try backtrack....'
+			print('try backtrack....')
 			two_state_structure = backtrack.backtrack(new_two_state_structure)
 
 

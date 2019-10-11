@@ -67,9 +67,9 @@ def printer(fstructure):
 	formula, pos_model_list, conjunct_structure_list, pred_score_dict = fstructure
 	print_list.append('#Goal:%s'%formula)
 	print_list.append('#(+)model:\n  %s\n%s'%('\n  '.join([ str(m) for m in pos_model_list]), 
-		''.join([ format_output.format_output(m, 'Ch') for m in pos_model_list])))
+		format_output.format_outputs(pos_model_list, 'Ch')))
 	str_conjunct_models = '\n'.join([ "(%s):%s\n  %s\n%s"%(e,c, '\n  '.join([str(m) for m in m_list]), 
-		 ''.join([ format_output.format_output(m, 'Ch') for m in m_list]) ) for e, (c, m_list, adj_list) in enumerate(conjunct_structure_list)])
+		 format_output.format_outputs(m_list, 'Ch') ) for e, (c, m_list, adj_list) in enumerate(conjunct_structure_list)])
 	print_list.append('#conjuncts:\n%s'%str_conjunct_models)
 	return '\n'.join(print_list)
 

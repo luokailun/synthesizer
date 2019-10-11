@@ -63,6 +63,10 @@ def format_output(model, keyword):
 	return format_str
 
 
+def format_outputs(model_list, keyword):
+	return ""
+	return ''.join([format_output(m, keyword) for m in model_list])
+
 '''
 M = ({'_S1': ['p2', 'p1'], 'Int': ['1', '0', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'False', 'Ch(0,1)': 'False', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'xlen()': '2'}, {})
 print format_output(M, 'Ch')
