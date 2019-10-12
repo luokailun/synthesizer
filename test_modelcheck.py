@@ -25,8 +25,8 @@ from parser import BATparser
 
 from algorithm import local_update
 from formula import Predicate
-BATparser.parser('new_chompNN.sc')
-math_preds, fluent_preds = Predicate.generate_preds('new_chompNN.sc')
+BATparser.parser('chompNN.sc')
+math_preds, fluent_preds = Predicate.generate_preds('chompNN.sc')
 
 pred_list = math_preds + fluent_preds
 
@@ -43,8 +43,8 @@ neg_model_list = [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True'
 
 
 #print pred_list
-#preds = local_update.__generate_new_conjuncts(neg_model_list, pos_model_list, pred_list, 2)
-#print preds
+preds = local_update.__generate_new_conjuncts(neg_model_list, pos_model_list, pred_list, 2)
+print preds
 
 """
 

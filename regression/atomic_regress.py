@@ -290,8 +290,10 @@ def __regress(formula, action):
 	if fluent_pattern:
 		formula = fluent_pattern.sub(__mrepl_fluent_regress, formula)
 	#logger.debug('#formula after fluent replace: %s' %formula)
+	#print('#formula after fluent replace: %s' %formula)
 	if predicate_pattern:
 		formula = predicate_pattern.sub(__mrepl_fluent_regress, formula)
+	#print('#formula after predicate replace: %s' %formula)
 	#logger.debug('#formula after predicate replace: %s' %formula)
 	#print "------\n",decode_handle_fluent(formula)
 	return decode_handle_fluent(formula)
@@ -300,6 +302,7 @@ def __regress(formula, action):
 def regress(formula, action):
 	#logger.debug("#before normalization, formula: %s, action: %s" %(formula, action))
 	formula = __normalize_formula(formula)
+	#print("#after normalization formula: %s" %(formula))
 	#logger.debug("#after normalization formula: %s" %(formula))
 	return __regress(formula,action)
 

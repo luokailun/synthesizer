@@ -51,8 +51,10 @@ from basic import context_operator
 import sort_system
 
 
+#when replace 'and' with '&', both 'notlogic_pattern_str1' and 'notlogic_pattern_str2' is not possible.
+#notlogic_pattern_str1 = r"(?:(?:(?<!and)(?<!or)(?<!=>).(?!and)(?!or)(?!=>))+)"
+#notlogic_pattern_str2 = r"(?:(?:(?<!\&)(?<!\|)(?<!=>).(?!\&)(?!\|)(?!=>))+)"
 
-#notlogic_pattern_str = r"(?:(?:(?<!\&)(?<!\|)(?<!=>).(?!\&)(?!\|)(?!=>))+)"
 notlogic_pattern_str = r"[^\&\|!=]+"
 fluent_pattern_lambda_exp = lambda x: r"(?:"+ "|".join(x)+ ")\s*=\s*"+notlogic_pattern_str 
 predicate_pattern_lambda_exp = lambda x: r"(?:"+ "|".join(x)+ ")"
@@ -315,7 +317,7 @@ def ____get_0arity_functions(function_list):
 				zero_arity_fluents.append(matched.group())
 			else:
 				print "#EOROR(__parse_SSA|Poss): name error when parsing function: ",function
-	return zero_arity_fluents
+	return list(set(zero_arity_fluents))
 
 
 def ____get_relations_from_rules(rule_list):

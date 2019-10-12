@@ -5,7 +5,6 @@
 import itertools
 import re
 constlist = {}
-valuecharlist = []
 mathlogic = ['+','-','*','/','>=','<=','<','>','mod']
 and_or = ['and','or']
 
@@ -15,11 +14,13 @@ def  z3list(results):             #用来返回z3定理证明器的每一个（d
     #with open('output') as z3output:   #打开z3的输出文件
     #    z3li = z3output.readlines()             #按行读取
     for line in results:
+        #print 'kkk', line
         if ''.join(line.split()) == ")":          #处理最后一行
             item = ' '.join(item.strip().replace('!','').replace('\n','').split())    #剔除感叹号与多余的空格
             z3data.append(item)
             break
-        if 'define-fun' in line:
+        if 'define-fun' in line or 'declare-fun' in line:
+            #print '???', line
             if '' != item:
                 item = ' '.join(item.strip().replace('!','').replace('\n','').split())
                 z3data.append(item)
@@ -162,7 +163,11 @@ def parsebody(body):
         else:
             return (" " + type + " ").join("(" + parsebody(z3item(body,i))+")" for i in range(2,num))
     if type == '=':
-        return '(%s)==(%s)'%(parsebody(z3item(body,2)), parsebody(z3item(body,3)))
+        return '(%s) == (%s)'%(parsebody(z3item(body,2)), parsebody(z3item(body,3)))
+    if type == 'or':
+        return ' or '.join(['( %s )'%parsebody(z3item(body,i)) for i in range(2,num)])
+    if type == 'and':
+        return ' and '.join(['( %s )'%parsebody(z3item(body,i)) for i in range(2,num)])
     else:  
         #其他类型有 ： 不含括号字符串 abx0/123 , (p x) ,p(x y),(p x y z ....)
         if num <= 2:          #不含括号
@@ -201,15 +206,27 @@ def parsefun(oneline):
 
 
 
+def parse_declarefun(oneline, valuecharlist):
+    fun = ''
+    funname = z3item(oneline,2)                 #第二项为函数名字
+    funargs = z3item(oneline,3)                 #第三项为函数的参数列表
+    #print funbody
+    if '()' == funargs: 
+        valuecharlist.append(funname)
 
-def parseZ3fun(oneline):                     #把一个define-fun进行分解
+
+
+def parseZ3fun(oneline, valuecharlist):                     #把一个define-fun进行分解
     fun = ''
     funname = z3item(oneline,2)                 #第二项为函数名字
     funargs = z3item(oneline,3)                 #第三项为函数的参数列表
     funbody = z3item(oneline,5)                 #第五项为函数体
+    #print funbody
     if '()' == funargs and not funbody.startswith('('):    #零元函数为常量，存放在一个字典里
+
         if not funbody.isdigit():
             #print funbody                              #函数体不是数字
+            valuecharlist.append(funname)
             valuecharlist.append(funbody)
             constlist[funname] = funbody
         else:
@@ -226,10 +243,15 @@ def parseZ3fun(oneline):                     #把一个define-fun进行分解
 def get_fun(results):
     funlist = []
     fun_list = []
+    valuecharlist = []
+
     for line in z3list(results):
-        #print '---',line
-        if parseZ3fun(line) != '':
-            funlist.append(parseZ3fun(line))
+        if line.find('define-fun')!=-1:
+            fun = parseZ3fun(line, valuecharlist)
+            if fun!='':
+                funlist.append(fun)
+        elif line.find('declare-fun')!=-1:
+            parse_declarefun(line, valuecharlist)
     charset = set(valuecharlist)
     for fun in funlist:
         for valuechar in charset:
@@ -242,8 +264,11 @@ def get_fun(results):
 
 def get_const(results):
     for line in z3list(results):
-        parseZ3fun(line)
+        if line.find('define-fun')!=-1:
+            parseZ3fun(line, list())
     return constlist
 
-
+if __name__ == '__main__':
+    result = ['sat\n', '(model \n', '  ;; universe for _S1:\n', '  ;;   _S1!val!1 _S1!val!0 \n', '  ;; -----------\n', '  ;; definitions for universe elements:\n', '  (declare-fun _S1!val!1 () _S1)\n', '  (declare-fun _S1!val!0 () _S1)\n', '  ;; cardinality constraint:\n', '  (forall ((x _S1)) (or (= x _S1!val!1) (= x _S1!val!0)))\n', '  ;; -----------\n', '  (define-fun p1 () _S1\n', '    _S1!val!0)\n', '  (define-fun p2 () _S1\n', '    _S1!val!1)\n', '  (define-fun xlen () Int\n', '    2)\n', '  (define-fun ylen () Int\n', '    2)\n', '  (define-fun True () Bool\n', '    false)\n', '  (define-fun False () Bool\n', '    false)\n', '  (define-fun turn ((x!0 _S1)) Bool\n', '    (ite (= x!0 _S1!val!1) false\n', '      true))\n', '  (define-fun Ch ((x!0 Int) (x!1 Int)) Bool\n', '    (let ((a!1 (ite (<= 0 x!0) (ite (<= 1 x!0) (ite (<= 2 x!0) 2 1) 0) (- 1)))\n', '          (a!2 (ite (<= 0 x!1) (ite (<= 1 x!1) (ite (<= 2 x!1) 2 1) 0) (- 1))))\n', '      (or (and (= a!1 0) (= a!2 1))\n', '          (and (= a!1 1) (= a!2 0))\n', '          (and (= a!1 0) (= a!2 0))\n', '          (and (= a!1 1) (= a!2 1)))))\n', ')\n']
+    print get_fun(result)
 

@@ -44,25 +44,24 @@ def __before_verify(domain_file):
 	#__load_state_constaints(domain_name)
 
 
-__before_verify('takeaway.sc')
+__before_verify('chompNN.sc')
 
 Init = get_inital_database()
 Goal = get_goal('p1')
 End = get_end()
 #pi_action = generate_pi_action()
-
-math_preds, fluent_preds = Predicate.generate_preds('takeaway.sc')
-
-#print math_preds+fluent_preds
+math_preds, fluent_preds = Predicate.generate_preds('chompNN.sc')
 
 
 from regression import program_regress
 from algorithm import algorithm2 
 
-#f = "(( !Ch(1,1) ) => ( !Ch(1,1)&turn(p1) ))&!exists(K266:Int)[! xlen() = K266&K266 > 1&! ylen() = K266]"
 
-#print program_regress.A_regress(program_regress.E_regress(f, __generate_pi_action()), __generate_pi_action())
 
+#F = "!(exists(G0:Int)[G0>=0&spile() >= G0&! fpile() > G0])"
+#print 
+#print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
+#print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
 #exit(0)
 
 algorithm2.synthesis(Init, End, Goal, math_preds+fluent_preds)

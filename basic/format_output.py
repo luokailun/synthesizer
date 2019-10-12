@@ -64,7 +64,6 @@ def format_output(model, keyword):
 
 
 def format_outputs(model_list, keyword):
-	return ""
 	return ''.join([format_output(m, keyword) for m in model_list])
 
 '''

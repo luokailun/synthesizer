@@ -98,7 +98,7 @@ def __update_structure(state, fstructure, neg_model_list, pos_model_list, pred_l
 	# memory the type and the state of update for possible backtrack
 	backtrack.set_update(update_type, state)
 	print('State %s: %s models %s\n'%(state, update_type, str(update_model_list)))
-	#print format_output.format_outputs(update_model_list, 'Ch')
+	print(format_output.format_outputs(update_model_list, 'Ch'))
 	fstructure = update_function(fstructure, update_model_list, pred_list)
 	return fstructure
 
@@ -172,7 +172,6 @@ def __check_convergence(formula1, formula2):
 		Checking whether formula 1 entails formula 2
 	"""
 	result = z3prover.imply(formula1, formula2, "(set-option :timeout 10000)")
-	#print 'rrrr', result
 	if model_interpretor.interpret_result(result) is True:
 		return True
 	elif model_interpretor.interpret_result(result) is False:
@@ -281,12 +280,12 @@ def synthesis(Init, End, Goal, pred_list):
 		elif model_interpretor.interpret_result(result) is False:
 			positive_model = __generate_small_model(Init, formula1, result)
 			print('DS0 model:%s\n'%(str(positive_model)))
-			#print(format_output.format_output(positive_model, 'Ch'))
+			print(format_output.format_output(positive_model, 'Ch'))
 
 			progress_model_list = __progress_model(positive_model)
 			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
 			print('DS0 progressed updated model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
-			#print(format_output.format_outputs(update_model_list, 'Ch'))
+			print(format_output.format_outputs(update_model_list, 'Ch'))
 			print('---------------------------------------------------')
 			fstructure1, fstructure2 = new_two_state_structure
 			fstructure1 = __update_structure('q1',fstructure1,  [], [positive_model], pred_list)

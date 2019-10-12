@@ -1,0 +1,12 @@
+
+### About interpret SMT models results
+
+['sat\n', '(model \n', '  ;; universe for _S1:\n', '  ;;   _S1!val!1 _S1!val!2 _S1!val!0 \n', '  ;; -----------\n', '  ;; definitions for universe elements:\n', '  (declare-fun _S1!val!1 () _S1)\n', '  (declare-fun _S1!val!2 () _S1)\n', '  (declare-fun _S1!val!0 () _S1)\n', '  ;; cardinality constraint:\n', '  (forall ((x _S1)) (or (= x _S1!val!1) (= x _S1!val!2) (= x _S1!val!0)))\n', '  ;; -----------\n', '  (define-fun fpile () Int\n', '    1)\n', '  (define-fun spile () Int\n', '    1)\n', '  (define-fun p1 () _S1\n', '    _S1!val!0)\n', '  (define-fun p2 () _S1\n', '    _S1!val!1)\n', '  (define-fun True () Bool\n', '    false)\n', '  (define-fun False () Bool\n', '    false)\n', '  (define-fun turn ((x!0 _S1)) Bool\n', '    (let ((a!1 (ite (= x!0 _S1!val!1)\n', '                    _S1!val!1\n', '                    (ite (= x!0 _S1!val!0) _S1!val!0 _S1!val!2))))\n', '      (or (= a!1 _S1!val!2) (= a!1 _S1!val!0))))\n', ')\n'] 
+
+
+
+### util_z3_model.py return Results :
+
+["turn=lambda x0: (('_S1val1' if x0 == '_S1val1' else '_S1val0' if x0 == '_S1val0' else _S1val2) == (_S1val2)) or (('_S1val1' if x0 == '_S1val1' else '_S1val0' if x0 == '_S1val0' else _S1val2) == ('_S1val0'))"]
+
+### where _S1val2 should be '_S1val2'

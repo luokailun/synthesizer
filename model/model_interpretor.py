@@ -188,10 +188,8 @@ def get_default_value(elem_list, scope, const_dict, anti_const_dict):
 def interpret_model(results, max_value=99999):
 	#print results
 	#context_operator.set_counterexample_result(results)
-
 	lambda_funs = util_z3_model.get_fun(results)
 	#print lambda_funs
-	#print results
 	# a dict maps constants to SMT constants
 	const_dict = util_z3_model.get_const(results)
 	#print const_dict
@@ -228,6 +226,7 @@ def interpret_model(results, max_value=99999):
 		# transform SMT true/false to 'True'/'False'
 		elem_value_list = __trans_true_false(elem_value_list)
 		elem_value_list += [ (fun, paras, apply(eval(fun,scope), __name_relpace(paras, const_dict))) for fun, paras in elem_list if fun not in const_dict.keys()]
+
 		# transform SMT constants to constant symbols
 		anti_const_dict = { value:key for key,value in const_dict.items() if key not in fluents and key in const_symbols and not isinstance(value,int) and not value.isdigit()}
 		elem_value_list = [ (fun, paras, anti_const_dict[value]) if value in anti_const_dict.keys() else (fun, paras, value) for (fun, paras, value) in elem_value_list  ]

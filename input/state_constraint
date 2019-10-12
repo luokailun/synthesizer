@@ -7,106 +7,28 @@
         "sc": " (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
     },
 
-    "new_chompNN": {
+    "two_Nim": {
+        "sc": " (assert (>= spile 0) ) (assert (>= fpile 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+    },
+
+    "chompNN": {
         "sc": "(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false))))"
     },
 
+
     "chomp2N": {
-        "sc": "(assert (> len 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (forall ((X Int)) (=>  (or (= X 1) (= X 2) ) (>= (row X) 0)))) (assert (forall ((X Int)) (=> (not (or (= X 1)(= X 2))) (= (row X) 0))))",
-        "unknown": "0",
-        "bound": ["%s>=0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-    "new_chomp2N": {
-        "sc": "(assert (= xlen 2) ) (assert (> ylen 0) ) (assert (>= lastx 0) ) (assert (<= lastx xlen) ) (assert (>= lasty 0) ) (assert (<= lasty ylen) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (forall ((X Int) (Y Int)) (=> (not (and (> X 0) (<= X xlen) (> Y 0) (<= Y ylen) )) (= (Ch X Y) false))))(assert (forall ((X Int) (Y Int) (W Int) (Z Int)) (=> (and (and (and (and (not (Ch X Y)) (> X 0)) (> Y 0)) (>= W X)) (>= Z Y)) (not (Ch W Z)))))(assert (forall ((X Int) (Y Int)) (=> (and (= X lastx) (= Y lasty)) (not (Ch X Y)))))",
-        "unknown": "unknown",
-        "bound": ["%s>0"],
-        "template":"template",
-        "action_function":"quantifier_first"
+        "sc": "(assert (= xlen 2) ) (assert (> ylen 0) ) (assert (>= lastx 0) ) (assert (<= lastx xlen) ) (assert (>= lasty 0) ) (assert (<= lasty ylen) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (forall ((X Int) (Y Int)) (=> (not (and (> X 0) (<= X xlen) (> Y 0) (<= Y ylen) )) (= (Ch X Y) false))))(assert (forall ((X Int) (Y Int) (W Int) (Z Int)) (=> (and (and (and (and (not (Ch X Y)) (> X 0)) (> Y 0)) (>= W X)) (>= Z Y)) (not (Ch W Z)))))(assert (forall ((X Int) (Y Int)) (=> (and (= X lastx) (= Y lasty)) (not (Ch X Y)))))"
     },
     
-   
-
-    "chompNN": {
-        "sc": "(assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (> len 0) ) (assert  (> mrow 0) ) (assert (> line 0) )(assert (forall ((X Int)) (>= (row X) 0))) (assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (row X) 0))))(assert (<= mrow len) ) (assert (<= line len) )(assert (= (row 1) mrow)) (assert (> (row 1) 0)) (assert (<= (row 1) len))(assert (forall ((U Int)) (=> (and (> U line) (<= U len)) (= (row U) 0))) )",
-        "unknown": "0",
-        "bound": ["%s>=0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-
 
     "clobber": {
-        "sc": " (assert (> len 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X _S1)) (or (= X p1) (= X p2) (= X empty) (= X unknown) ) ))(assert  (not (= p1 empty))) (assert  (not (= p2 empty)))(assert  (not (= p1 unknown)))(assert  (not (= p2 unknown)))(assert  (not (= empty unknown)))(assert (not (turn empty))) (assert (not (turn unknown)))(assert (= (mod len 2) 0) )(assert (forall ((X Int) (Y Int)) (=> (or (not (and (> X 0) (<= X 2))) (not (and (> Y 0) (<= Y len))))  (= (cell X Y) unknown))))(assert (forall ((X Int) (Y Int)) (=> ( and (> X 0) (<= X 2) (> Y 0) (<= Y len))  (not (= (cell X Y) unknown)))))",
-        "unknown": "unknown",
-        "bound": ["%s>0", "!%s>len()"],
-        "template":"template2",
-        "action_function":"equal"
+        "sc": " (assert (> len 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X _S1)) (or (= X p1) (= X p2) (= X empty) (= X unknown) ) ))(assert  (not (= p1 empty))) (assert  (not (= p2 empty)))(assert  (not (= p1 unknown)))(assert  (not (= p2 unknown)))(assert  (not (= empty unknown)))(assert (not (turn empty))) (assert (not (turn unknown)))(assert (= (mod len 2) 0) )(assert (forall ((X Int) (Y Int)) (=> (or (not (and (> X 0) (<= X 2))) (not (and (> Y 0) (<= Y len))))  (= (cell X Y) unknown))))(assert (forall ((X Int) (Y Int)) (=> ( and (> X 0) (<= X 2) (> Y 0) (<= Y len))  (not (= (cell X Y) unknown)))))"
     },
 
-    "1d": {
-        "sc": " (assert (> len 0) ) (assert (>= xpos 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert(forall((X Int))( => (not(and( > X 0)( <= X len)))( not (vis X) ))))",
-        "unknown": "unknown",
-        "bound": ["%s>=0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-
-    "Arith": {
-        "sc": " (assert (> len 0) ) (assert (>= sum 0) ) (assert (>= xpos 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )",
-        "unknown": "0",
-        "bound": ["%s>=0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-
-
-    "Sort": {
-        "sc": " (assert (> len 0) ) (assert (>= xpos 0) ) (assert (<= xpos len) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int)) (>= (cell X) 0)))(assert(forall((X Int))( => (not(and( > X 0)( <= X len)))( = (cell X) 0))))",
-        "unknown": "0",
-        "bound": ["%s>0"],
-        "template":"template2",
-        "action_function":"equal"
-    },
-
-
-    "Find": {
-        "sc": " (assert (> len 0) ) (assert (>= xpos 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (forall ((X Int)) (>= (ina X) 0))) (assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (ina X) 0))))(assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (Inb X) false))))",
-        "unknown": "0",
-        "bound": ["%s>0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-
-
-
-    "Addition": {
-        "sc": " (assert (> xlen 0) ) (assert (> ylen 0)) (assert (>= xpos 0) ) (assert (>= ypos 0) ) (assert (>= sum 0) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (>= xlen xpos) ) (assert (>= ylen ypos) )",
-        "unknown": "0",
-        "bound": ["%s>=0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-    },
-
-
-    "PrizeA1": {
-        "sc": " (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (> len 0) )  (assert (>= xpos 0) ) (assert (>= ypos 0) ) (assert (or (and LeftTurn (not RightTurn) ) (and RightTurn (not LeftTurn))))(assert (forall ((X Int) (Y Int)) (=> (not (and (> X 0) (<= X len) (> Y 0) (<= Y len) )) (= (Vis X Y) false))))(assert (<= xpos len) ) (assert (<= ypos len) )",
-        "unknown": "unknown",
-        "bound": ["%s>0"],
-        "template":"template",
-        "action_function":"quantifier_first"
-
-    },
 
     "m_coloring": {
-        "sc": "(assert (> len 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert  (and  (not (= red empty)) (not (= red blue))  (not (= red unknown)) (not (= red green)) (not (= unknown blue)) (not (= green blue)) (not (= empty blue)) (not (= empty unknown)) (not (= empty green))  (not (= unknown green)) )) (assert (forall ((X _S3)) (or (= X red) (= X empty) (= X blue) (= X green) (= X unknown))))(assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (cell X) unknown))))(assert (forall ((X Int)) (=> (and (> X 0) (<= X len)) (not (= (cell X) unknown)))))",
-        "unknown": "unknown",
-        "bound": ["%s>0"],
-        "template":"template",
-        "action_function":"quantifier_first"
+        "sc": "(assert (> len 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert  (and  (not (= red empty)) (not (= red blue))  (not (= red unknown)) (not (= red green)) (not (= unknown blue)) (not (= green blue)) (not (= empty blue)) (not (= empty unknown)) (not (= empty green))  (not (= unknown green)) )) (assert (forall ((X _S3)) (or (= X red) (= X empty) (= X blue) (= X green) (= X unknown))))(assert (forall ((X Int)) (=> (not (and (> X 0) (<= X len))) (= (cell X) unknown))))(assert (forall ((X Int)) (=> (and (> X 0) (<= X len)) (not (= (cell X) unknown)))))"
     }
-
 
 
 }
