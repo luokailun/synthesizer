@@ -2668,17 +2668,17 @@ Agent Player2
 end Agent
  
 Evaluation 
-	p1win if !((!Environment.Ch0_0=true)) or (!Environment.Ch0_0=true and Environment.turnp1=true); 
+	goal if !((!Environment.Ch0_0=true)) or (!Environment.Ch0_0=true and Environment.turnp1=true); 
 end Evaluation 
 
 InitStates 
- 	Environment.Ch1_0=true and !Environment.Ch2_1=true and Environment.turnp2=true and !Environment.Ch2_3=true and !Environment.Ch1_4=true and !Environment.Ch3_1=true and Environment.ylen=4 and !Environment.Ch3_3=true and !Environment.Ch1_2=true and Environment.Ch0_2=true and Environment.Ch0_0=true and !Environment.Ch4_2=true and !Environment.Ch4_3=true and !Environment.Ch4_1=true and !Environment.Ch4_4=true and !Environment.Ch3_4=true and !Environment.Ch1_1=true and Environment.Ch2_0=true and !Environment.Ch2_2=true and !Environment.turnp1=true and !Environment.Ch2_4=true and !Environment.Ch3_0=true and !Environment.Ch0_4=true and !Environment.Ch3_2=true and Environment.Ch1_3=true and !Environment.Ch0_3=true and Environment.xlen=4 and !Environment.Ch4_0=true and Environment.Ch0_1=true;
+ 	Environment.Ch1_0=true and Environment.Ch2_1=true and Environment.turnp2=true and Environment.Ch2_3=true and !Environment.Ch1_4=true and Environment.Ch3_1=true and !Environment.Ch3_3=true and Environment.ylen=4 and Environment.Ch1_2=true and Environment.Ch0_2=true and Environment.Ch0_0=true and !Environment.Ch4_2=true and !Environment.Ch4_3=true and !Environment.Ch4_1=true and !Environment.Ch4_4=true and !Environment.Ch3_4=true and Environment.Ch1_1=true and Environment.Ch2_0=true and Environment.Ch2_2=true and !Environment.turnp1=true and !Environment.Ch2_4=true and Environment.Ch3_0=true and !Environment.Ch0_4=true and Environment.Ch3_2=true and Environment.Ch1_3=true and Environment.Ch0_3=true and Environment.xlen=4 and !Environment.Ch4_0=true and Environment.Ch0_1=true;
 end InitStates 
 
 Groups 
-	g1={Player1}; 
+	g1 = {Player1}; 
 end Groups 
 
 Formulae 
- 	<g1>G p1win; 
+ 	<g1>G goal; 
 end Formulae 

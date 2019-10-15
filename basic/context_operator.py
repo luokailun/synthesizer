@@ -168,6 +168,12 @@ def get_predicates():
 
 
 
+def set_rigid_functions(f_list):
+	global_context.RIGID_FUNCTION = f_list
+
+def get_rigid_functions():
+	return global_context.RIGID_FUNCTION
+
 ##########################################################################################
 
 

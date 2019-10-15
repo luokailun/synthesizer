@@ -3,6 +3,7 @@
 from basic import Util
 from basic import context_operator
 import re
+import itertools
 
 quantifier_pattern = re.compile(r"(?:(forall|exists))\s*\(([\w:,\s\d_]+)\)\[([^\[\]]+)\]")
 most_inner_pattern = re.compile(r'\(([^\(\)]+)\)')

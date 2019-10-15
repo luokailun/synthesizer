@@ -106,6 +106,7 @@ def __trans_true_false(elems):
 
 
 def __get_model_elements(fluents, fluent_constraints=None, add_universe=None):
+
 	fluent_sorts = context_operator.get_functions_sorts()
 	fluent_constraints = {} if fluent_constraints is None else fluent_constraints
 	#fluents = context_operator.get_fluents()
@@ -185,7 +186,7 @@ def get_default_value(elem_list, scope, const_dict, anti_const_dict):
 ##############################################################################################################################
 
 
-def interpret_model(results, max_value=99999):
+def interpret_model(results, universe=None, max_value=99999):
 	#print results
 	#context_operator.set_counterexample_result(results)
 	lambda_funs = util_z3_model.get_fun(results)
@@ -195,11 +196,16 @@ def interpret_model(results, max_value=99999):
 	#print const_dict
 	#print const_dict
 	#print '----------',context_operator.get_sort_symbols_dict()
+	if universe is None:
+		universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
+		min_num = min([int(e) for e in universe['Int']])
+		max_num = max([int(e) for e in universe['Int']])
+		universe['Int'] = [str(e) for e in range(min_num,max_num+1)]
+	else:
+		universe = copy.deepcopy(universe)
 
-	universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
-	min_num = min([int(e) for e in universe['Int']])
-	max_num = max([int(e) for e in universe['Int']])
-	universe['Int'] = [str(e) for e in range(min_num,max_num+1)]
+	#print 'aaaa', universe
+	#exit(0)
 	#universe['Int'] =  list(set(universe['Int'] +__generate_num_universe(str(lambda_funs)+str(const_dict))))
 	#print universe['Int']
 	# get fluent names from the interpretation

@@ -66,9 +66,14 @@ p5: +updates will generate two same conjuncts??
 
 two much P updates ???
 
-P1: Restart may be too weak???
+P1(FIX): Restart may be too weak???
 
-P2: Consider more powerful template???
+P2(??? Useful??): Consider more powerful template???
+
+P3: Checking whether states are reachable ???  (Init ->F state)
+
+
+
 
 
 

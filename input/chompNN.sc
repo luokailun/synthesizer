@@ -9,7 +9,6 @@ SSA(ylen = Y, pi(A)) <=> ylen =Y
 Init() <=> forall(X,Y)[ X>=0 and X<xlen and Y>=0 and Y<ylen =>Ch(X,Y)] and xlen>1 and ylen=xlen
 End() <=> !Ch(0,0)
 Win(pi(P)) <=> !Ch(0,0) and turn(P)
-  
 
 
 

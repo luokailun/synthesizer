@@ -1,6 +1,10 @@
 
 
 
+
+
+################################################################################################################################################
+
 # model is a tuple (U, S) where U is universe and S is an assignment
 
 def to_formula(model):
@@ -44,4 +48,18 @@ def is_lager_model(M1, M2):
 
 
 
+################################################################################################################################################
+
+
+
+
+
+'''
+from parser import BATparser
+M = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(0,3)': 'False', 'Ch(3,3)': 'False', 'turn(p2)': 'True', 'Ch(0,0)': 'True', 'xlen()': '3', 'turn(p1)': 'False', 'Ch(3,1)': 'False', 'Ch(2,3)': 'False', 'Ch(2,0)': 'False', 'Ch(3,0)': 'False', 'Ch(2,1)': 'False', 'Ch(2,2)': 'False', 'ylen()': '3', 'Ch(3,2)': 'False', 'Ch(1,3)': 'False', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+BATparser.parser('chompNN.sc')
+#print format_output(M,'Ch')
+newM = get_init_models_with_universe(M)
+print format_output.format_outputs(newM,'Ch')
+'''
 

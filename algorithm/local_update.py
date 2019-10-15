@@ -33,7 +33,7 @@ def __update_adjacent_conjuncts(fstructure, conjunct, adjacent_list):
 
 def __generate_new_conjuncts(model_neg_list, model_pos_list, atomic_pred_list, LENGTH):
 	"""
-	generate new conjuncts of limited length
+		generate new conjuncts of limited length
 
 	"""
 	print('****** Generate new conjuncts')
@@ -44,6 +44,7 @@ def __generate_new_conjuncts(model_neg_list, model_pos_list, atomic_pred_list, L
 
 
 def N_update(fstructure, model_minus_list, atomic_pred_list, LENGTH=2):
+	
 	"""
 		 Modify certain conjunct in the fstructure to exclude the model.
 		 Note the fstructure can be translated as:  Goal & !(C1 & C2 & C3 ...), 
@@ -80,22 +81,27 @@ def N_update(fstructure, model_minus_list, atomic_pred_list, LENGTH=2):
 	updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, model_pos_list)
 	
 	if updated_conjunct is None:
-		print('***** Local update fails ')
-		return None
-	else:
-		"""
-			modify the fstructure by the updated_conjunct
-		"""
-		# find the conjunct that need to be replaced
-		old_conjunct_list = Fstructure.find_repl_conjuncts(fstructure, updated_conjunct)
-		print('***** Change %s ---> %s \n'%(' and '.join([Conjunct.to_formula(c) for c in old_conjunct_list]), Conjunct.to_formula(updated_conjunct)))
-		# find the negative models for the new updated conjunct
-		updated_model_list = model_minus_list + Fstructure.get_update_model_list(fstructure, old_conjunct_list, updated_conjunct)
-		fstructure = Fstructure.delete_conjuncts(fstructure, old_conjunct_list )
-		fstructure = Fstructure.add_conjuncts(fstructure, [(updated_conjunct, updated_model_list, None)])
-		# store the choice for possible backtrack
-		backtrack.store_choice(fstructure_copy, [(model_minus_list, scoring_conjunct_dict)])
-		return fstructure
+		print('\n***** Long update ***** \n')
+		candicate_conjuncts_list =  Conjunct.generate_conjuncts([([],[],[])], model_minus_list, model_pos_list, atomic_pred_list, 3)
+		if candicate_conjuncts_list ==list():
+			print('***** Local update fails ')
+			return None
+		else:
+			scoring_conjunct_dict = scoring.compute_conjuncts_score(candicate_conjuncts_list, pred_score_dict)
+			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, model_pos_list)
+	"""
+		modify the fstructure by the updated_conjunct
+	"""
+	# find the conjunct that need to be replaced
+	old_conjunct_list = Fstructure.find_repl_conjuncts(fstructure, updated_conjunct)
+	print('***** Change %s ---> %s \n'%(' and '.join([Conjunct.to_formula(c) for c in old_conjunct_list]), Conjunct.to_formula(updated_conjunct)))
+	# find the negative models for the new updated conjunct
+	updated_model_list = model_minus_list + Fstructure.get_update_model_list(fstructure, old_conjunct_list, updated_conjunct)
+	fstructure = Fstructure.delete_conjuncts(fstructure, old_conjunct_list )
+	fstructure = Fstructure.add_conjuncts(fstructure, [(updated_conjunct, updated_model_list, None)])
+	# store the choice for possible backtrack
+	backtrack.store_choice(fstructure_copy, [(model_minus_list, scoring_conjunct_dict)])
+	return fstructure
 
 
 

@@ -45,6 +45,8 @@ ACTION_LIST = list()
 FLUENT_LIST = list()
 PREDICATES = list()
 
+RIGID_FUNCTION = list()
+
 
 ##########################################################################################
 

@@ -34,6 +34,7 @@ feature pattern for regression:
  0arity-fluents:['xlen', 'ylen']
  predicates:['Ch', 'turn']
  functional fluents:['xlen', 'ylen']
+ rigid functions:['xlen', 'ylen']
 
  sort for constants:{'_S1': ['p2', 'p1'], 'Int': ['1', '0'], 'Bool': ['True', 'False']}
  sort for functions:{'xlen': ['Int'], 'ylen': ['Int'], 'Ch': ['Int', 'Int', 'Bool'], 'eat': ['_S1', 'Int', 'Int', 'Bool'], 'turn': ['_S1', 'Bool']}

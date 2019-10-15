@@ -79,8 +79,21 @@ def __generate_pred_regress_lambda(predicates, function_sorts):
 	#print [predicate+"\("+','.join(["(.*?)"]*len(function_sorts[predicate]))+"\)" for predicate in predicates ]
 	return re.compile(predicate_pattern_lambda_exp([predicate+"\("+','.join(["(.*?)"]*len(function_sorts[predicate]))+"\)" for predicate in predicates ]))
 
+###########################################################################################
+
+def __get_rigid_functions(rule_list, fluent_list):
+
+	ssas = [(paras, formula) for name, paras, formula in rule_list if name == 'SSA' ]
+	rigid_str_list = [ formula for fluent_action, formula in ssas if re.match('%s,pi\('%(formula.replace('(','\(').replace(')','\)')), fluent_action)]
+	rigid_str = ' '.join(rigid_str_list)
+	rigid_function_list = [fluent for fluent in fluent_list if re.search(r'\b%s\b'%fluent, rigid_str)]
+
+	return rigid_function_list
+
+
 
 ###########################################################################################
+
 
 
 def __generate_predicates(fluent_list, symbols):
@@ -111,7 +124,7 @@ def __get_sort_const_with_fluents(sort_consts, fluent):
 ######################
 #f(X) =Y , X,Y can be variable or constant 
 #f(X) = k(Y) can be changed, for example:
-#contains(P) = volunn(P), take(P',P) <=> contains(P)+ contains(P')> volunn(P) can be rewirte as
+#contains(P) = volunn(P), take(P',P) <=> contains(P)+ contains(P')> volunn(P) can be rewrite as
 #contains(P) = Y, take(P',P) <=> Y=volunn(P) and  contains(P)+ contains(P')> volunn(P)
 
 def __parse_Basic(*tuples):
@@ -201,21 +214,7 @@ def __parse_SSA(*tuples):
 		#'numStone=Y, take(P,X)' -> [numStone=Y, take(P,X)]
 
 		formula = mtuple[2]
-		'''
-		for function in functions:
-			if function.split('=')[0].find('(')==-1: # it's f = X or f or f = g(Y) where f is zero-para function
-				matched = name_pattern.match(function)
-				if matched.group():
-					context_operator.add_zero_fluent(matched.group())     #add to const set()
-					function = function.replace(matched.group(),matched.group()+"()",1) # change f -> f()
-				else:
-					print "#EOROR(__parse_SSA|Poss): name eror when parsing function: ",function
-			fun_name, fun_para, fun_value = Util.parse_function(function)
-			#get vars from para and values
-			var_list+= [mvar.strip() for mvar in Util.get_paras_from_str(fun_para)+[fun_value] if isVar(mvar.strip()) ] 
-			#generate feature
-			feature_list.append(Util.generate_function_feature(function))
-		'''
+
 		#print var_list
 		name_list, feature_list, var_list = ____get_features_vars(mtuple[1])
 		#print name_list, feature_list, var_list
@@ -389,6 +388,7 @@ def parser(filename):
 		
 		rule_list = __pre_parse(rule_list)
 
+
 		sc_temp.writelines('\n')
 		sc_temp.writelines('\n\n')
 		sc_temp.writelines('\n'.join([str(elem) for elem in rule_list]))
@@ -397,6 +397,9 @@ def parser(filename):
 			m_group = list(g)
 		 	#print "-------",k, m_group
 			eval("apply(__parse_" + k + "," + str(m_group) + ")")
+
+		rigid_function_list = __get_rigid_functions(rule_list, context_operator.get_fluents())
+		context_operator.set_rigid_functions(rigid_function_list)
 
 		predicates = __generate_predicates(context_operator.get_fluents(), context_operator.get_symbol_sorts_dict().keys())
 		fun_fluents = [fluent for fluent in  context_operator.get_fluents() if fluent not in predicates]
@@ -412,6 +415,8 @@ def parser(filename):
 		sc_temp.writelines('\n 0arity-fluents:'+str(context_operator.get_zero_fluents()))
 		sc_temp.writelines('\n predicates:'+str(predicates))
 		sc_temp.writelines('\n functional fluents:'+str(fun_fluents))
+		sc_temp.writelines('\n rigid functions:'+str(context_operator.get_rigid_functions()))
+
 		
 		#logger.debug("\n actions :%s \n fluents %s"%(context_operator.get_actions(), context_operator.get_fluents()))
 		#print sort_system.get_function_sort('numStone')

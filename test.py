@@ -64,7 +64,7 @@ from algorithm import algorithm2
 #print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
 #exit(0)
 
-algorithm2.synthesis(Init, End, Goal, math_preds+fluent_preds)
+algorithm2.synthesis(Init, End, Goal, 'p1', math_preds+fluent_preds)
 
 
 

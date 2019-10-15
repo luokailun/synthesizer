@@ -248,7 +248,7 @@ def ____refresh_vars(conjunct):
 	"""
 		sub-sub-procedure:	delete redundant variables
 
-	If k = (['X','Y'], ['Int','Int'],['! numStone() = N']) , 
+	If k = (['X','Y'], ['Int','Int'],['! numStone() = X']) , 
 	then ____refresh_vars(k) will return  (['X'], ['Int'], ['! numStone() = X'])
 
 	"""

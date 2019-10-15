@@ -15,7 +15,7 @@ def poss(action_str, model):
 	#print '----', lambda_function, para_selected_list
 	formula = lambda_function if  isinstance(lambda_function, str) else lambda_function(para_selected_list)
 
-	return model_checker.sat_formula(model, formula)
+	return model_checker.sat_formula_math(model, formula)
 
 
 
@@ -28,7 +28,7 @@ def __model_ssa(fluent, action_str, model):
 	formula = lambda_function if  isinstance(lambda_function, str) else lambda_function(para_selected_list)
 
 	#print 'ffff', formula
-	return model_checker.sat_formula(model, formula)#eval(__replace_model(ground_formula, model))
+	return model_checker.sat_formula_math(model, formula)#eval(__replace_model(ground_formula, model))
 
 
 

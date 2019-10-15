@@ -56,7 +56,7 @@ def __to_python_equivalent(formula):
 
 
 
-def sat_conjunct_by_model(model, conjunct):
+def sat_conjunct_by_model(model, conjunct, logical_sym):
 	#print '!',model
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
@@ -65,7 +65,7 @@ def sat_conjunct_by_model(model, conjunct):
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
 	#formula = __to_python_equivalent(' & '.join(pred_list))
-	formula = ' & '.join(pred_list)
+	formula = (' %s '%(logical_sym)).join(pred_list)
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
 	ground_formula = formula if var_list == [] else __grounding_conjunct(var_list, sort_list, formula, universe)
@@ -73,8 +73,8 @@ def sat_conjunct_by_model(model, conjunct):
 	logical_formula = __assignment_light(ground_formula, assignment)
 	#logical_formula = unknown_pattern.sub(__mrepl_unknown,logical_formula)
 	#print '--------logical',logical_formula
-	if var_list == []:
-		return evaluation.eval_expression(logical_formula, {'True':True, 'False':False})
+	#if var_list == []:
+	#	return evaluation.eval_expression(logical_formula, {'True':True, 'False':False})
 	instance_list = logical_formula.split('|')
 	m_dict = {'True':True, 'False':False}
 	for instance in instance_list:
@@ -88,30 +88,30 @@ def sat_conjunct_by_model(model, conjunct):
 
 
 
-def sat_conjunct(model_list, conjunct):
+def sat_conjunct(model_list, conjunct, logical_sym = '&'):
 	for model in model_list:
 		#print preds_sat_model_org(model, [pred])
-		if sat_conjunct_by_model(model, conjunct) is False :
+		if sat_conjunct_by_model(model, conjunct, logical_sym) is False :
 			return False
 	return True
 
 
 
-def unsat_conjunct(model_list, conjunct):
+def unsat_conjunct(model_list, conjunct, logical_sym = '&'):
 	for model in model_list:
 		#print preds_sat_model_org(model, [pred])
-		if sat_conjunct_by_model(model, conjunct) is True:
+		if sat_conjunct_by_model(model, conjunct, logical_sym) is True:
 			return False
 	return True
 
 ##############################################################################################################################################################
 
-def get_unsat_models(model_list, conjunct):
-	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is False]
+def get_unsat_models(model_list, conjunct, logical_sym = '&'):
+	return [model for model in model_list if sat_conjunct_by_model(model, conjunct, logical_sym) is False]
 
 
-def get_sat_models(model_list, conjunct):
-	return [model for model in model_list if sat_conjunct_by_model(model, conjunct) is True]
+def get_sat_models(model_list, conjunct, logical_sym = '&'):
+	return [model for model in model_list if sat_conjunct_by_model(model, conjunct, logical_sym) is True]
 
 
 
@@ -129,14 +129,14 @@ def __set_default_value(logical_formula, default_value):
 	return logical_formula
 
 
-def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
+def sat_conjunct_by_model_math(model, conjunct, logical_sym, MIN=0, INC=5):
 	#print '!',model
 	#print '@',conjunct
 	var_list, sort_list, pred_list= conjunct
 	universe, assignment, default_value = model
 	#var_constraint_dict = context_operator.get_pred_constraint_dict()
 	#var_constraint_dict = var_constraint_dict[formula] if formula in var_constraint_dict else dict()
-	formula = ' & '.join(pred_list)
+	formula = (' %s '%(logical_sym)).join(pred_list)
 	#print '--------formula',formula
 	#print var_list, sorts, formula, universe, var_constraint_dict
 	MAX = INC + max([int(e) for e in universe['Int']])
@@ -148,8 +148,8 @@ def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	logical_formula = __assignment(ground_formula, assignment)
 	logical_formula = __set_default_value(logical_formula, default_value)
 	#print '--------logical',logical_formula
-	if var_list == []:
-		return evaluation.eval_expression(logical_formula, {'True':True, 'False':False})
+	#if var_list == []:
+	#	return evaluation.eval_expression(logical_formula, {'True':True, 'False':False})
 	instance_list = logical_formula.split('|')
 	m_dict = {'True':True, 'False':False}
 	for instance in instance_list:
@@ -158,10 +158,10 @@ def sat_conjunct_by_model_math(model, conjunct, MIN=0, INC=6):
 	return False
 
 
-def unsat_conjunct_math(model_list, conjunct):
+def unsat_conjunct_math(model_list, conjunct, logical_sym='&'):
 	
 	for model in model_list:
-		if sat_conjunct_by_model_math(model, conjunct) is True:
+		if sat_conjunct_by_model_math(model, conjunct, logical_sym) is True:
 			return False
 	return True
 
@@ -195,16 +195,17 @@ def __to_python_formula(formula):
 	return formula.replace('!',' not ').replace('&', ' and ').replace('|', ' or ')
 
 
+
 def sat_formula(model, formula):
 
 	universe, assignment, default_value = model
-	formula = __to_python_formula(formula)
 	#print '1,---------',formula
 	formula = Formula.transform_entailment(formula)
 	#print '2,---------',formula
 	ground_formula = Formula.grounding(formula, model)
 	#print '3,--------',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
+	formula = __to_python_formula(formula)
 	#print '4,--------model replace',logical_formula
 	#print 'kkkk',context_operator.get_sort_symbols_dict()
 	#logger.debug("Checking formula %s with model %s \n formula after grounding: %s \n after model_replace %s"%(formula,model,ground_formula,logical_formula))
@@ -213,11 +214,13 @@ def sat_formula(model, formula):
 	#logger.debug('sat?: \n%s'%flag)
 	return flag
 
-'''
-def sat_formula_math(model, formula, INC=6):
 
-	universe, assignment = model
-	formula = __to_python_formula(formula)
+
+
+
+def sat_formula_math(model, formula, MIN=0, INC=5):
+
+	universe, assignment, default_value = model
 	#print '1,---------',formula
 	formula = Formula.transform_entailment(formula)
 	#print '2,---------',formula
@@ -226,8 +229,11 @@ def sat_formula_math(model, formula, INC=6):
 	universe['Int'] = [str(e) for e in list(range(MIN,MAX))]
 	ground_formula = Formula.grounding(formula, model)
 	universe['Int'] = temp_list
+	
 	#print '3,--------',ground_formula
 	logical_formula = __assignment(ground_formula, assignment)
+	logical_formula = __set_default_value(logical_formula, default_value)
+	logical_formula = __to_python_formula(logical_formula)
 	#print '4,--------model replace',logical_formula
 	#print 'kkkk',context_operator.get_sort_symbols_dict()
 	#logger.debug("Checking formula %s with model %s \n formula after grounding: %s \n after model_replace %s"%(formula,model,ground_formula,logical_formula))
@@ -235,7 +241,7 @@ def sat_formula_math(model, formula, INC=6):
 	flag = eval(logical_formula,scope)
 	#logger.debug('sat?: \n%s'%flag)
 	return flag
-'''
+
 
 ##############################################################################################################################################################
 

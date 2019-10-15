@@ -34,7 +34,6 @@ import itertools
 from regression import atomic_regress
 from formula import Formula
 from basic import Util
-from model import util_model
 from basic import simplify
 import re
 
@@ -322,7 +321,7 @@ Agent Player2\n\
 end Agent\n \
 \n\
 Evaluation \n\
-	p1win if %s; \n\
+	goal if %s; \n\
 end Evaluation \n\
 \n\
 InitStates \n \
@@ -330,17 +329,21 @@ InitStates \n \
 end InitStates \n\
 \n\
 Groups \n\
-	g1={Player1}; \n\
+	%s; \n\
 end Groups \n\
 \n\
 Formulae \n \
-	<g1>G p1win; \n\
+	%s; \n\
 end Formulae \n\
 '
 #%(ispl_vars, ispl_updates, p1_actions, p1_poss, p2_actions, p2_poss, win_property, init)
 
 
-def to_ispl(model, goal):
+def to_ispl(model, init, goal, players, modal_operator):
+	"""
+	players: a list containing p1, p2
+	modal_operator: G or F
+	"""
 	universe, assignment, default_value = model
 
 	fluent_tuple_list  = __get_fluents(universe)
@@ -374,12 +377,16 @@ def to_ispl(model, goal):
 
 	ispl_win_property = __get_ispl_formula(goal, model, fluent_tuple_list)
 
-	ispl_init = __get_ispl_formula(util_model.to_formula(model), model, fluent_tuple_list)
+	ispl_init = __get_ispl_formula(init, model, fluent_tuple_list)
 	#print ispl_init
 	#print util_model.to_formula(model)
+	player_dict = {'p1':"Player1", 'p2':'Player2'}
+	groups = "g1 = {%s}"%(','.join([player_dict[p] for p in players]))
+
+	formula = "<g1>%s goal"%(modal_operator)
 
 	return ispl%(ispl_vars, ispl_updates, ispl_p1_actions, ispl_p1_actions_poss, ispl_p2_actions, ispl_p2_actions_poss, \
-		ispl_win_property, ispl_init)
+		ispl_win_property, ispl_init, groups, formula)
 
 	#print ispl_vars_str
 	#print ispl_p1_actions_str

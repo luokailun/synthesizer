@@ -64,14 +64,14 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 		generate a model that entails formula 1 but not formula2
 		the universe of the model should be smallest 
 	"""
-	flag, element = model_interpretor.interpret_model(results, MAX_VALUE)
+	flag, element = model_interpretor.interpret_model(results, max_value=MAX_VALUE)
 	while flag is False:
 
 		value_constraints = ' '.join([ "(assert %s)"%smt_translator.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
 		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+value_constraints)
 		#exit(0)
 		if model_interpretor.interpret_result(new_results) is False:
-			flag, element = model_interpretor.interpret_model(new_results, MAX_VALUE)
+			flag, element = model_interpretor.interpret_model(new_results, max_value=MAX_VALUE)
 
 		MAX_VALUE = MAX_VALUE+2
 	return element
@@ -103,8 +103,21 @@ def __update_structure(state, fstructure, neg_model_list, pos_model_list, pred_l
 	return fstructure
 
 
+################################################################################################################################################
 
-def __decide_update_model(model, state_type, Goal):
+
+
+def ____check_reachability(model):
+
+	Init_formula = context_operator.get_axioms()['init']['']
+	if model_checker.sat_formula_math(model, Init_formula) is True:
+		return True
+	else:
+	 	return mcmas.interpret_result(mcmas.check_reachability(model))
+
+
+
+def __decide_update_model(model, state_type, Goal, player):
 	"""
 		decide to use the N update or P update
 		@param 		model 			the model needed to use by N update or P update
@@ -116,32 +129,31 @@ def __decide_update_model(model, state_type, Goal):
 	"""
 	#print("Checking %s model: %s\n%s"%(state_type, str(model), format_output.format_output(model,'Ch')))
 	print("Checking %s model: %s\n"%(state_type, str(model)))
+	print(format_output.format_output(model, 'Ch'))
 	universe, assignment, default_value = model
-	right_turn = True if assignment['turn(p1)'] == 'True' and state_type == 'E' or assignment['turn(p2)'] == 'True' and state_type == 'A' else False
-
 	current_exclude_models, next_include_models = list(), list()
 
+	right_turn = True if assignment['turn(p1)'] == 'True' and state_type == 'E' or assignment['turn(p2)'] == 'True' and state_type == 'A' else False
+
 	if right_turn is False:
+		print('**** Wrong Turn! Exclude it\n')
 		current_exclude_models = [model]
-	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is True:
+	elif mcmas.interpret_result(mcmas.check_win(model, Goal, player)) is False:
+		print('**** Lose Here! Exclude it\n')
+		current_exclude_models = [model]
+	elif ____check_reachability(model) is False:
+		print('**** Not Reachable! Exclude it\n')
+		current_exclude_models = [model]
+	else:
+		print('**** Win! Include it by next state\n')
 		progress_model_list = __progress_model(model)
-		update_model_list = [m for m in progress_model_list if mcmas.interpret_result(mcmas.check_win(m,Goal))]
-		# ?????
-		if update_model_list==list():
-			print "Mdel Error update_model_list is empty!"
-			exit(0)
-			current_exclude_models = [model]
+		update_model_list = [m for m in progress_model_list if mcmas.interpret_result(mcmas.check_win(m,Goal, player))]
 		# if the state is in our turn, then we only choice an action to progress
-		elif state_type == 'E':
+		if state_type == 'E':
 			next_include_models = [update_model_list.pop(0)]
 		# if the state is in opponent's turn, then we know all actions should be performed
 		else:
 			next_include_models = update_model_list
-	elif mcmas.interpret_result(mcmas.check_win(model,Goal)) is False:
-		current_exclude_models = [model]
-	else:
-		print 'Model Error!'
-		exit(0)
 	return current_exclude_models, next_include_models
 
 
@@ -185,7 +197,7 @@ def __check_convergence(formula1, formula2):
 
 
 
-def structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal):
+def structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal, player):
 	"""
 		update and check the two-state FSA until it becomes convergence (form an invariant)
 	"""
@@ -211,9 +223,9 @@ def structure_regress_until_convergence(two_state_structure, pred_list, End,  Go
 		else:
 			e_neg_model_list, e_pos_model_list, a_neg_model_list, a_pos_model_list = list(), list(), list(), list()
 			if negative_model1 is not True:
-				e_neg_model_list, a_pos_model_list = __decide_update_model(negative_model1, 'E', Goal)
+				e_neg_model_list, a_pos_model_list = __decide_update_model(negative_model1, 'E', Goal, player)
 			if negative_model2 is not True:
-				a_neg_model_list, e_pos_model_list = __decide_update_model(negative_model2, 'A', Goal)
+				a_neg_model_list, e_pos_model_list = __decide_update_model(negative_model2, 'A', Goal, player)
 
 			# initialize the choice structure for possible backtrack
 			backtrack.init_choice()
@@ -237,7 +249,7 @@ def structure_regress_until_convergence(two_state_structure, pred_list, End,  Go
 ################################################################################################################################################
 
 
-def synthesis(Init, End, Goal, pred_list):
+def synthesis(Init, End, Goal, player, pred_list):
 	"""
 	Synthesize sufficient and necessary invariants X, where each formula f in X is of the form:
 				f= \forall* Goal and clause1 and clause2 and ...
@@ -266,7 +278,7 @@ def synthesis(Init, End, Goal, pred_list):
 		n += 1
 		print(__printer(two_state_structure))
 		# Getting a sufficient invariant
-		new_two_state_structure = structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal)
+		new_two_state_structure = structure_regress_until_convergence(two_state_structure, pred_list, End,  Goal, player)
 		formula1 = Fstructure.to_formula(new_two_state_structure[0])
 
 		print('\n***************** Checking DS0 *****************:\n\n')
@@ -283,7 +295,7 @@ def synthesis(Init, End, Goal, pred_list):
 			print(format_output.format_output(positive_model, 'Ch'))
 
 			progress_model_list = __progress_model(positive_model)
-			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal))]
+			update_model_list = [model for model in progress_model_list if mcmas.interpret_result(mcmas.check_win(model,Goal, player))]
 			print('DS0 progressed updated model:%s\n'%('\n'.join([str(m) for m in update_model_list])))
 			print(format_output.format_outputs(update_model_list, 'Ch'))
 			print('---------------------------------------------------')
