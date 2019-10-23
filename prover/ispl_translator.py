@@ -104,7 +104,7 @@ def ____to_ispl_vars(formula, fluent_list, ispl_fluent_list):
 
 def __get_ispl_formula(formula, model, fluent_tuple_list):
 	#print formula
-	ispl_fluent_list = ['%s%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
+	ispl_fluent_list = ['%s_%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	pred_fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list \
 			if f in context_operator.get_predicates()]
@@ -117,11 +117,14 @@ def __get_ispl_formula(formula, model, fluent_tuple_list):
 	#print formula
 	formula = ____ispl_simplify(formula, 'Environment.Action')
 	#print formula
+	# add back zero fluent
+	formula = ____handle_0arity_fluents(formula)
 	formula = ____to_ispl_preds(formula, pred_fluent_list)
 	#print formula
 	#formula = ____add_env(formula, fluent_list)
 	#print formula
 	formula = Util.endecode_string(formula, fluent_list, ispl_fluent_list)
+	#formula = ____ispl_simplify(formula, 'Environment.Action')
 	#print formula
 	formula = ____to_ispl_logic(formula)
 	#print formula
@@ -142,10 +145,17 @@ turn_list = [
 			]
 
 
+def ____handle_0arity_fluents(elem):
+	zero_arity_fluents = context_operator.get_zero_fluents()
+	old_strs = [r'\b'+str(fluent)+r'\b' for fluent in zero_arity_fluents]
+	replaces = [fluent+'()' for fluent in zero_arity_fluents]
+	return Util.repeat_do_function(Util.sub_lambda_exp, zip(old_strs,replaces), elem)
+
+
 def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_list, model):
 
 	universe, assignment, default_value = model
-	ispl_fluent_list = ['%s%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
+	ispl_fluent_list = ['%s_%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 
 	predicates = context_operator.get_predicates()
@@ -172,6 +182,8 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 	update_pair_list = [ (a, Formula.transform_entailment(b), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, Formula.grounding(b,model), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, ____ispl_simplify(b,'Player1.Action'), c) for a, b, c in update_pair_list]
+	# simply will eliminate () in 0arity fluent, here we add back to it
+	update_pair_list = [ (a, ____handle_0arity_fluents(b),c) for a, b, c in update_pair_list]
 	#update_pair_list = [ (a, b, c) for a, b, c in update_pair_list if b is not None]
 
 	pred_fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list if f in predicates]
@@ -186,7 +198,7 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 	update_list += ['%s=false if !(%s) and %s;'%(fluent, update, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update !='false' ]
 	update_list += ['%s=false if %s;'%(fluent, ispl_action) for fluent, update, ispl_action in  pred_update_pair_list if update =='false' ]
 	update_list += turn_list
-	#update_list = [____add_env(formula, fluent_list) for formula in update_list]
+	
 	update_list = [ Util.endecode_string(formula, fluent_list, ispl_fluent_list) for formula in update_list]
 	update_list = [ ____to_ispl_logic(formula) for formula in update_list]
 
@@ -198,7 +210,8 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 def __get_ispl_poss(action_tuple_list, model, fluent_tuple_list):
 	#feature_list = Util.get
 	#context_operator.get
-	ispl_fluent_list = ['%s%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
+
+	ispl_fluent_list = ['%s_%s'%(f,'_'.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	fluent_list = ['%s(%s)'%(f,','.join(para_list)) for f, para_list, sort in fluent_tuple_list]
 	ispl_action_list = ['%s%s'%(a,'_'.join(para_list)) for a, para_list in action_tuple_list]
 	action_list = ['%s(%s)'%(a,','.join(para_list)) for a, para_list in action_tuple_list]
@@ -207,14 +220,15 @@ def __get_ispl_poss(action_tuple_list, model, fluent_tuple_list):
 				if f in context_operator.get_predicates()]
 
 	action_poss_list = [ atomic_regress.poss_or_ssa(action) for action in action_list ]
-	#print '\n    '.join(action_poss_list)
+	#exit(0)
 	action_poss_list = [ Formula.transform_entailment(poss) for poss in action_poss_list ]
 	action_poss_list = [ ____add_env(poss, fluent_list) for poss in action_poss_list ]
 	action_poss_list = [ Formula.grounding(poss, model) for poss in action_poss_list ]
-
 	action_poss_list = [ ____ispl_simplify(poss, 'state') for poss in action_poss_list]
+	action_poss_list = [ ____handle_0arity_fluents(poss) for poss in action_poss_list]
 	action_poss_list = [ ____to_ispl_preds(poss, pred_fluent_list) for poss in action_poss_list ]
 	action_poss_list = [ ____to_ispl_vars(poss, fluent_list, ispl_fluent_list) for poss in action_poss_list]
+	#action_poss_list = [ ____ispl_simplify(poss, 'state') for poss in action_poss_list]
 	action_poss_list = [ ____to_ispl_logic(poss) for poss in action_poss_list]
 	action_poss_list = [ "%s:{%s};"%(poss, ispl_action_list[e]) for e, poss in enumerate(action_poss_list) if poss !='false']
 	
@@ -256,7 +270,7 @@ def __get_ispl_vars(fluent_tuple_list, universe):
 			ispl_type = '%s..%s'%(str(min(Int_list)),str(max(Int_list)))
 		else:
 			ispl_type = '{%s}'%(','.join(universe[sort]))
-		ispl_var_list.append('%s%s:%s;'%(f, '_'.join(paras), ispl_type))
+		ispl_var_list.append('%s_%s:%s;'%(f, '_'.join(paras), ispl_type))
 
 	#return '\n    '.join(ispl_var_list)
 	return ispl_var_list

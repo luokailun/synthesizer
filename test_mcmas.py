@@ -43,18 +43,37 @@ from basic import context_operator
 
 from prover import mcmas
 from prover import ispl_translator
+from basic import Util
 
 #print ispl_translator.to_ispl(M,Goal)
 
+def get_goal(player):
+	lambda_fun, para_list = context_operator.find_axiom_with_feature('win', Util.generate_function_feature(player+'()'))
+	Win = lambda_fun(para_list)
+	End = context_operator.get_axioms()['end']['']
+	return "( %s ) => ( %s )"%(End, Win)
 
-#print mcmas.check_win(M,Goal)
 
-M = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(0,3)': 'False', 'Ch(3,3)': 'False', 'turn(p2)': 'True', 'Ch(0,0)': 'True', 'xlen()': '3', 'turn(p1)': 'False', 'Ch(3,1)': 'False', 'Ch(2,3)': 'False', 'Ch(2,0)': 'False', 'Ch(3,0)': 'False', 'Ch(2,1)': 'False', 'Ch(2,2)': 'False', 'ylen()': '3', 'Ch(3,2)': 'False', 'Ch(1,3)': 'False', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
-from basic import format_output
+
+#M = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'ylen()': '4', 'Ch(3,3)': 'False', 'Ch(1,2)': 'True', 'Ch(0,2)': 'True', 'Ch(0,0)': 'True', 'Ch(4,2)': 'False', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'True', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(2,4)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(1,3)': 'True', 'Ch(0,3)': 'True', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+#ispl_translator.to_ispl(M, Goal)
+Goal = get_goal('p1')
+#print mcmas.check_win(M, Goal,'p1')
+
+#from basic import format_output
 #print format_output.format_output(M,'Ch')
 #M = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'True', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'False', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
 #print format_output.format_output(M,'Ch')
-print mcmas.check_reachability(M)
+#print mcmas.check_reachability(M)
+
+
+model = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'True', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+Goal = get_goal('p1')
+
+from strategy import strategy
+
+#print strategy.check_and_get_strategy(model, Goal, 'p1')
+print strategy.__get_init_models_with_universe({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2','3'], 'Bool': ['True', 'False']})
 
 
 

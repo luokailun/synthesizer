@@ -301,8 +301,8 @@ def ____handle_0arity_fluents(rule_list, zero_arity_fluents):
 	old_strs = [r'\b'+str(fluent)+r'\b' for fluent in zero_arity_fluents]
 	replaces = [fluent+'()' for fluent in zero_arity_fluents]
 	for e, rule in enumerate(rule_list):
-		relations = Util.repeat_do_function(Util.sub_lambda_exp, zip(zero_arity_fluents,replaces),rule[1])
-		formula = Util.repeat_do_function(Util.sub_lambda_exp, zip(zero_arity_fluents,replaces),rule[2])
+		relations = Util.repeat_do_function(Util.sub_lambda_exp, zip(old_strs,replaces),rule[1])
+		formula = Util.repeat_do_function(Util.sub_lambda_exp, zip(old_strs,replaces),rule[2])
 		rule_list[e] = (rule[0], relations, formula)
 	return rule_list 
 

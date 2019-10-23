@@ -81,4 +81,5 @@ def grounding(formula, model):
 	context_operator.set_current_model(model)
 	return Util.repeat_replace_inner_with_pattern(grounding_pattern, __mrepl_ground, formula)
 
+
 #######################################################################################################################################

@@ -1,0 +1,522 @@
+************************************************************************
+                       MCMAS v1.3.0 
+
+ This software comes with ABSOLUTELY NO WARRANTY, to the extent
+ permitted by applicable law. 
+
+ Please check http://vas.doc.ic.ac.uk/tools/mcmas/ for the latest release.
+ Please send any feedback to <mcmas@imperial.ac.uk>
+************************************************************************
+
+Command line: /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/mcmas -c 1 -l 1 -f 1 /Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/win.ispl
+
+/Users/luokailun/Documents/GitHub3/synthesizer/input_mcmas/win.ispl has been parsed successfully.
+Global syntax checking...
+1
+1
+1
+Done
+Encoding BDD parameters...
+Building partial transition relation...
+Building BDD for initial states...
+Building reachable state space...
+Checking formulae...
+Verifying properties...
+  Formula number 1: (<g1>G goal), is TRUE in the model
+  The following is a witness for the formula: 
+   < 0 1 > 
+   < 1 2 > 
+   < 1 3 > 
+   < 1 4 > 
+   < 1 5 > 
+   < 1 6 > 
+   < 4 7 > 
+   < 6 7 > 
+   < 2 8 > 
+   < 3 8 > 
+   < 5 5 > 
+   < 8 4 > 
+   < 8 9 > 
+   < 8 5 > 
+   < 7 5 > 
+   < 9 7 > 
+  States description: 
+------------- State: 0 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = true
+  Ch0_3 = true
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = true
+  Ch1_2 = true
+  Ch1_3 = true
+  Ch1_4 = false
+  Ch2_0 = true
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 1 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = true
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = true
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = false
+  turnp2 = true
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 2 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+
+  Ch1_0 = true
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = true
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 3 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = true
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 4 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = false
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 5 -----------------
+Agent Environment
+  Ch0_0 = false
+  Ch0_1 = false
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = false
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 6 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = false
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = true
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 7 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = false
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = false
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = false
+  turnp2 = true
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 8 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = true
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = false
+  turnp2 = true
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+------------- State: 9 -----------------
+Agent Environment
+  Ch0_0 = true
+  Ch0_1 = false
+  Ch0_2 = false
+  Ch0_3 = false
+  Ch0_4 = false
+  Ch1_0 = true
+  Ch1_1 = false
+  Ch1_2 = false
+  Ch1_3 = false
+  Ch1_4 = false
+  Ch2_0 = false
+  Ch2_1 = false
+  Ch2_2 = false
+  Ch2_3 = false
+  Ch2_4 = false
+  Ch3_0 = false
+  Ch3_1 = false
+  Ch3_2 = false
+  Ch3_3 = false
+  Ch3_4 = false
+  Ch4_0 = false
+  Ch4_1 = false
+  Ch4_2 = false
+  Ch4_3 = false
+  Ch4_4 = false
+  turnp1 = true
+  turnp2 = false
+  xlen = 4
+  ylen = 4
+Agent Player1
+  state = none
+Agent Player2
+  state = none
+----------------------------------------
+done, 1 formulae successfully read and checked
+execution time = 0.464
+number of reachable states = 46
+BDD memory in use = 11316960
+luokailundeMacBook-Pro:~ luokailun$ 
+
+
+
+
+[Structure1]
+#Goal:( !Ch(0,0) ) => ( !Ch(0,0)&turn(p1) )
+#(+)model:
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'True', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'False', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'True', 'Ch(1,0)': 'True', 'Ch(0,2)': 'True', 'Ch(0,3)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'Ch(0,1)': 'True', 'turn(p1)': 'True', 'xlen()': '3', 'Ch(3,1)': 'False', 'Ch(3,0)': 'False', 'Ch(2,1)': 'True', 'Ch(2,0)': 'True', 'Ch(2,2)': 'True', 'ylen()': '3', 'Ch(3,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,3)': 'False', 'Ch(2,3)': 'False', 'Ch(1,2)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'False', 'Ch(0,0)': 'False', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'False', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'True', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'False', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'True', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'True', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'True', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'True', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'True', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'True', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'True', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'True', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'Ch(3,3)': 'False', 'ylen()': '4', 'Ch(1,2)': 'False', 'Ch(0,2)': 'True', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'True', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+OO
+OO
+-------
+##
+##
+-------
+O#
+O#
+-------
+OO
+##
+-------
+OOO
+OOO
+OOO
+-------
+####
+####
+####
+####
+-------
+O###
+O###
+O###
+O###
+-------
+OO##
+O###
+O###
+O###
+-------
+OOO#
+O###
+O###
+O###
+-------
+OOOO
+####
+####
+####
+-------
+OOOO
+O###
+####
+####
+-------
+OOOO
+O###
+O###
+####
+-------
+
+#conjuncts:
+(0):(['G0'], ['_S1'], ['turn(G0)', '! turn(p1)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'True', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'False', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+O#
+##
+-------
+
+(1):(['G0'], ['Int'], ['Ch(1,G0)', '! Ch(G0,0)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'False', 'Ch(2,1)': 'True', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'True', 'ylen()': '4', 'Ch(3,3)': 'False', 'Ch(1,2)': 'False', 'Ch(0,2)': 'False', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'True', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'True', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+OO##
+#O##
+OO##
+OO##
+-------
+
+(2):(['G0'], ['Int'], ['Ch(1,G0)', '! Ch(G0,G0)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'False']}, {'Ch(1,0)': 'False', 'Ch(2,1)': 'True', 'turn(p2)': 'False', 'Ch(2,3)': 'False', 'Ch(1,4)': 'False', 'Ch(3,1)': 'False', 'ylen()': '4', 'Ch(3,3)': 'False', 'Ch(1,2)': 'True', 'Ch(0,2)': 'False', 'Ch(0,0)': 'True', 'Ch(4,3)': 'False', 'Ch(4,1)': 'False', 'Ch(4,4)': 'False', 'Ch(3,4)': 'False', 'Ch(1,1)': 'False', 'Ch(2,0)': 'True', 'Ch(2,2)': 'False', 'turn(p1)': 'True', 'Ch(4,2)': 'False', 'Ch(1,3)': 'False', 'Ch(3,0)': 'False', 'Ch(0,4)': 'False', 'Ch(3,2)': 'False', 'Ch(2,4)': 'False', 'Ch(0,3)': 'False', 'xlen()': '4', 'Ch(4,0)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+OO##
+##O#
+OO##
+####
+-------
+
+(3):(['G0'], ['Int'], ['Ch(G0,G0)', '! Ch(1,G0)', '! Ch(G0,1)'])
+  ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'False', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'False'}, {'Ch\\(\\d+,\\d+\\)': 'False'})
+O#
+##
+-------
+
+
+
+
+
+State q1: N models [({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2'], 'Bool': ['True', 'False']}, {'Ch(1,1)': 'False', 'Ch(1,0)': 'True', 'Ch(0,2)': 'False', 'Ch(2,1)': 'False', 'turn(p2)': 'False', 'Ch(0,0)': 'True', 'xlen()': '2', 'turn(p1)': 'True', 'Ch(2,0)': 'False', 'Ch(2,2)': 'False', 'ylen()': '2', 'Ch(1,2)': 'False', 'Ch(0,1)': 'True'}, {'Ch\\(\\d+,\\d+\\)': 'False'})]
+
+OO
+O#
+-------
+
+
+
+
