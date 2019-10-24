@@ -61,6 +61,8 @@ def __backtrack_P_update(fstructure, choice_list):
 		if model_plus_list is None:
 			new_choice_list.append((None, None))
 		else:
+			# add this to indicate that not None models are add to the fstructure
+			add_to_models = model_plus_list
 			new_model_pos_list = model_pos_list + model_plus_list
 			updated_conjunct = scoring.get_min_score_conjunct(scoring_conjunct_dict, new_model_pos_list)
 			new_choice_list.append((model_plus_list, scoring_conjunct_dict))
@@ -73,7 +75,13 @@ def __backtrack_P_update(fstructure, choice_list):
 				print('****** Change %s ---> %s \n'%(Conjunct.to_formula(conjunct), Conjunct.to_formula(updated_conjunct)))
 
 	store_choice(fstructure_copy, new_choice_list)
-	return Fstructure.add_positive_models(fstructure, model_plus_list)
+	fstructure =  Fstructure.add_positive_models(fstructure, add_to_models)
+
+	# check whether there is only "delete" operation was occurred such that the new and old fstructure is the same
+	if cmp(fstructure_copy, fstructure):
+		return None
+	else:
+		return fstructure
 
 
 
@@ -133,8 +141,11 @@ def backtrack(two_state_structure):
 		set_update(global_structure.CHOICE['type'], 'q2')
 		# redoing N/P update again by updating 
 		fstructure2 = apply_function(fstructure2_bk, choice_list2)
-	# record for possible restart
-	restart.store_two_state_conjuncts((fstructure1, fstructure2))
+
+	# if the backtrack is not failed
+	if fstructure1 is not None and fstructure2 is not None:
+		# record for possible restart
+		restart.store_two_state_conjuncts((fstructure1, fstructure2))
 	return (fstructure1, fstructure2)
 
 

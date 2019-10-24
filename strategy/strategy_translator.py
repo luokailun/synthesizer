@@ -161,32 +161,45 @@ def __get_win_nodes(start_node, link_dict):
 
 
 
-def construct_strategy(result, model):
-	universe, assignment, default_value = model
-	tree_pattern = re.compile(r"The following is a witness for the formula:(.+?)States description:")
-	link_pattern = re.compile(r"<\s*(\d+)\s*(\d+)\s*>")
 
-	result = ''.join(result).replace('\n',"#")
-	m = tree_pattern.search(result)
-	tree_str = m.group(1)
-	link_list = link_pattern.findall(tree_str)
-	# generate tree link structure
-	link_dict = dict()
-	for left, right in link_list:
-		if left in link_dict:
-			link_dict[left].append(right)
-		else:
-			link_dict[left] = [right]
+def construct_strategy(result, model):
+
+  universe, assignment, default_value = model
+  tree_pattern = re.compile(r"The following is a witness for the formula:(.+?)States description:")
+  link_pattern = re.compile(r"<\s*(\d+)\s*(\d+)\s*>")
+  result = ''.join(result).replace('\n',"#")
+  m = tree_pattern.search(result)
+  tree_str = m.group(1)
+  link_list = link_pattern.findall(tree_str)
+  # generate tree link structure
+  link_dict = dict()
+  for left, right in link_list:
+    if left in link_dict:
+      link_dict[left].append(right)
+    else:
+      link_dict[left] = [right]
+  # it may contains redundant????
+  link_dict = {key: list(set(value)) for key, value in link_dict.items()}
+
+  win_node_list = __get_win_nodes('0', link_dict)
+  node_model_dict = __get_node_models(link_dict, result, universe, default_value)
+
+  strategy_structure = dict()
+  strategy_structure['domain'] = universe
+  strategy_structure['init_model'] = model
+  strategy_structure['strategy'] = (node_model_dict, link_dict, win_node_list)
+  return strategy_structure
+  '''
+
 	
-	win_node_list = __get_win_nodes('0', link_dict)
-	node_model_dict = __get_node_models(link_dict, result, universe, default_value)
+	
 
 	strategy_structure = dict()
 	strategy_structure['domain'] = universe
 	strategy_structure['init_model'] = model
 	strategy_structure['strategy'] = (node_model_dict, link_dict, win_node_list)
 	return strategy_structure
-
+  '''
 
 ################################################################################################################################################
 

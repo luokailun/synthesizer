@@ -4,11 +4,11 @@
 
 	-- key: domain (universe)
 	-- key: init_model 
-	-- key: strategy (strategy tree)
+	-- key: strategy (strategy tree), a tuple (A, B, C) ,where
 
-		nodes {1: model, 2: model}
-		structure {1: [1,2,3], 3:[4,5,6]}
-		win nodes [0,1,3,4]
+		A -- nodes {1: model, 2: model}
+		B -- structure {1: [1,2,3], 3:[4,5,6]}
+		C -- win nodes [0,1,3,4]
 
 """
 
@@ -47,6 +47,7 @@ def check_and_get_strategy(model, goal, player):
 	"""
 		get the winning strategy (strategy structure representation) under the model  
 	"""
+
 	result = __check_win_strategy(model, goal, player)
 	strategy_structure = strategy_translator.construct_strategy(result, model)
 	return strategy_structure
@@ -112,14 +113,14 @@ def get_init_models_with_universe(universe):
 		print('ERROR')
 		exit(0)
 
+
 ################################################################################################################################################
 
 
-def find_model_in_strategys(strategy_list, model):
+def find_universe_in_strategies(universe, strategy_list):
 	"""
 		find whether a model's universe has been generated strategies before
 	"""
-	universe, assignment, default_value = model
 	for strategy in strategy_list:
 		if cmp(strategy['domain'], universe) == 0:
 			return True
@@ -127,11 +128,43 @@ def find_model_in_strategys(strategy_list, model):
 
 
 ################################################################################################################################################
-# below are main procedure
+
+
+
+def find_model_in_strategies(model, strategy_list):
+	"""
+		find whether the model is in the states of strategies
+	"""
+	universe, assignment, default_value = model
+	the_strategy_list = [ strategy for strategy in strategy_list if cmp(strategy['domain'], universe)==0]
+
+	for strategy in the_strategy_list:
+		# when we say node, we say the number of node
+		node_model_dict, link_dict, win_node_list = strategy['strategy']
+		for node, m in node_model_dict.items():
+			if cmp(m, model) == 0:
+				return True
+	return False
+
 ################################################################################################################################################
 
 
+def find_next_models(model, strategy_list):
+	"""
+		find next models of the model in the strategies
+	"""
+	universe, assignment, default_value = model
+	the_strategy_list = [ strategy for strategy in strategy_list if cmp(strategy['domain'], universe)==0]
 
+	for strategy in the_strategy_list:
+		# when we say node, we say the number of node
+		node_model_dict, link_dict, win_node_list = strategy['strategy']
+		for node, m in node_model_dict.items():
+			if cmp(m, model) == 0:
+				return [ node_model_dict[num] for num in link_dict[node]]
+	print "ERROR Because can not find next models"
+	exit(0)
 
+################################################################################################################################################
 
 

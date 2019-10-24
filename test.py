@@ -54,7 +54,7 @@ math_preds, fluent_preds = Predicate.generate_preds('chompNN.sc')
 
 
 from regression import program_regress
-from algorithm import algorithm2 
+from algorithm import algorithm3 
 
 
 
@@ -64,7 +64,7 @@ from algorithm import algorithm2
 #print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
 #exit(0)
 
-algorithm2.synthesis(Init, End, Goal, 'p1', math_preds+fluent_preds)
+algorithm3.synthesis(Init, End, Goal, 'p1', math_preds+fluent_preds)
 
 
 
