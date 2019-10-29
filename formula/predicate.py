@@ -223,7 +223,6 @@ def genPreds(constraints=dict()):
 
 	# generate fluent predicates like turn(p1)
 	fluent_predicates = __gen_fluent_pred(pred_parasorts_list, sort_consts)
-
 	# generate fluent predicates by combining fluent terms with constants or variables under certain relation (e.g.,=,>=)
 	const_funs = [ fun+"()" for fun in context_operator.get_zero_fluents() if fun in context_operator.get_fluents() if fun not in predicates]
 	fluent_predicates += __gen_equal_pred_from_template(fun_valuesort_list, fluent_terms , sort_consts, "@fun @rel @const")

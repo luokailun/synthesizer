@@ -186,7 +186,7 @@ def get_default_value(elem_list, scope, const_dict, anti_const_dict):
 ##############################################################################################################################
 
 
-def interpret_model(results, universe=None, max_value=99999):
+def interpret_model(results, universe=None, max_value=99999, INC=0):
 	#print results
 	#context_operator.set_counterexample_result(results)
 	lambda_funs = util_z3_model.get_fun(results)
@@ -200,7 +200,7 @@ def interpret_model(results, universe=None, max_value=99999):
 		universe = copy.deepcopy(context_operator.get_sort_symbols_dict())
 		min_num = min([int(e) for e in universe['Int']])
 		max_num = max([int(e) for e in universe['Int']])
-		universe['Int'] = [str(e) for e in range(min_num,max_num+1)]
+		universe['Int'] = [str(e) for e in range(min_num, max_num+1)]
 	else:
 		universe = copy.deepcopy(universe)
 
@@ -266,13 +266,16 @@ def interpret_model(results, universe=None, max_value=99999):
 		complete_part = __get_default_fluents(lack_fluents, fluent_sorts, universe)
 		model.update(complete_part)
 
+		# expand the universe
+		min_num = min([int(e) for e in universe['Int']])
+		max_num = max([int(e) for e in universe['Int']])
+		universe['Int'] = [str(e) for e in range(min_num, max_num+1+INC)]
+
 		"""
 			get default value for fluents who have parameters of Int sort
 		"""
 		default_value  = get_default_value(elem_list, scope, const_dict, anti_const_dict)
 
-		""" 
-		"""
 		return True, (universe, model, default_value)
 
 

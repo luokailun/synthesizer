@@ -11,6 +11,14 @@
         "sc": " (assert (>= spile 0) ) (assert (>= fpile 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
     },
 
+    "chocolate": {
+        "sc": " (assert (>= spile 0) ) (assert (>= fpile 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+    },
+
+    "empty": {
+        "sc": " (assert (>= chip1 1) ) (assert (>= chip2 1) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) )"
+    },
+
     "chompNN": {
         "sc": "(assert (= xlen ylen) ) (assert (> xlen 1) ) (assert (> ylen 1) ) (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (turn p2)) ) (and (turn p2) (not (turn p1)))) )(assert (forall ((X Int) (Y Int)) (=> (not (and (>= X 0) (< X xlen) (>= Y 0) (< Y ylen) )) (= (Ch X Y) false))))"
     },

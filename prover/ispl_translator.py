@@ -181,7 +181,7 @@ def __get_ispl_update(fluent_tuple_list, p1_action_tuple_list, p2_action_tuple_l
 	# transform (=>) to (not or)
 	update_pair_list = [ (a, Formula.transform_entailment(b), c) for a, b, c in update_pair_list]
 	update_pair_list = [ (a, Formula.grounding(b,model), c) for a, b, c in update_pair_list]
-	update_pair_list = [ (a, ____ispl_simplify(b,'Player1.Action'), c) for a, b, c in update_pair_list]
+	update_pair_list = [ (a, ____ispl_simplify(b,'Estate'), c) for a, b, c in update_pair_list]
 	# simply will eliminate () in 0arity fluent, here we add back to it
 	update_pair_list = [ (a, ____handle_0arity_fluents(b),c) for a, b, c in update_pair_list]
 	#update_pair_list = [ (a, b, c) for a, b, c in update_pair_list if b is not None]
@@ -299,6 +299,9 @@ Agent Environment\n\
   Obsvars:\n\
 	  %s\n\
   end Obsvars\n\
+  Vars:\n\
+  	Estate: {none};\n\
+  end Vars\n\
   Actions = {none};\n\
   Protocol: Other: {none}; end Protocol \n\
   Evolution: \n\

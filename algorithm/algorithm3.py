@@ -65,14 +65,14 @@ def __generate_small_model(formula1, formula2, results,  MAX_VALUE=2):
 		generate a model that entails formula 1 but not formula2
 		the universe of the model should be smallest 
 	"""
-	flag, element = model_interpretor.interpret_model(results, max_value=MAX_VALUE)
+	flag, element = model_interpretor.interpret_model(results, max_value=MAX_VALUE, INC=3)
 	while flag is False:
 
 		value_constraints = ' '.join([ "(assert %s)"%smt_translator.get_smt_body('%s<=%s'%(constraint,MAX_VALUE)) for constraint in element])
 		new_results = z3prover.imply(formula1,formula2, "(set-option :timeout 4000)"+value_constraints)
 		#exit(0)
 		if model_interpretor.interpret_result(new_results) is False:
-			flag, element = model_interpretor.interpret_model(new_results, max_value=MAX_VALUE)
+			flag, element = model_interpretor.interpret_model(new_results, max_value=MAX_VALUE, INC=3)
 
 		MAX_VALUE = MAX_VALUE+2
 	return element
@@ -118,7 +118,7 @@ def ____check_reachability(model):
 
 
 
-def __decide_update_model(model, state_type, Goal, player, strategy_list):
+def __decide_update_model(model, state_type, Goal, player, strategy_list, INC=3):
 	"""
 		decide to use the N update or P update
 		@param 		model 			the model needed to use by N update or P update
@@ -241,6 +241,7 @@ def structure_regress_until_convergence(two_state_structure, pred_list, End,  Go
 
 			# if the local update fails, we restart by decreasing the score of the predicates
 			if fstructure1 is None or fstructure2 is None:
+				print('\n N update fails!!! \n')
 				print('\n\n\n***************** Restart *****************:\n\n\n\n')
 				fstructure1, fstructure2 =  restart.restart(two_state_structure)
 				restart.init_conjunct_storer()

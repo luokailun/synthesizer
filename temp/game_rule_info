@@ -1,41 +1,50 @@
-('SSA', 'Ch(X,Y),eat(P,I,J)', 'Ch(X,Y)&(I>X|J>Y)')
-('SSA', 'xlen=Y,pi(A)', 'xlen=Y')
-('SSA', 'ylen=Y,pi(A)', 'ylen=Y')
-('End', '', '!Ch(0,0)')
-('Win', 'pi(P)', '!Ch(0,0)&turn(P)')
+('SSA', 'fpile=Y,takeF(P,X)', 'fpile=Y+X')
+('SSA', 'fpile=Y,takeS(P,X)', 'fpile=Y')
+('SSA', 'spile=Y,takeS(P,X)', 'spile=Y+X')
+('SSA', 'spile=Y,takeF(P,X)', 'spile=Y')
 ('SSA', 'turn(P),pi(A)', '!turn(P)')
-('Poss', 'eat(P,X,Y)', 'Ch(X,Y)&turn(P)&X>=0&X<xlen&Y>=0&Y<ylen')
-('Init', '', 'forall(X,Y)[X>=0&X<xlen&Y>=0&Y<ylen=>Ch(X,Y)]&xlen>1&ylen=xlen')
+('End', '', 'fpile=1&spile=1')
+('Win', 'pi(P)', 'fpile=1&spile=1&!turn(P)')
+('SSA', 'turn(P),pi(A)', '!turn(P)')
+('Poss', 'takeF(P,X)', 'fpile>X&X>0&fpile-X>=spile&turn(P)')
+('Poss', 'takeS(P,X)', 'spile>X&X>0&turn(P)')
+('Init', '', '!fpile=spile&fpile>=1&spile>=1')
 ('Init', '', 'turn(p1)&!turn(p2)')
 ('Basic', '', 'forall(P)[(P=p1|P=p2)&!(p1=p2)]')
 
 
-('SSA', 'Ch(K1,K2),eat(K3,K4,K5)', 'Ch(K1,K2)&(K4>K1|K5>K2)')
-('SSA', 'xlen()=K6,pi(K7)', 'xlen()=K6')
-('SSA', 'ylen()=K8,pi(K9)', 'ylen()=K8')
-('End', '', '!Ch(0,0)')
-('Win', 'pi(K10)', '!Ch(0,0)&turn(K10)')
-('SSA', 'turn(K11),pi(K12)', '!turn(K11)')
-('Poss', 'eat(K13,K14,K15)', 'Ch(K14,K15)&turn(K13)&K14>=0&K14<xlen()&K15>=0&K15<ylen()')
-('Init', '', 'forall(K16:Int,K17:Int)[K16>=0&K16<xlen()&K17>=0&K17<ylen()=>Ch(K16,K17)]&xlen()>1&ylen()=xlen()')
+('SSA', 'fpile()=K1,takeF(K2,K3)', 'fpile()=K1+K3')
+('SSA', 'fpile()=K4,takeS(K5,K6)', 'fpile()=K4')
+('SSA', 'spile()=K7,takeS(K8,K9)', 'spile()=K7+K9')
+('SSA', 'spile()=K10,takeF(K11,K12)', 'spile()=K10')
+('SSA', 'turn(K13),pi(K14)', '!turn(K13)')
+('End', '', 'fpile()=1&spile()=1')
+('Win', 'pi(K15)', 'fpile()=1&spile()=1&!turn(K15)')
+('SSA', 'turn(K16),pi(K17)', '!turn(K16)')
+('Poss', 'takeF(K18,K19)', 'fpile()>K19&K19>0&fpile()-K19>=spile()&turn(K18)')
+('Poss', 'takeS(K20,K21)', 'spile()>K21&K21>0&turn(K20)')
+('Init', '', '!fpile()=spile()&fpile()>=1&spile()>=1')
 ('Init', '', 'turn(p1)&!turn(p2)')
-('Basic', '', 'forall(K18:_S1)[(K18=p1|K18=p2)&!(p1=p2)]')
+('Basic', '', 'forall(K22:_S1)[(K22=p1|K22=p2)&!(p1=p2)]')
 
 feature pattern for regression:
-(['eat_K13_K14_K15_'], ['K13', 'K14', 'K15'], 'eat_(.+?)_(.+?)_(.+?)_')
-(['Ch_K1_K2_', 'eat_K3_K4_K5_'], ['K1', 'K2', 'K3', 'K4', 'K5'], 'Ch_(.+?)_(.+?)__eat_(.+?)_(.+?)_(.+?)_')
-(['xlen__K6', 'pi_K7_'], ['K6', 'K7'], 'xlen__(.+?)_(.+?)_')
-(['ylen__K8', 'pi_K9_'], ['K8', 'K9'], 'ylen__(.+?)_(.+?)_')
-(['turn_K11_', 'pi_K12_'], ['K11', 'K12'], 'turn_(.+?)__(.+?)_')
-(['pi_K10_'], ['K10'], '(.+?)_')
+(['takeF_K18_K19_'], ['K18', 'K19'], 'takeF_(.+?)_(.+?)_')
+(['takeS_K20_K21_'], ['K20', 'K21'], 'takeS_(.+?)_(.+?)_')
+(['fpile__K1', 'takeF_K2_K3_'], ['K1', 'K2', 'K3'], 'fpile__(.+?)_takeF_(.+?)_(.+?)_')
+(['fpile__K4', 'takeS_K5_K6_'], ['K4', 'K5', 'K6'], 'fpile__(.+?)_takeS_(.+?)_(.+?)_')
+(['spile__K7', 'takeS_K8_K9_'], ['K7', 'K8', 'K9'], 'spile__(.+?)_takeS_(.+?)_(.+?)_')
+(['spile__K10', 'takeF_K11_K12_'], ['K10', 'K11', 'K12'], 'spile__(.+?)_takeF_(.+?)_(.+?)_')
+(['turn_K13_', 'pi_K14_'], ['K13', 'K14'], 'turn_(.+?)__(.+?)_')
+(['turn_K16_', 'pi_K17_'], ['K16', 'K17'], 'turn_(.+?)__(.+?)_')
+(['pi_K15_'], ['K15'], '(.+?)_')
 
- actions:['eat']
- fluents:['xlen', 'ylen', 'Ch', 'turn']
- 0arity-fluents:['xlen', 'ylen']
- predicates:['Ch', 'turn']
- functional fluents:['xlen', 'ylen']
- rigid functions:['xlen', 'ylen']
+ actions:['takeF', 'takeS']
+ fluents:['turn', 'fpile', 'spile']
+ 0arity-fluents:['fpile', 'spile']
+ predicates:['turn']
+ functional fluents:['fpile', 'spile']
+ rigid functions:[]
 
  sort for constants:{'_S1': ['p2', 'p1'], 'Int': ['1', '0'], 'Bool': ['True', 'False']}
- sort for functions:{'xlen': ['Int'], 'ylen': ['Int'], 'Ch': ['Int', 'Int', 'Bool'], 'eat': ['_S1', 'Int', 'Int', 'Bool'], 'turn': ['_S1', 'Bool']}
- sort for predicates:{'turn': ['_S1'], 'Ch': ['Int', 'Int']}
+ sort for functions:{'takeF': ['_S1', 'Int', 'Bool'], 'turn': ['_S1', 'Bool'], 'fpile': ['Int'], 'takeS': ['_S1', 'Int', 'Bool'], 'spile': ['Int']}
+ sort for predicates:{'turn': ['_S1']}

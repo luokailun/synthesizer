@@ -45,6 +45,7 @@ def check_win(model, goal, player):
 ################################################################################################################################################
 
 
+'''
 
 from basic import context_operator
 from formula import Formula
@@ -75,10 +76,10 @@ def __get_init_models_with_universe(model):
 	domain_constraint = '&' + '&'.join(["forall(X:%s)[%s]"%(sort, ' or '.join(['X=%s'%elem for elem in constants])) \
 				for sort, constants in universe.items() if sort!='Int' and sort!='Bool'])
 
-	'''
-		for integer we only set the value of those fluent less than maximal number in the universe
-		 	(for light implementation we only set 0-arity fluent)
-	'''
+	
+	#	for integer we only set the value of those fluent less than maximal number in the universe
+	#	 	(for light implementation we only set 0-arity fluent)
+	
 	max_num = max([ int(e) for e in universe['Int'] ])
 	fun_sorts_dict = context_operator.get_functions_sorts()
 	
@@ -130,7 +131,7 @@ def check_reachability(model):
 		return os.popen(cmd).readlines()
 
 
-
+'''
 
 
 

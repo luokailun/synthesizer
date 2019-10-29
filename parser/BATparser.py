@@ -112,7 +112,6 @@ def __get_funs_sorts(funs):
 
 
 def __get_sort_const_with_fluents(sort_consts, fluent):
-	#print sort_consts , fluent
 	for key in sort_consts.keys():
 		sort_consts[key] = [ elem for elem in sort_consts[key] if elem not in fluent]
 	return sort_consts
@@ -156,7 +155,7 @@ def __parse_Init(*tuples):
 	formulas = list()
 	for mtuple in tuples:
 		formulas.append(mtuple[2])
-	context_operator.set_axiom("init", "" , [], "&".join(formulas))
+	context_operator.set_axiom("init", "" , [], "&".join([ '(%s)'%f for f in formulas]))
 
 
 def __parse_Poss(*tuples): #(('Poss', 'take(P,X)', ' num_stone>=X and (X=1 or X=2 or X=3)       and turn(P)    '),)
@@ -279,6 +278,7 @@ def ____rename_rule_vars(rule_list, varlist_list):
 
 def ____get_vars_from_relationlist_list(relationlist_list):
 	return [____get_vars_from_relations(relation_list) for relation_list in relationlist_list]
+
 
 def ____get_vars_from_relations(relation_list):
 	if relation_list ==[""]:

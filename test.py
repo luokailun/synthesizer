@@ -43,14 +43,13 @@ def __before_verify(domain_file):
 	BATparser.parser(domain_file) 
 	#__load_state_constaints(domain_name)
 
-
-__before_verify('chompNN.sc')
+__before_verify('chocolate.sc')
 
 Init = get_inital_database()
 Goal = get_goal('p1')
 End = get_end()
 #pi_action = generate_pi_action()
-math_preds, fluent_preds = Predicate.generate_preds('chompNN.sc')
+math_preds, fluent_preds = Predicate.generate_preds('chocolate.sc')
 
 
 from regression import program_regress
@@ -63,7 +62,6 @@ from algorithm import algorithm3
 #print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
 #print program_regress.A_regress(F, algorithm2.__generate_pi_action('p2'))
 #exit(0)
-
 algorithm3.synthesis(Init, End, Goal, 'p1', math_preds+fluent_preds)
 
 

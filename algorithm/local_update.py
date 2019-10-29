@@ -106,7 +106,8 @@ def N_update(fstructure, model_minus_list, atomic_pred_list, LENGTH=2):
 
 
 def P_update(fstructure, model_plus_list, atomic_pred_list, LENGTH=2):
-
+	"""
+	"""
 	pred_score_dict = Fstructure.get_pred_score_dict(fstructure)
 	conjunct_structure_list = Fstructure.get_conjunct_structure(fstructure)
 	model_pos_list = Fstructure.get_pos_models(fstructure)
@@ -139,7 +140,7 @@ def P_update(fstructure, model_plus_list, atomic_pred_list, LENGTH=2):
 				fstructure = Fstructure.add_conjuncts(fstructure, [(updated_conjunct, model_neg_list, adjacent_list)])
 		else:
 		# else mark that this conjunct does not need to do update
-			choice_copy.append((None, None))
+			choice_copy.append((model_plus_list, None))
 	# store the choice for possible backtrack
 	backtrack.store_choice(fstructure_copy, choice_copy)
 	return Fstructure.add_positive_models(fstructure, model_plus_list)

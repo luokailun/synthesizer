@@ -49,13 +49,18 @@ def check_and_get_strategy(model, goal, player):
 	"""
 
 	result = __check_win_strategy(model, goal, player)
-	strategy_structure = strategy_translator.construct_strategy(result, model)
+	#print 'dddd',result
+	universe, assignment, default_value = model
+	strategy_structure = strategy_translator.construct_strategy(result, universe, default_value)
 	return strategy_structure
 
 
 
 ################################################################################################################################################
-
+"""
+the universe should be expanded because the math issues, e.g.,
+Int: [0,1,2,3,4],  we know numStone =4 is reachable but its initial models can not be generated with this small universe
+"""
 
 def get_init_models_with_universe(universe):
 	"""
@@ -68,11 +73,10 @@ def get_init_models_with_universe(universe):
 	domain_constraint = '&' + '&'.join(["forall(X:%s)[%s]"%(sort, ' or '.join(['X=%s'%elem for elem in constants])) \
 				for sort, constants in universe.items() if sort!='Int' and sort!='Bool'])
 
-	'''
+	"""
 		for integer fluent (whose value is integer) 
 		we only set the value of those fluent less than maximal number in the universe
-		
-	'''
+	"""
 	max_num = max([ int(e) for e in universe['Int'] ])
 	fun_sorts_dict = context_operator.get_functions_sorts()
 	

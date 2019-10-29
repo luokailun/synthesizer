@@ -117,7 +117,7 @@ def __mrepl_detect_fluent(matched):
 def __get_formula_from_local_dict():
 	local_dict = context_operator.get_local_dict()
 	vars_sorts = [local_dict[fluent] + ":" + sort_system.get_fun_value_sort(fluent) for fluent in local_dict.keys() ]
-	formula_str=' and '.join([str( key )+"="+str(value) for key, value in local_dict.iteritems()])
+	formula_str=' & '.join([str( key )+"="+str(value) for key, value in local_dict.iteritems()])
 	return 'exists('+ ','.join(vars_sorts)+ '){ '+ formula_str if formula_str!="" else formula_str
 
 
@@ -248,7 +248,7 @@ def poss_or_ssa(action_str, fluent=None):
 def __mrepl_fluent_regress(matched):
 	fluent_str =matched.group()
 	
-	#print fluent_str
+	#print '!!', fluent_str
 	match_fluent_str = Util.eliminate_unmatched(fluent_str).strip()
 	
 	#handle regression:#########
@@ -302,6 +302,7 @@ def __regress(formula, action):
 def regress(formula, action):
 	#logger.debug("#before normalization, formula: %s, action: %s" %(formula, action))
 	formula = __normalize_formula(formula)
+	#print '---',formula
 	#print("#after normalization formula: %s" %(formula))
 	#logger.debug("#after normalization formula: %s" %(formula))
 	return __regress(formula,action)

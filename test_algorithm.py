@@ -14,6 +14,7 @@ from basic import context_operator
 from basic import Util
 from algorithm import algorithm3 
 from strategy import strategy_translator
+from regression import program_regress
 
 BATparser.parser('chompNN.sc')
 Goal = get_goal('p1')
@@ -25,4 +26,16 @@ M = ({'_S1': ['p2', 'p1'], 'Int': ['0', '1', '2', '3', '4'], 'Bool': ['True', 'F
 
 #print algorithm3.__decide_update_model(M, 'E', Goal, 'p1', list())
 
-print strategy_translator.construct_strategy(result, M)
+
+
+f1 = "(( !Ch(0,0) ) => ( !Ch(0,0)&turn(p1) ))&!(Ch(0,0)&! Ch(1,0)&! Ch(0,1))&!(Ch(1,0)&Ch(0,1)&! Ch(1,1))&!(exists(G0:Int)[G0>=0&Ch(G0,1)&! Ch(G0,G0)])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&Ch(G0,G1)&! Ch(0,G1)])&!(exists(G0:Int)[G0>=0&ylen() > G0&! turn(p1)])"
+f2 = "(( !Ch(0,0) ) => ( !Ch(0,0)&turn(p1) ))&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&Ch(G0,G1)&! Ch(G1,G0)])&!(exists(G0:Int,G1:Int)[G0>=0&G1>=0&Ch(G0,1)&ylen() > G1&! Ch(G1,G0)])&!(exists(G0:Int,Y11:Int)[G0>=0&Y11>=0&G0 > 1&Ch(G0,Y11)])&!(Ch(1,1))"
+
+End = context_operator.get_axioms()['end']['']
+reg_f2 = "!(%s)=>(%s)"%(End, program_regress.E_regress(f2, algorithm3.__generate_pi_action('p1')))
+
+negative_model1 = algorithm3.__check_convergence(f1, reg_f2)
+
+print negative_model1
+
+

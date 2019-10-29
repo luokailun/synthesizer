@@ -4,6 +4,9 @@
 #coding=utf-8
 import itertools
 import re
+import sys
+sys.setrecursionlimit(1000000)
+
 constlist = {}
 mathlogic = ['+','-','*','/','>=','<=','<','>','mod']
 and_or = ['and','or']

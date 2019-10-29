@@ -43,6 +43,7 @@ def __isbounded(elem, ylen):
 
 
 def format_output(model, keyword):
+	return ""
 	universe, M, default_value = model
 	xlen = M['xlen()']
 	ylen = M['ylen()']
