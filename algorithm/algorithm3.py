@@ -286,6 +286,7 @@ def synthesis(Init, End, Goal, player, pred_list):
 	strategy_list = list()
 
 	while n>0:
+		
 		n += 1
 		print(__printer(two_state_structure))
 		# Getting a sufficient invariant

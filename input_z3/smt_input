@@ -1,9 +1,8 @@
 
 (declare-sort _S1)(declare-fun turn(_S1) Bool)
-(declare-fun fpile() Int)
-(declare-fun spile() Int)(declare-const p2 _S1)
+(declare-fun numStone() Int)(declare-const p2 _S1)
 (declare-const p1 _S1)
 (declare-const True Bool)
-(declare-const False Bool)(set-option :timeout 10000) (assert (>= spile 0) ) (assert (>= fpile 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not   (=> (and (and (and (=> (and (= fpile 1) (= spile 1)) (and (and (= fpile 1) (= spile 1)) (not (turn p1)))) (not (= spile 0))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= fpile G0)) (>= spile G0))))) (not (exists ((G0 Int)) (and (and (and (>= G0 0) (turn p2)) (> G0 0)) (not (>= fpile G0)))))) (=> (not (and (= fpile 1) (= spile 1))) (or (exists ((K1541 Int)) (and (and (and (and (> fpile K1541) (> K1541 0)) (>= (- fpile K1541) spile)) (turn p1)) (and (=> (and (= fpile (+ 1 K1541)) (= spile 1)) (and (and (= fpile (+ 1 K1541)) (= spile 1)) (not (not (turn p1))))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= fpile (+ G0 K1541))) (not (= spile G0)))))))) (exists ((K1542 Int)) (and (and (and (> spile K1542) (> K1542 0)) (turn p1)) (and (=> (and (= fpile 1) (= spile (+ 1 K1542))) (and (and (= fpile 1) (= spile (+ 1 K1542))) (not (not (turn p1))))) (not (exists ((G0 Int)) (and (and (>= G0 0) (= fpile G0)) (not (= spile (+ G0 K1542))))))))))))  ))
+(declare-const False Bool)(set-option :timeout 10000) (assert (>= numStone 0) )  (assert  (not (= p1 p2))) (assert (or (and (turn p1) (not (  turn p2)) ) (and (turn p2) (not (turn p1)))) ) (assert (not   (=> (and (=> (= numStone 0) (and (= numStone 0) (not (turn p1)))) (not (= numStone 1))) (forall ((K125 Int)) (=> (and (and (>= numStone K125) (or (or (= K125 1) (= K125 3)) (= K125 4))) (turn p2)) (and (and (and (=> (= numStone (+ 0 K125)) (and (= numStone (+ 0 K125)) (not (not (turn p1))))) (not (exists ((G0 Int)) (exists ((K126 Int)) (and (= numStone (+ K126 K125)) (and (and (>= G0 0) (> K126 G0)) (not (not (turn p1))))))))) (not (= numStone (+ 2 K125)))) (not (exists ((G0 Int)) (and (and (and (>= G0 0) (> G0 3)) (= (mod G0 2) 1)) (= numStone (+ G0 K125)))))))))  ))
 (check-sat)
 (get-model)

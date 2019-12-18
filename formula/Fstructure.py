@@ -37,6 +37,21 @@ def to_formula(fstructure):
 		return "(%s)&%s"%(formula, '&'.join(conjunct_str_list))
 
 
+def to_formula_list(fstructure):
+	"""
+	return a list of formula
+	"""
+	formula, pos_model_list, conjunct_structure_list, pred_score_dict = fstructure
+	conjunct_list = [ conjunct for (conjunct, model_list, adjacent_list) in conjunct_structure_list]
+	formula_list = [formula]
+	if conjunct_list ==[]:
+		return formula_list
+	else:
+		for conjunct in conjunct_list:
+			formula_list.append('!(%s)'%(Conjunct.to_formula(conjunct)))
+		return formula_list
+
+
 def to_conjuncts(fstructure):
 	formula, pos_model_list, conjunct_structure_list, pred_score_dict = fstructure
 	return [ conjunct for (conjunct, model_list, adjacent_list) in conjunct_structure_list]
